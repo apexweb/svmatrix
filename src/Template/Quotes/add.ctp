@@ -154,10 +154,10 @@ foreach ($parts as $part) {
                             <tr>
                                 <th>NO.</th>
                                 <th>QTY</th>
-                                <th>SECURITY PERF D/GRILLE INSECT</th>
+                                <th>Product Type</th>
                                 <th>INFILL</th>
-                                <th>WINDOW OR DOOR</th>
-                                <th>WINDOW FRAME TYPE</th>
+                                <th>WINDOW or DOOR</th>
+                                <th>9 or 11mm</th>
                                 <th>CONFIGURATION</th>
                                 <th>LOCATION / NOTES</th>
                                 <th>HEIGHT MM</th>

@@ -2730,8 +2730,8 @@ a.underline:hover {
 }
 
 .products select, .products input {
-    padding: 5px;
-    height: 30px;
+    padding: 2px;
+    height: 25px;
     font-size: 12px;
 }
 
@@ -2742,11 +2742,12 @@ a.underline:hover {
 }
 
 .product-item-no {
-    width: 50px;
+    width: 60px;
 }
 
 .product-qty {
-    width: 65px;
+    /*width: 65px;*/
+    width:50px;
 }quote-in-progress
 
 .product-sec-dg-fibr,
@@ -2774,7 +2775,7 @@ a.underline:hover {
     font-size: 11px;
     display: inline-block;
     /*padding: 5px 10px 20px;*/
-    padding: 5px 10px;
+    padding: 2px 10px;
     margin-left: 50px;
     color: #0b0b0b;
     float: left;
