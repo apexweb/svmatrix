@@ -6,7 +6,7 @@
 
     <td>
 
-        <?= $this->Form->input('additionalperlength.' . $i . '.additional_per_length', ['label' => false, 'class' => 'form-control additional-per-length additional-length']); ?>
+        <?= $this->Form->input('additionalperlength.' . $i . '.additional_per_length', ['type' => 'number', 'label' => false, 'class' => 'form-control additional-per-length additional-length width-80']); ?>
 
     </td>
     <td>
@@ -32,6 +32,19 @@
     </td>
 
     <td>
+        <?= $this->Form->input('additionalperlength.' . $i . '.additional_markup',
+            ['label' => false, 'class' => 'form-control additional-markup-price']); ?>
+
+    </td>
+    
+    <td class="width-75">
+
+        <?= $this->Form->input('additionalperlength.' . $i . '.additional_sell_price',
+            ['label' => false, 'class' => 'form-control span-input additional-sell-price', 'readonly' => 'readonly']); ?>
+
+    </td>
+
+    <td class="width-10">
         <button style="visibility: hidden;" type="button"
                 class="delete-btn addtional-l-delete"><i class="typcn typcn-delete"></i>
         </button>

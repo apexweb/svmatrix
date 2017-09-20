@@ -7,10 +7,10 @@
 
     <td>
 
-        <?= $this->Form->select(
+        <?= $this->Form->input(
             'products.' . $i . '.product_qty',
-            [1 => 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-            ['empty' => ' ', 'label' => false,
+            /*[1 => 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],*/
+            ['empty' => ' ', 'label' => false, 'type' => 'number',
                 'class' => 'product-options form-control product-qty', 'data-style' => 'btn-primary']
         );
         ?>

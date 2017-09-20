@@ -28,14 +28,14 @@
 
 
     </td>
-    <td>
+    <td class="width-50">
 
         <?= $this->Form->input('customitems.' . $i . '.custom_charged',
             ['label' => false, 'class' => 'form-control span-input custom-item-charged', 'readonly' => 'readonly']); ?>
 
     </td>
 
-    <td>
+    <td class="width-10">
         <button style="visibility: hidden;" type="button"
                 class="delete-btn customitem-delete"><i class="typcn typcn-delete"></i>
         </button>

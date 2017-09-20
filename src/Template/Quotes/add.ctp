@@ -154,7 +154,7 @@ foreach ($parts as $part) {
                             <tr>
                                 <th>NO.</th>
                                 <th>QTY</th>
-                                <th>Product Type</th>
+                                <th>PRODUCT TYPE</th>
                                 <th>INFILL</th>
                                 <th>WINDOW or DOOR</th>
                                 <th>9 or 11mm</th>
@@ -238,13 +238,15 @@ foreach ($parts as $part) {
             <div class="panel-body">
 
                 <fieldset>
-                    <div class="col-lg-6 table-responsive text-center">
+                    <div class="col-lg-4 col-lg-4_5_1 table-responsive text-center padding-s">
                         <table class="table-bordered products additional-m-table">
                             <tr>
                                 <th>ITEM NO.</th>
                                 <th>PER METER</th>
                                 <th>ADDITIONAL SECTION</th>
-                                <th colspan="2">PRICE</th>
+                                <th class="width-40">COST</th>
+                                <th>MARK UP %</th>
+                                <th colspan="2">SELL PRICE</th>
                             </tr>
 
                             <?php for ($i = 0; $i < 5; $i++): ?>
@@ -262,13 +264,15 @@ foreach ($parts as $part) {
                         </button>
                     </div>
 
-                    <div class="col-lg-6 table-responsive text-center">
+                    <div class="col-lg-4 col-lg-4_5_1 table-responsive text-center padding-s">
                         <table class="table-bordered additional-l-table products">
                             <tr>
                                 <th>ITEM NO.</th>
-                                <th>PER FULL LENGTH</th>
+                                <th>PER LENGTH</th>
                                 <th>ADDITIONAL SECTION</th>
-                                <th>PRICE</th>
+                                <th class="width-40">COST</th>
+                                <th>MARK UP %</th>
+                                <th colspan="2">SELL PRICE</th>
                             </tr>
 
                             <?php for ($i = 0; $i < 5; $i++): ?>
@@ -286,20 +290,14 @@ foreach ($parts as $part) {
                         </button>
                         
                     </div>
-                </fieldset>
-
-
-                <div class="form-group"></div>
-
-
-                <fieldset>
-                    <div class="col-lg-6 table-responsive">
+                    
+                    <div class="col-lg-4 col-lg-4_5_2 table-responsive padding-s">
                         <table class="table-bordered products accessories-table">
                             <tr>
                                 <th>ITEM NO.</th>
                                 <th>EACH</th>
                                 <th>ACCESSORIES</th>
-                                <th>PRICE</th>
+                                <th class="width-50">PRICE</th>
                             </tr>
 
                             <?php for ($i = 0; $i < 3; $i++): ?>
@@ -312,50 +310,27 @@ foreach ($parts as $part) {
 
                         </table>
                     </div>
-
-                    <div class="col-lg-6 table-responsive text-center">
-                        <table class="table-bordered customitem-table products">
-                            <tr>
-                                <th>QTY</th>
-                                <th colspan="2">ADD CUSTOM ITEM <br>
-                                    TO BE INVOICED BY THE MANUFACTURER - TICK BOX
-                                </th>
-                                <th>COST</th>
-                                <th>MARK UP %</th>
-                                <th colspan="2">CHARGED OUT AT</th>
-                            </tr>
-
-                            <?php for ($i = 0; $i < 3; $i++): ?>
-
-                                <?= $this->element('Quotes/custom_item_row', ['i' => $i]); ?>
-
-                            <?php endfor; ?>
-
-
-                        </table>
-                        <button type="button" id="add-row-customitem" class="btn btn-primary waves-effect btn-sm">Add
-                            next item
-                        </button>
-                    </div>
                 </fieldset>
 
-                <hr>
+
+                <div class="form-group"></div>
+
 
                 <fieldset>
-                    <div class="col-lg-12 table-responsive text-center">
+                    <div class="col-lg-6 table-responsive text-center padding-s">
 
-                        <table class="table table-bordered cutsheets-table">
+                        <table class="table-bordered cutsheets-table">
 
                             <tr>
                                 <th class="text-center" colspan="5"><strong>Additional Sections Cut Sheet</strong></th>
                             </tr>
                             <tr>
-                                <th class="width-100 text-center">Qty</th>
+                                <th class="width-60 text-center">Qty</th>
                                 <th class="width-200 text-center">Section</th>
-                                <th class="width-200 text-center">Colour</th>
-                                <th class="width-200 text-center">Cut to size mm</th>
+                                <th class="width-100 text-center">Colour</th>
+                                <th class="width-80 text-center">Cut size mm</th>
                                 <th class="text-center">Notes</th>
-                                <th class="width-50 text-center"></th>
+                                <th class="width-10 text-center"></th>
                             </tr>
 
                             <?php if (count($quote['cutsheets']) > 3): ?>
@@ -384,6 +359,34 @@ foreach ($parts as $part) {
                         </button>
 
                     </div>
+
+                    <div class="col-lg-6 table-responsive text-center padding-s">
+                        <table class="table-bordered customitem-table products">
+                            <tr>
+                                <th>QTY</th>
+                                <th colspan="2">ADD CUSTOM ITEM <br>
+                                    TO BE INVOICED BY THE MANUFACTURER - TICK BOX
+                                </th>
+                                <th>COST</th>
+                                <th>MARK UP %</th>
+                                <th colspan="2">CHARGED OUT AT</th>
+                            </tr>
+
+                            <?php for ($i = 0; $i < 3; $i++): ?>
+
+                                <?= $this->element('Quotes/custom_item_row', ['i' => $i]); ?>
+
+                            <?php endfor; ?>
+
+
+                        </table>
+                        <button type="button" id="add-row-customitem" class="btn btn-primary waves-effect btn-sm">Add
+                            next item
+                        </button>
+                    </div>
+                    
+                    
+                    
                 </fieldset>
 
                 <hr>

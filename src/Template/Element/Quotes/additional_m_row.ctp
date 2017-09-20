@@ -5,7 +5,7 @@
     </td>
 
     <td>
-        <?= $this->Form->input('additionalpermeters.' . $i . '.additional_per_meter', ['label' => false, 'class' => 'form-control additional-per-meters additional-meters']); ?>
+        <?= $this->Form->input('additionalpermeters.' . $i . '.additional_per_meter', ['type' => 'number', 'label' => false, 'class' => 'form-control additional-per-meters additional-meters width-80']); ?>
     </td>
 
     <td>
@@ -30,8 +30,21 @@
             ['label' => false, 'class' => 'form-control additional-total-price span-input', 'readonly' => 'readonly']); ?>
 
     </td>
-
+    
     <td>
+        <?= $this->Form->input('additionalpermeters.' . $i . '.additional_markup',
+            ['label' => false, 'class' => 'form-control additional-markup-price']); ?>
+
+    </td>
+    
+    <td class="width-75">
+
+        <?= $this->Form->input('additionalpermeters.' . $i . '.additional_sell_price',
+            ['label' => false, 'class' => 'form-control span-input additional-sell-price', 'readonly' => 'readonly']); ?>
+
+    </td>
+    
+    <td class="width-10">
         <button style="visibility: hidden;" type="button"
                 class="delete-btn addtional-m-delete"><i class="typcn typcn-delete"></i>
         </button>
