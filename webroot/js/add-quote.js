@@ -10,6 +10,10 @@ var additionalsCount = 4;
 var additionalMAX = 9;
 var additionalMIN = 4;
 
+var additionalsLengthCount = 4;
+var additionalLengthMAX = 9;
+var additionalLengthMIN = 4;
+
 var customitemsCount = 2;
 var customitemMAx = 9;
 var customitemMIN = 2;
@@ -754,6 +758,75 @@ $(document).ready(function () {
         //***************
 
         additionalMeters.splice(index, 1);
+        calculateAddtionalsTotal();
+    });
+    
+        
+    //Additional PER FULL LENGTH
+    $('#add-row-additional-l').on('click', function () {
+
+        if (additionalsLengthCount >= additionalLengthMAX) {
+            return;
+        }
+
+        var row = $('#additional-l-row-0').html();
+
+        var numberOfTds = $('#additional-l-row-0 td').length;
+
+        for (var i = 0; i < numberOfTds; i++) {
+            row = row.replace('additionalperlength[0]', 'additionalperlength[' + (additionalsLengthCount + 1) + ']');
+            row = row.replace('additionalperlength-0', 'additionalperlength-' + (additionalsLengthCount + 1));
+            row = row.replace('selected="selected"', '');
+        }
+        row = row.replace('visibility: hidden', 'visibility: visible');
+
+
+        // Hidden the Last Row Delete button
+        $('.additional-l-table tr').last().find('td').last().find('button').css('visibility', 'hidden');
+        //***************
+
+        $('.additional-l-table').append('<tr id="additional-l-row-' + (additionalsLengthCount + 1) + '">' + row + '</tr>');
+        additionalsLengthCount++;
+
+
+        if (isEdit) {
+            var newRow = $('.additional-l-table').find('tr').last();
+            newRow.find('input').val('');
+            newRow.find('select').val('');
+            newRow.find('input[type="hidden"]').remove();
+        }
+
+
+        if (additionalsLengthCount >= additionalLengthMAX) {
+            $(this).css('visibility', 'hidden');
+        }
+    });
+
+    $('body').on('click', '.addtional-l-delete', function () {
+        var additionalRow = $(this).parents('tr');
+        var index = findIndexById(additionalRow);
+
+
+        if (isEdit) {
+            var id = $('[name="additionalperlength[' + index + '][id]"]').val();
+            if (id) {
+                $('input[name="additional_l_to_delete"]').val(id + ',' + $('input[name="additional_l_to_delete"]').val());
+            }
+        }
+
+
+        additionalRow.remove();
+        additionalsLengthCount--;
+        $('#add-row-additional-l').css('visibility', 'visible');
+
+
+        // Show the Last Row Delete button
+        if (additionalsLengthCount > 4) {
+            $('.additional-l-table tr').last().find('td').last().find('button').css('visibility', 'visible');
+        }
+        //***************
+
+        additonalLengths.splice(index, 1);
         calculateAddtionalsTotal();
     });
 
