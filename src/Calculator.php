@@ -325,7 +325,12 @@ class Calculator
 
         /*** Increase cost when LOCK Type is Changed ***/
         if ($winDoor == 'Door') {
-            $totalPrice = $totalPrice - $this->tripleLock;
+            if ($secDigFibr == 'Insect') {
+                $totalPrice = $totalPrice - ($this->singleLock * $newQty);
+            } else {
+                $totalPrice = $totalPrice - ($this->tripleLock * $newQty);
+            }
+
             if ($lockType == 'Single' && $lockCount > 0) {
                 //Single LOCK
                 $totalPrice = $totalPrice + ($lockCount * $this->singleLock);

@@ -10,10 +10,6 @@ var additionalsCount = 4;
 var additionalMAX = 9;
 var additionalMIN = 4;
 
-var additionalsLengthCount = 4;
-var additionalLengthMAX = 9;
-var additionalLengthMIN = 4;
-
 var customitemsCount = 2;
 var customitemMAx = 9;
 var customitemMIN = 2;
@@ -31,6 +27,8 @@ var midrailResultTableHtml = '';
 var isEdit = false;
 
 var role, mfrole, markupRole;
+
+var flagSaveBtnClicked = false;
 
 //
 // var securityWindowMesh = 52;
@@ -292,7 +290,7 @@ function calculateInstallation(productRow, index, isAdd) {
         if (isAdd) {
             installations[index] = installation;
         } else {
-            installations.splice(index, 1);
+            installations[index] = 0;
         }
 
         PRESET_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
@@ -333,6 +331,18 @@ function calculateMfTotalCost() {
 
 
 $(document).ready(function () {
+    window.onbeforeunload = null;
+
+    $(window).on('beforeunload',function(){
+
+        if (flagSaveBtnClicked) {
+            return;
+        }
+        if (confirm('You are about to leave this page without saving any changes, All unsaved data will be lost. Are you sure?')) {
+            return true;
+        }
+        return false;
+    });
 
     $('.created-date').val(getDate());
 
@@ -419,7 +429,7 @@ $(document).ready(function () {
             }
 
             row.remove();
-            cutsheetsCount--;
+            // cutsheetsCount--;
         }
 
     });
@@ -431,25 +441,29 @@ $(document).ready(function () {
             return;
         }
 
-        var options = $('#product-options-row-' + productsCount).html();
-        var prices = $('#product-prices-row-' + productsCount).html();
+        // var options = $('#product-options-row-' + productsCount).html();
+        // var prices = $('#product-prices-row-' + productsCount).html();
 
+        var options = $('.product-options-row:last').html();
+        var prices = $('.product-prices-row:last').html();
+        var index =  findIndexById($('.product-options-row:last'));
 
-        var numberOfTds = $('#product-options-row-' + productsCount + ' td').length;
+        var numberOfTds = $('.product-options-row:last').find('td').length;
         for (var i = 0; i <= numberOfTds; i++) {
-            options = options.replace('products[' + productsCount + ']', 'products[' + (productsCount + 1) + ']');
-            options = options.replace('products-' + productsCount, 'products-' + (productsCount + 1));
+            options = options.replace('products[' + index + ']', 'products[' + (productsCount + 1) + ']');
+            options = options.replace('products-' + index, 'products-' + (productsCount + 1));
             options = options.replace('selected="selected"', '');
-            prices = prices.replace('products[' + productsCount + ']', 'products[' + (productsCount + 1) + ']');
-            prices = prices.replace('products-' + productsCount, 'products-' + (productsCount + 1));
-            prices = prices.replace('products-' + productsCount, 'products-' + (productsCount + 1));
+            prices = prices.replace('products[' + index + ']', 'products[' + (productsCount + 1) + ']');
+            prices = prices.replace('products-' + index, 'products-' + (productsCount + 1));
+            prices = prices.replace('products-' + index, 'products-' + (productsCount + 1));
         }
         options = options.replace('visibility: hidden', 'visibility: visible');
-        prices = prices.replace('row-' + productsCount, 'row-' + (productsCount + 1));
+        prices = prices.replace('row-' + index, 'row-' + (productsCount + 1));
 
 
         $('.product-table').append('<tr id="product-options-row-' + (productsCount + 1) + '" class="product-options-row">' + options + '</tr>');
         $('.product-table').append('<tr id="product-prices-row-' + (productsCount + 1) + '" class="product-prices-row">' + prices + '</tr>');
+        $('.product-prices-row:last > td').css('background-color', '#fff');
         $('.product-table').find('.product-win-door:last').css('background', '#fff');
 
         if (isEdit) {
@@ -463,7 +477,7 @@ $(document).ready(function () {
 
 
         // Hidden the Last Row Delete button
-        $('.product-table tr').eq(((productsCount + 1) * 2) - 1).find('td').last().find('button').css('visibility', 'hidden');
+        // $('.product-table tr').eq(((productsCount + 1) * 2) - 1).find('td').last().find('button').css('visibility', 'hidden');
         //***************
 
         productsCount++;
@@ -492,20 +506,21 @@ $(document).ready(function () {
         productRow.remove();
         pricesRow.remove();
 
-        productsCount--;
+        productMAX++;
         $('.product-btns').css('visibility', 'visible');
 
 
         // Show the Last Row Delete button
-        if (productsCount > 0) {
-            $('.product-table tr').eq(((productsCount + 1) * 2) - 1).find('td').last().find('button').css('visibility', 'visible');
-        }
+        // if (productsCount > 0) {
+        //     $('.product-table tr').eq(((productsCount + 1) * 2) - 1).find('td').last().find('button').css('visibility', 'visible');
+        // }
         //***************
 
         calculateInstallation(productRow, productIndex, false);
 
-        productsNoMarkup.splice(productIndex, 1);
-        screensTotal.splice(productIndex, 1);
+        productsNoMarkup[productIndex] = 0;
+        screensTotal[productIndex] = 0;
+
         calculateScreensTotal();
         markups.deleteFromMarkup(secdgfibr, productIndex)
     });
@@ -519,7 +534,7 @@ $(document).ready(function () {
 
 
         /* Copy before last row's values to Last Row */
-        var beforeLastRow = productsCount - 1;
+        var beforeLastRow = findIndexById($('.product-options-row').eq(-2));
 
         $('[name="products[' + productsCount + '][product_item_number]"]').val($('[name="products[' + beforeLastRow + '][product_item_number]"]').val());
         $('[name="products[' + productsCount + '][product_qty]"]').val($('[name="products[' + beforeLastRow + '][product_qty]"]').val());
@@ -739,74 +754,6 @@ $(document).ready(function () {
         //***************
 
         additionalMeters.splice(index, 1);
-        calculateAddtionalsTotal();
-    });
-    
-    //Additional PER FULL LENGTH
-    $('#add-row-additional-l').on('click', function () {
-
-        if (additionalsLengthCount >= additionalLengthMAX) {
-            return;
-        }
-
-        var row = $('#additional-l-row-0').html();
-
-        var numberOfTds = $('#additional-l-row-0 td').length;
-
-        for (var i = 0; i < numberOfTds; i++) {
-            row = row.replace('additionalperlength[0]', 'additionalperlength[' + (additionalsLengthCount + 1) + ']');
-            row = row.replace('additionalperlength-0', 'additionalperlength-' + (additionalsLengthCount + 1));
-            row = row.replace('selected="selected"', '');
-        }
-        row = row.replace('visibility: hidden', 'visibility: visible');
-
-
-        // Hidden the Last Row Delete button
-        $('.additional-l-table tr').last().find('td').last().find('button').css('visibility', 'hidden');
-        //***************
-
-        $('.additional-l-table').append('<tr id="additional-l-row-' + (additionalsLengthCount + 1) + '">' + row + '</tr>');
-        additionalsLengthCount++;
-
-
-        if (isEdit) {
-            var newRow = $('.additional-l-table').find('tr').last();
-            newRow.find('input').val('');
-            newRow.find('select').val('');
-            newRow.find('input[type="hidden"]').remove();
-        }
-
-
-        if (additionalsLengthCount >= additionalLengthMAX) {
-            $(this).css('visibility', 'hidden');
-        }
-    });
-    
-    $('body').on('click', '.addtional-l-delete', function () {
-        var additionalRow = $(this).parents('tr');
-        var index = findIndexById(additionalRow);
-
-
-        if (isEdit) {
-            var id = $('[name="additionalperlength[' + index + '][id]"]').val();
-            if (id) {
-                $('input[name="additional_l_to_delete"]').val(id + ',' + $('input[name="additional_l_to_delete"]').val());
-            }
-        }
-
-
-        additionalRow.remove();
-        additionalsLengthCount--;
-        $('#add-row-additional-l').css('visibility', 'visible');
-
-
-        // Show the Last Row Delete button
-        if (additionalsLengthCount > 4) {
-            $('.additional-l-table tr').last().find('td').last().find('button').css('visibility', 'visible');
-        }
-        //***************
-
-        additonalLengths.splice(index, 1);
         calculateAddtionalsTotal();
     });
 
@@ -1102,8 +1049,16 @@ $(document).ready(function () {
         if (winDoor == 'Door') {
             $lockCount.prop('disabled', false);
             $lockType.prop('disabled', false);
-            resultTotal = (Number(resultTotal) - Number(tripleLock * newQty)).toFixed(2);
-            noMarkupCost = (Number(noMarkupCost) - Number(tripleLock * newQty)).toFixed(2);
+            if (secDigFibr == 'Insect') {
+                resultTotal = (Number(resultTotal) - Number(singleLock * newQty)).toFixed(2);
+                noMarkupCost = (Number(noMarkupCost) - Number(singleLock * newQty)).toFixed(2);
+                $lockType.find('option:last').hide();
+            } else {
+                resultTotal = (Number(resultTotal) - Number(tripleLock * newQty)).toFixed(2);
+                noMarkupCost = (Number(noMarkupCost) - Number(tripleLock * newQty)).toFixed(2);
+                $lockType.find('option:last').show();
+            }
+
 
             var confRuled = product.attr('data-conf-rule');
             if ($(this).hasClass('product-conf') || (isEdit && !data && !$(this).hasClass('product-lock-type') && !$(this).hasClass('product-lock-qty'))) {
@@ -1952,6 +1907,7 @@ function editPageFunctions() {
         }
 
         $(el).find('.product-qty').trigger('change', {onEditLoad: true});
+        $(el).find('td:last').find('button').css('visibility', 'visible');
 
     });
 
@@ -2007,7 +1963,7 @@ function hideOrShowBtns() {
 
     /****** Decides which Add and Delete buttons need to hide or show *******/
 
-    //PRODUCTS
+        //PRODUCTS
     var count = $('.product-options-row').length - 1; //Index
     if (count >= productMAX) {
         $('.product-btns').css('visibility', 'hidden');
@@ -2056,7 +2012,7 @@ function validate(type) {
         var lockType = $(el).find('.product-lock-type').val();
         var lockHeight = $(el).find('.product-lock-height').val();
 
-
+        console.log(lockType, lockHeight);
         if (!error) {
             if (lockType && !lockHeight) {
                 errorMsg += 'Lock handle height is empty. \n';
@@ -2064,6 +2020,7 @@ function validate(type) {
         }
 
     });
+    // return false;
 
     error = false;
 
@@ -2088,9 +2045,13 @@ function validate(type) {
         return false;
     }
 
+    flagSaveBtnClicked = true;
     return true;
 
 
 }
+
+
+
 
 /*************************/
