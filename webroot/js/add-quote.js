@@ -1323,11 +1323,15 @@ $(document).ready(function () {
         if (name) {
             var price = additionalRow.find('.additional-name').find(':selected').data('price');
             var meter = additionalRow.find('.additional-meters').val();
-
-
+            var markup = Number(additionalRow.find('.additional-markup').val());
+      
             var totalPrice = Number(price * meter).toFixed(2);
+            var markedup = totalPrice * markup / 100;
+                     
+            //totalPrice = (Number(totalPrice) + Number(markedup)).toFixed(2);
             additionalRow.find('.additional-total-price').val(totalPrice);
-
+            additionalRow.find('.additional-charged').val(Number(markedup).toFixed(2));
+            
             additionalMeters[index] = totalPrice;
 
         } else {
@@ -1347,10 +1351,12 @@ $(document).ready(function () {
         if (name) {
             var price = additionalRow.find('.additional-name').find(':selected').data('price');
             var length = additionalRow.find('.additional-length').val();
-
+            var markup = Number(additionalRow.find('.additional-markup').val());
 
             var totalPrice = Number(price * length).toFixed(2);
+            var markedup = totalPrice * markup / 100;
             additionalRow.find('.additional-total-price').val(totalPrice);
+            additionalRow.find('.additional-charged').val(Number(markedup).toFixed(2));
             additonalLengths[index] = totalPrice;
         } else {
             additionalRow.find('.additional-total-price').val('');

@@ -33,14 +33,14 @@
 
     <td>
         <?= $this->Form->input('additionalperlength.' . $i . '.additional_markup',
-            ['label' => false, 'class' => 'form-control additional-markup-price']); ?>
+            ['label' => false, 'class' => 'form-control additional-per-length additional-markup']); ?>
 
     </td>
     
     <td class="width-75">
 
-        <?= $this->Form->input('additionalperlength.' . $i . '.additional_sell_price',
-            ['label' => false, 'class' => 'form-control span-input additional-sell-price', 'readonly' => 'readonly']); ?>
+        <?= $this->Form->input('additionalperlength.' . $i . '.additional_charged',
+            ['label' => false, 'class' => 'form-control span-input additional-charged', 'readonly' => 'readonly']); ?>
 
     </td>
 
