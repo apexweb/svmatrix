@@ -335,7 +335,7 @@ class Calculator
                 //Single LOCK
                 $totalPrice = $totalPrice + ($lockCount * $this->singleLock);
                 //        die('is Single');
-            } else if ($lockType == 'Triple Lock' && $lockCount > 0) {
+            } else if ($lockType == 'Triple' && $lockCount > 0) {
                 //Triple LOCK
                 $totalPrice = $totalPrice + ($lockCount * $this->tripleLock);
             }

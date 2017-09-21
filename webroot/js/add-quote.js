@@ -1162,13 +1162,13 @@ $(document).ready(function () {
             if ($(this).hasClass('product-conf') || (isEdit && !data && !$(this).hasClass('product-lock-type') && !$(this).hasClass('product-lock-qty'))) {
                 $lockType.find('option:eq(0)').prop('disabled', false);
                 if (productConf == 'SD' || productConf == 'HD') {
-                    $lockType.val('Triple Lock');
+                    $lockType.val('Triple');
                     return $lockCount.val('1').trigger('change', {a: true});
                 } else if (productConf == 'DBHD') {
                     $('option[data-code="DRCLS"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
                     $('option[data-code="DBLHNGDRCV"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
 
-                    $lockType.val('Triple Lock');
+                    $lockType.val('Triple');
                     $lockType.find('option:eq(0)').prop('disabled', true);
                     return $lockCount.val('1').trigger('change', {a: true});
                 }
@@ -1179,7 +1179,7 @@ $(document).ready(function () {
             if (lockType == 'Single' && lockCounts) {
                 resultTotal = (Number(resultTotal) + Number(lockCounts * singleLock)).toFixed(2);
                 noMarkupCost = (Number(noMarkupCost) + Number(lockCounts * singleLock)).toFixed(2);
-            } else if (lockType == 'Triple Lock' && lockCounts) {
+            } else if (lockType == 'Triple' && lockCounts) {
                 resultTotal = (Number(resultTotal) + Number(lockCounts * tripleLock)).toFixed(2);
                 noMarkupCost = (Number(noMarkupCost) + Number(lockCounts * tripleLock)).toFixed(2);
             }
