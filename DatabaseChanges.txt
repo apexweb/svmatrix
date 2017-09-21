@@ -1,0 +1,8 @@
+/**
+20/09/2017 Added Field for Markup %  (Ramandeep)
+
+*/
+
+ALTER TABLE `additionalpermeters` ADD `additional_markup` VARCHAR(5) NULL AFTER `additional_price`, ADD `additional_charged` VARCHAR(50) NULL AFTER `additional_markup`;
+
+ALTER TABLE `additionalperlength` ADD `additional_markup` VARCHAR(5) NULL AFTER `additional_price`, ADD `additional_charged` VARCHAR(50) NULL AFTER `additional_markup`;

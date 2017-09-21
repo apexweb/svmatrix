@@ -146,6 +146,8 @@ var additionalMeters = [];
 var additonalLengths = [];
 var accessories = [];
 var customitems = [];
+var additionalPerMeter = [];
+var additionalPerLength = [];
 var installations = [];
 
 
@@ -189,6 +191,7 @@ function calculateAddtionalsTotal() {
     SECTIONS_ACC_TOTAL = (additionalMeters.reduce(sum, 0) + additonalLengths.reduce(sum, 0) + accessories.reduce(sum, 0)).toFixed(2);
     $('#section-acc-total').val(SECTIONS_ACC_TOTAL);
     calculateTotalBuy();
+    calculateProfit();
 }
 
 function calculateCustomItemsTotal() {
@@ -201,9 +204,30 @@ function calculateCustomItemsTotal() {
 function calculateProfit() {
     PROFIT = (markups.getTotalMarkups() - Number(DISCOUNT_AMOUNT)).toFixed(2);
     PROFIT = (Number(PROFIT) + Number(getCustomItemsMarkups())).toFixed(2);
+    PROFIT = (Number(PROFIT) + Number(getPerMeterMarkups()) + Number(getPerLengthMarkups()) ).toFixed(2);
     $('#profit').val(PROFIT);
 }
 
+
+function getPerMeterMarkups() {
+    var markup = 0;
+    
+    $.each(additionalPerMeter, function (i, item) {
+        markup += Number(item[1]);
+
+    });
+    return markup.toFixed(2);
+}
+
+function getPerLengthMarkups() {
+    var markup = 0;
+    
+    $.each(additionalPerLength, function (i, item) {
+        markup += Number(item[1]);
+
+    });
+    return markup.toFixed(2);    
+}
 
 function getCustomItemsMarkups() {
     var markup = 0;
@@ -257,6 +281,7 @@ function calculateTotalBuy() {
 function calculateTotalSell() {
     TOTAL_SELL_PRICE = (Number(TOTAL_BUY_PRICE) + Number(markups.getTotalMarkups()) - Number(DISCOUNT_AMOUNT) + Number(INSTALLATION_TOTAL)).toFixed(2);
     TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getCustomItemsCharged()) - Number(CUSTOM_ITEMS_TOTAL)).toFixed(2);
+    TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getPerMeterMarkups()) + Number(getPerLengthMarkups())).toFixed(2);
     $('#total-sell-price').val(TOTAL_SELL_PRICE);
 
     if (role == 'manufacturer') {
@@ -1327,17 +1352,20 @@ $(document).ready(function () {
       
             var totalPrice = Number(price * meter).toFixed(2);
             var markedup = totalPrice * markup / 100;
-                     
-            //totalPrice = (Number(totalPrice) + Number(markedup)).toFixed(2);
+            var totalCharged = (Number(totalPrice) + Number(markedup)).toFixed(2);      
             additionalRow.find('.additional-total-price').val(totalPrice);
-            additionalRow.find('.additional-charged').val(Number(markedup).toFixed(2));
+            additionalRow.find('.additional-charged').val(totalCharged);
             
             additionalMeters[index] = totalPrice;
+            additionalPerMeter[index] = [totalPrice, markedup, totalCharged];
 
         } else {
             additionalRow.find('.additional-total-price').val('');
             additionalMeters[index] = 0;
+            additionalPerMeter[index] = 0;
         }
+        
+        
 
         calculateAddtionalsTotal();
     });
@@ -1355,12 +1383,17 @@ $(document).ready(function () {
 
             var totalPrice = Number(price * length).toFixed(2);
             var markedup = totalPrice * markup / 100;
+            var totalCharged = (Number(totalPrice) + Number(markedup)).toFixed(2); 
+            
             additionalRow.find('.additional-total-price').val(totalPrice);
-            additionalRow.find('.additional-charged').val(Number(markedup).toFixed(2));
+            additionalRow.find('.additional-charged').val(totalCharged);
             additonalLengths[index] = totalPrice;
+            
+            additionalPerLength[index] = [totalPrice, markedup, totalCharged];
+            
         } else {
             additionalRow.find('.additional-total-price').val('');
-            additonalLengths[index] = 0;
+            additionalPerLength[index] = 0;
         }
 
         calculateAddtionalsTotal();

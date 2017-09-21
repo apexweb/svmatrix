@@ -238,14 +238,14 @@ foreach ($parts as $part) {
             <div class="panel-body">
 
                 <fieldset>
-                    <div class="col-lg-4 col-lg-4_5_1 table-responsive text-center padding-s">
+                    <div class="col-lg-4 col-lg-4_5_1 table-responsive text-center">
                         <table class="table-bordered products additional-m-table">
                             <tr>
                                 <th>ITEM NO.</th>
                                 <th>PER METER</th>
                                 <th>ADDITIONAL SECTION</th>
                                 <th class="width-40">COST</th>
-                                <th>MARK UP %</th>
+                                <th class="width-40">MARK UP %</th>
                                 <th colspan="2">SELL PRICE</th>
                             </tr>
 
@@ -264,14 +264,14 @@ foreach ($parts as $part) {
                         </button>
                     </div>
 
-                    <div class="col-lg-4 col-lg-4_5_1 table-responsive text-center padding-s">
+                    <div class="col-lg-4 col-lg-4_5_1 table-responsive text-center">
                         <table class="table-bordered additional-l-table products">
                             <tr>
                                 <th>ITEM NO.</th>
                                 <th>PER LENGTH</th>
                                 <th>ADDITIONAL SECTION</th>
                                 <th class="width-40">COST</th>
-                                <th>MARK UP %</th>
+                                <th class="width-40">MARK UP %</th>
                                 <th colspan="2">SELL PRICE</th>
                             </tr>
 
@@ -291,7 +291,7 @@ foreach ($parts as $part) {
                         
                     </div>
                     
-                    <div class="col-lg-4 col-lg-4_5_2 table-responsive padding-s">
+                    <div class="col-lg-4 col-lg-4_5_2 table-responsive">
                         <table class="table-bordered products accessories-table">
                             <tr>
                                 <th>ITEM NO.</th>
@@ -317,7 +317,7 @@ foreach ($parts as $part) {
 
 
                 <fieldset>
-                    <div class="col-lg-6 table-responsive text-center padding-s">
+                    <div class="col-lg-6 table-responsive text-center">
 
                         <table class="table-bordered cutsheets-table">
 
@@ -360,7 +360,7 @@ foreach ($parts as $part) {
 
                     </div>
 
-                    <div class="col-lg-6 table-responsive text-center padding-s">
+                    <div class="col-lg-6 table-responsive text-center">
                         <table class="table-bordered customitem-table products">
                             <tr>
                                 <th>QTY</th>
