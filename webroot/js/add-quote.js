@@ -216,7 +216,11 @@ function getPerMeterMarkups() {
         markup += Number(item[1]);
 
     });
-    return markup.toFixed(2);
+    if (markup) {
+        return markup.toFixed(2);
+    }
+    return 0;
+
 }
 
 function getPerLengthMarkups() {
@@ -226,7 +230,10 @@ function getPerLengthMarkups() {
         markup += Number(item[1]);
 
     });
-    return markup.toFixed(2);    
+    if (markup) {
+        return markup.toFixed(2);
+    }
+    return 0;
 }
 
 function getCustomItemsMarkups() {
@@ -235,7 +242,10 @@ function getCustomItemsMarkups() {
         markup += Number(item[2]);
 
     });
-    return markup.toFixed(2);
+    if (markup) {
+        return markup.toFixed(2);
+    }
+    return 0;
 }
 
 function getCustomItemsTotal() {
@@ -247,7 +257,11 @@ function getCustomItemsTotal() {
             total += Number(item[1]);
         }
     });
-    return total.toFixed(2);
+    if (total) {
+        return total.toFixed(2);
+    }
+    return 0;
+
 }
 
 function getCustomItemsCharged() {
@@ -257,7 +271,11 @@ function getCustomItemsCharged() {
 
         totalCharged += Number(item[3])
     });
-    return totalCharged.toFixed(2);
+    if (totalCharged) {
+        return totalCharged.toFixed(2);
+    }
+    return 0;
+
 }
 
 //
@@ -284,6 +302,7 @@ function calculateTotalSell() {
     TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getPerMeterMarkups()) + Number(getPerLengthMarkups())).toFixed(2);
     $('#total-sell-price').val(TOTAL_SELL_PRICE);
 
+
     if (role == 'manufacturer') {
         calculateMfTotalCost();
     }
@@ -292,6 +311,7 @@ function calculateTotalSell() {
 
 function calculateInstallation(productRow, index, isAdd) {
     var installation = 0;
+
 
     var qty = Number(productRow.find('.product-qty').val());
 
@@ -315,17 +335,17 @@ function calculateInstallation(productRow, index, isAdd) {
             }
         }
     }
-    if (installation) {
-        if (isAdd) {
-            installations[index] = installation;
-        } else {
-            installations[index] = 0;
-        }
-
-        PRESET_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
-        $('input[name="installation_preset_amount"]').val(PRESET_INSTALLATION);
-        calculateTotalInstallation();
+    // if (installation) {
+    if (isAdd) {
+        installations[index] = installation;
+    } else {
+        installations[index] = 0;
     }
+
+    PRESET_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
+    $('input[name="installation_preset_amount"]').val(PRESET_INSTALLATION);
+    calculateTotalInstallation();
+    // }
 }
 
 
@@ -333,13 +353,12 @@ function calculateTotalInstallation() {
     var installationType = $('input[name="installation_type"]:checked').val();
     var installationValue = 0;
 
-    //console.log(installationType);
-
     if (installationType == 'preset amount') {
         installationValue = PRESET_INSTALLATION;
     } else if (installationType == 'custom amount') {
         installationValue = CUSTOM_INSTALLATION;
     }
+
 
     INSTALLATION_TOTAL = (Number(installationValue) + Number(FREIGHTCOST)).toFixed(2);
 
@@ -928,7 +947,6 @@ $(document).ready(function () {
 
     /*** Products On change Event => Calculator ***/
     $('body').on('change', '.product-options', function (evt, data) {
-        console.log('DATA IS: ', data);
 
         var product = $(this).parents('.product-options-row');
         var productOptions = product.next();
