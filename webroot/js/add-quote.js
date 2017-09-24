@@ -216,7 +216,11 @@ function getPerMeterMarkups() {
         if( Number(item[1]) >= 0)
             markup += Number(item[1]);
     });
-    return markup.toFixed(2);
+    if (markup) {
+        return markup.toFixed(2);
+    }
+    return 0;
+
 }
 
 function getPerLengthMarkups() {
@@ -227,7 +231,10 @@ function getPerLengthMarkups() {
             markup += Number(item[1]);
 
     });
-    return markup.toFixed(2);    
+    if (markup) {
+        return markup.toFixed(2);
+    }
+    return 0;
 }
 
 function getCustomItemsMarkups() {
@@ -236,7 +243,10 @@ function getCustomItemsMarkups() {
         markup += Number(item[2]);
 
     });
-    return markup.toFixed(2);
+    if (markup) {
+        return markup.toFixed(2);
+    }
+    return 0;
 }
 
 function getCustomItemsTotal() {
@@ -248,7 +258,11 @@ function getCustomItemsTotal() {
             total += Number(item[1]);
         }
     });
-    return total.toFixed(2);
+    if (total) {
+        return total.toFixed(2);
+    }
+    return 0;
+
 }
 
 function getCustomItemsCharged() {
@@ -258,7 +272,11 @@ function getCustomItemsCharged() {
 
         totalCharged += Number(item[3])
     });
-    return totalCharged.toFixed(2);
+    if (totalCharged) {
+        return totalCharged.toFixed(2);
+    }
+    return 0;
+
 }
 
 //
@@ -286,6 +304,7 @@ function calculateTotalSell() {
     TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getPerMeterMarkups()) + Number(getPerLengthMarkups())).toFixed(2);
     $('#total-sell-price').val(TOTAL_SELL_PRICE);
 
+
     if (role == 'manufacturer') {
         calculateMfTotalCost();
     }
@@ -294,6 +313,7 @@ function calculateTotalSell() {
 
 function calculateInstallation(productRow, index, isAdd) {
     var installation = 0;
+
 
     var qty = Number(productRow.find('.product-qty').val());
 
@@ -317,17 +337,17 @@ function calculateInstallation(productRow, index, isAdd) {
             }
         }
     }
-    if (installation) {
-        if (isAdd) {
-            installations[index] = installation;
-        } else {
-            installations[index] = 0;
-        }
-
-        PRESET_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
-        $('input[name="installation_preset_amount"]').val(PRESET_INSTALLATION);
-        calculateTotalInstallation();
+    // if (installation) {
+    if (isAdd) {
+        installations[index] = installation;
+    } else {
+        installations[index] = 0;
     }
+
+    PRESET_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
+    $('input[name="installation_preset_amount"]').val(PRESET_INSTALLATION);
+    calculateTotalInstallation();
+    // }
 }
 
 
@@ -335,13 +355,12 @@ function calculateTotalInstallation() {
     var installationType = $('input[name="installation_type"]:checked').val();
     var installationValue = 0;
 
-    //console.log(installationType);
-
     if (installationType == 'preset amount') {
         installationValue = PRESET_INSTALLATION;
     } else if (installationType == 'custom amount') {
         installationValue = CUSTOM_INSTALLATION;
     }
+
 
     INSTALLATION_TOTAL = (Number(installationValue) + Number(FREIGHTCOST)).toFixed(2);
 
@@ -954,7 +973,6 @@ $(document).ready(function () {
 
     /*** Products On change Event => Calculator ***/
     $('body').on('change', '.product-options', function (evt, data) {
-        console.log('DATA IS: ', data);
 
         var product = $(this).parents('.product-options-row');
         var productOptions = product.next();
@@ -1188,13 +1206,13 @@ $(document).ready(function () {
             if ($(this).hasClass('product-conf') || (isEdit && !data && !$(this).hasClass('product-lock-type') && !$(this).hasClass('product-lock-qty'))) {
                 $lockType.find('option:eq(0)').prop('disabled', false);
                 if (productConf == 'SD' || productConf == 'HD') {
-                    $lockType.val('Triple Lock');
+                    $lockType.val('Triple');
                     return $lockCount.val('1').trigger('change', {a: true});
                 } else if (productConf == 'DBHD') {
                     $('option[data-code="DRCLS"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
                     $('option[data-code="DBLHNGDRCV"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
 
-                    $lockType.val('Triple Lock');
+                    $lockType.val('Triple');
                     $lockType.find('option:eq(0)').prop('disabled', true);
                     return $lockCount.val('1').trigger('change', {a: true});
                 }
@@ -1205,7 +1223,7 @@ $(document).ready(function () {
             if (lockType == 'Single' && lockCounts) {
                 resultTotal = (Number(resultTotal) + Number(lockCounts * singleLock)).toFixed(2);
                 noMarkupCost = (Number(noMarkupCost) + Number(lockCounts * singleLock)).toFixed(2);
-            } else if (lockType == 'Triple Lock' && lockCounts) {
+            } else if (lockType == 'Triple' && lockCounts) {
                 resultTotal = (Number(resultTotal) + Number(lockCounts * tripleLock)).toFixed(2);
                 noMarkupCost = (Number(noMarkupCost) + Number(lockCounts * tripleLock)).toFixed(2);
             }
