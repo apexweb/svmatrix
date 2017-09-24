@@ -78,7 +78,11 @@ class PartsController extends AppController
     {
         $this->authorize(['factory', 'manufacturer']);
         $role = $this->Auth->user('role');
-
+        $search = null;
+        
+        if (isset($this->request->query['search'])) {
+            $search = $this->request->query['search'];
+        }
 
         $mf = $this->request->query('mf');
         $userparts = TableRegistry::get('users_parts');
@@ -110,9 +114,19 @@ class PartsController extends AppController
                     break;
             }
         }
+        
+        if ($search != null) {
+            $parts->where(['OR' => [
+                    'title LIKE' => '%' . $search . '%', 
+                    'part_code LIKE' => '%' . $search . '%',
+                    'part_number LIKE' => '%' . $search . '%',
+                    'supplier LIKE' => '%' . $search . '%'
+                ]
+            ]);
+        }
 
 
-        $this->set(compact('parts', 'filterby', 'mf'));
+        $this->set(compact('parts', 'filterby', 'mf', 'search'));
     }
 
     /**
