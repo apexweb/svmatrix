@@ -124,13 +124,19 @@ class QuotesController extends AppController
                 }
             ]
         ]);
+            
+        $filename = $quote->customer_name . '-' . $quote->qId;
+        if($name == 'CheckMeasure-InstallSheet') {            
+            $filename = '('. $quote->customer_name. ')-Check Measure' ;             
+        }
+        
         $this->viewBuilder()->options([
             'pdfConfig' => [
-                'filename' => $quote->customer_name . '-' . $quote->qId . '.pdf',
+                'filename' =>  $filename . '.pdf',
                 'orientation' => $orientation,
             ]
         ]);
-
+        
         $deductions = TableRegistry::get('Mcvalues');
         if ($this->Auth->user('role') == 'manufacturer') {
             $deductions = $deductions->find('all')->where(['user_id' => $this->Auth->user('id')])->first();
