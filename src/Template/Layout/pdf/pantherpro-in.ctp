@@ -10,7 +10,9 @@
         * {
             box-sizing: border-box;
         }
-
+        .print{
+            font-size: 11px !important;
+        }
         .row::after {
             content: "";
             clear: both;
@@ -157,6 +159,9 @@
             width:40px;
         }
         
+        .width-40{
+            width:40px;
+        }
         .width-60{
             width:60px;
         }
@@ -186,7 +191,7 @@
         
     </style>
 </head>
-<body>
+<body class="print">
 <?= $this->fetch('content') ?>
 </body>
 </html>

@@ -1,0 +1,50 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Sep 24, 2017, 11:56:48 AM
+    Author     : rss
+*/
+
+/* Quote Printout Page */
+
+.quote-printout th,
+.quote-installsheet th {
+    text-align: center;
+    font-size: 9px !important;
+    font-weight: bold;
+    vertical-align: middle !important;
+    color: #000;
+    font-family: 'Roboto', sans-serif !important;    
+}
+
+.heading-bg th{
+    background-color: #EEEEEE;
+    font-family: 'Roboto', sans-serif !important; 
+    font-size: 9px !important;
+}
+
+.bg-light-gray{
+    background-color: #EEEEEE;    
+}
+
+.quote-printout td,
+.quote-installsheet td {
+    font-size: 10px !important;
+    color: #515151;
+}
+
+.quote-colors p {
+    font-weight: bold;
+}
+.width-30{
+    width:30px;
+}
+.width-40{
+    width:40px;
+}
+.text-left{
+    text-align: right;    
+}
