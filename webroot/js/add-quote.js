@@ -213,8 +213,8 @@ function getPerMeterMarkups() {
     var markup = 0;
     
     $.each(additionalPerMeter, function (i, item) {
-        markup += Number(item[1]);
-
+        if( Number(item[1]) >= 0)
+            markup += Number(item[1]);
     });
     return markup.toFixed(2);
 }
@@ -223,7 +223,8 @@ function getPerLengthMarkups() {
     var markup = 0;
     
     $.each(additionalPerLength, function (i, item) {
-        markup += Number(item[1]);
+        if( Number(item[1]) >= 0)
+            markup += Number(item[1]);
 
     });
     return markup.toFixed(2);    
@@ -281,6 +282,7 @@ function calculateTotalBuy() {
 function calculateTotalSell() {
     TOTAL_SELL_PRICE = (Number(TOTAL_BUY_PRICE) + Number(markups.getTotalMarkups()) - Number(DISCOUNT_AMOUNT) + Number(INSTALLATION_TOTAL)).toFixed(2);
     TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getCustomItemsCharged()) - Number(CUSTOM_ITEMS_TOTAL)).toFixed(2);
+    
     TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getPerMeterMarkups()) + Number(getPerLengthMarkups())).toFixed(2);
     $('#total-sell-price').val(TOTAL_SELL_PRICE);
 
@@ -584,6 +586,30 @@ $(document).ready(function () {
 
         //Trigger 'Change' on copied product's QTY option to calculate the new copied product costs
         $('[name="products[' + productsCount + '][product_qty]"]').trigger('change');
+
+    });
+    
+    $('#copy-cutsheet-btn').on('click', function () {
+
+
+        /* Addd New Item */
+        $('#add-row-cutsheet').trigger('click');
+
+
+        /* Copy before last row's values to Last Row */
+        var beforeLastRow = findIndexById($('.cutsheets-rows').eq(-2));
+
+        $('[name="cutsheets[' + cutsheetsCount + '][qty]"]').val($('[name="cutsheets[' + beforeLastRow + '][qty]"]').val());
+        $('[name="cutsheets[' + cutsheetsCount + '][section]"]').val($('[name="cutsheets[' + beforeLastRow + '][section]"]').val());
+        $('[name="cutsheets[' + cutsheetsCount + '][colour]"]').val($('[name="cutsheets[' + beforeLastRow + '][colour]"]').val());
+        $('[name="cutsheets[' + cutsheetsCount + '][cut_to_size]"]').val($('[name="cutsheets[' + beforeLastRow + '][cut_to_size]"]').val());
+        $('[name="cutsheets[' + cutsheetsCount + '][notes]"]').val($('[name="cutsheets[' + beforeLastRow + '][notes]"]').val());
+        //$('#products-' + cutsheetsCount + '-product-inc-midrail').prop('checked', $('#products-' + beforeLastRow + '-product-inc-midrail').is(':checked'));
+        //$('#products-' + productsCount + '-product-no-lock').prop('checked', $('#products-' + beforeLastRow + '-product-no-lock').is(':checked'));
+
+
+        //Trigger 'Change' on copied product's QTY option to calculate the new copied product costs
+        $('[name="cutsheets[' + cutsheetsCount + '][qty]"]').trigger('change');
 
     });
 
