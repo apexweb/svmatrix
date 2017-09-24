@@ -127,7 +127,7 @@ class QuotesController extends AppController
             
         $filename = $quote->customer_name . '-' . $quote->qId;
         if($name == 'CheckMeasure-InstallSheet') {            
-            $filename = '('. $quote->customer_name. ')-Check Measure' ;             
+            $filename = $quote->customer_name. '-Check Measure' ;             
         }
         
         $this->viewBuilder()->options([
