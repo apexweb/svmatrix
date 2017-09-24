@@ -75,16 +75,18 @@ $role = $authUser['role'];
                     <li class="dropdown">
 
                         <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true">
-                            <span class="profile-name">Howdy, <?= $authUser['username']; ?></span>
+                            <span class="profile-name">Gidday, <?= $authUser['username']; ?></span>
                             <?= $this->Html->image('/assets/images/users/avatar-1.jpg', ['alt' => 'user-img', 'class' => 'img-circle']) ?>
                         </a>
 
 
                         <ul class="dropdown-menu">
                             <li><?= $this->Html->link('<i class="ti-user m-r-5"></i> <span> Edit Profile </span>', ['controller' => 'users', 'action' => 'edit', $authUser['id']], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                            <li><?= $this->Html->link('<i class="ti-power-off m-r-5 logout-icon"></i> <span> Log out </span>', ['controller' => 'users', 'action' => 'logout'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                         </ul>
                     </li>
+                    
+                    <li><?= $this->Html->link('<i class="ti-power-off m-r-5 logout-icon"></i> <span> Log out </span>', ['controller' => 'users', 'action' => 'logout'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                    
 
                 </ul>
 
