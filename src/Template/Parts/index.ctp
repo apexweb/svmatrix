@@ -47,7 +47,7 @@
     <?php endif; ?>
 
     <!-- <div class="col-md-2 col-md-offset-8 col-sm-offset-0">-->
-    <div class="col-md-5 search-form col-sm-offset-0" style="margin-bottom: 15px;">
+    <div class="col-md-5 search-form col-sm-offset-0" style="margin-bottom: 15px;text-align:right;">
         <?= $this->Form->create($this, ['type' => 'get', 'class' => 'form-inline search-form']) ?>
         
         <div class="input-group">
