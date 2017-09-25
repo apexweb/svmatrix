@@ -38,16 +38,16 @@ foreach ($parts as $part) {
     $price = $part->users_parts[0]->price_per_unit;
     $code = $part->part_code;
 
-    if ($part->show_in_additional_section_dropdown) {
+    if ($part->users_parts[0]->show_in_additional_section_dropdown) {
         $additional_per_meter[] = ['text' => $title, 'value' => $title, 'data-price' => $price, 'data-code' => $code];
     }
-    if ($part->show_in_additional_section_by_length_dropdown) {
+    if ($part->users_parts[0]->show_in_additional_section_by_length_dropdown) {
         $additional_per_length[] = ['text' => $title, 'value' => $title, 'data-price' => $price, 'data-code' => $code];
     }
-    if ($part->show_in_accessories_dropdown) {
+    if ($part->users_parts[0]->show_in_accessories_dropdown) {
         $accessories[] = ['text' => $title, 'value' => $title, 'data-price' => $price, 'data-code' => $code];
     }
-    if ($part->master_calculator_value) {
+    if ($part->users_parts[0]->master_calculator_value) {
         $mc_parts[$id] = ['title' => $title, 'price' => $price, 'data-code' => $code];
     }
 }

@@ -2168,12 +2168,13 @@ function validate(type) {
         var lockType = $(el).find('.product-lock-type').val();
         var lockHeight = $(el).find('.product-lock-height').val();
 
-        console.log(lockType, lockHeight);
+
         if (!error) {
             if (lockType && !lockHeight) {
                 errorMsg += 'Lock handle height is empty. \n';
             }
         }
+
 
     });
     // return false;
@@ -2182,12 +2183,15 @@ function validate(type) {
 
     // Check if "Covert To Order" Button is Clicked
     if (type == 'order') {
-        // if (!$('[name="standard"]').is(':checked') && !$('[name="color1"]').is(':checked') && !$('[name="color2"]').is(':checked')
-        //     && !$('[name="color3"]').is(':checked') && !$('[name="color4"]').is(':checked')) {
-        //
-        //     errorMsg += 'Colour not Chosen. \n';
-        //
-        // }
+        $('.product-options-row').each(function(i, el) {
+            var winDoor = $(el).find('.product-win-door').val();
+            if (winDoor == 'Window' || !error) {
+                if (!$(el).find('.product-frame-type').val()) {
+                    errorMsg += 'You are not allowed to convert to order without having the frame type selected. \n';
+                    error = true;
+                }
+            }
+        });
 
         if (!$('[name="required_date"]').val()) {
             errorMsg += 'Do you want to request a Required Completion Date? \n';

@@ -73,6 +73,7 @@
             <div class="checkbox checkbox-primary">
                 <?= $this->Form->input('show_in_additional_section_dropdown',
                     ['type' => 'checkbox',
+                        'disabled' => 'disabled',
                         'label' => 'Show In Additional Section Per Meter Dropdown',
                         'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
             </div>
@@ -84,6 +85,7 @@
             <div class="checkbox checkbox-primary">
                 <?= $this->Form->input('show_in_additional_section_by_length_dropdown',
                     ['type' => 'checkbox',
+                        'disabled' => 'disabled',
                         'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
             </div>
         </div>
@@ -94,6 +96,7 @@
             <div class="checkbox checkbox-primary">
                 <?= $this->Form->input('show_in_accessories_dropdown',
                     ['type' => 'checkbox',
+                        'disabled' => 'disabled',
                         'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
             </div>
         </div>
@@ -105,6 +108,7 @@
             <div class="checkbox checkbox-primary">
                 <?= $this->Form->input('master_calculator_value',
                     ['type' => 'checkbox',
+                        'disabled' => 'disabled',
                         'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
             </div>
         </div>

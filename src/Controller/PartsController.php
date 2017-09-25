@@ -170,6 +170,10 @@ class PartsController extends AppController
                     $entity->price_per_unit = $part->price_per_unit;
                     $entity->user_id = $mf->id;
                     $entity->part_id = $part->id;
+                    $entity->show_in_additional_section_dropdown = $part->show_in_additional_section_dropdown;
+                    $entity->show_in_additional_section_by_length_dropdown = $part->show_in_additional_section_by_length_dropdown;
+                    $entity->show_in_accessories_dropdown = $part->show_in_accessories_dropdown;
+                    $entity->master_calculator_value = $part->master_calculator_value;
                     $entities[] = $entity;
                 }
 
@@ -376,6 +380,10 @@ class PartsController extends AppController
                 $entity->user_id = $mf->id;
                 $entity->part_id = $part->id;
                 $entity->description = $part->description;
+                $entity->show_in_additional_section_dropdown = $part->show_in_additional_section_dropdown;
+                $entity->show_in_additional_section_by_length_dropdown = $part->show_in_additional_section_by_length_dropdown;
+                $entity->show_in_accessories_dropdown = $part->show_in_accessories_dropdown;
+                $entity->master_calculator_value = $part->master_calculator_value;
                 $entities[] = $entity;
             }
         }

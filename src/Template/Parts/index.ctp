@@ -110,7 +110,7 @@
                 <td><?= $part->mark_up ?></td>
                 <td><?= $part->price_per_unit ?></td>
                 <td>
-                    <?php if ($part->part->show_in_additional_section_dropdown): ?>
+                    <?php if ($part->show_in_additional_section_dropdown): ?>
                         <div class="checkbox checkbox-custom checkbox-single">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
@@ -118,7 +118,7 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <?php if ($part->part->show_in_additional_section_by_length_dropdown): ?>
+                    <?php if ($part->show_in_additional_section_by_length_dropdown): ?>
                         <div class="checkbox checkbox-custom checkbox-single">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
@@ -126,7 +126,7 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <?php if ($part->part->show_in_accessories_dropdown): ?>
+                    <?php if ($part->show_in_accessories_dropdown): ?>
                         <div class="checkbox checkbox-custom checkbox-single">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
@@ -134,7 +134,7 @@
                     <?php endif; ?>
                 </td>
                 <td>
-                    <?php if ($part->part->master_calculator_value): ?>
+                    <?php if ($part->master_calculator_value): ?>
                         <div class="checkbox checkbox-custom checkbox-single">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>

@@ -72,7 +72,7 @@
     <div class="form-group ">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="checkbox checkbox-primary">
-                <?= $this->Form->input('part.show_in_additional_section_dropdown',[
+                <?= $this->Form->input('show_in_additional_section_dropdown',[
                     'type' => 'checkbox',
                     'label' => 'Show In Additional Section Per Meter Dropdown',
                     //'disabled' => 'disabled',
@@ -84,7 +84,7 @@
     <div class="form-group ">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="checkbox checkbox-primary">
-                <?= $this->Form->input('part.show_in_additional_section_by_length_dropdown', [
+                <?= $this->Form->input('show_in_additional_section_by_length_dropdown', [
                     'type' => 'checkbox', 
                     //'disabled' => 'disabled',
                     'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']
@@ -96,7 +96,7 @@
     <div class="form-group ">
         <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
             <div class="checkbox checkbox-primary">
-                <?= $this->Form->input('part.show_in_accessories_dropdown', [
+                <?= $this->Form->input('show_in_accessories_dropdown', [
                         'type' => 'checkbox', 
                         //'disabled' => 'disabled',
                         'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']
@@ -109,8 +109,8 @@
         <div class="col-lg-3 col-md-4 col-xs-12">
 
             <div class="checkbox checkbox-primary">
-                <?= $this->Form->input('part.master_calculator_value',
-                    ['type' => 'checkbox', 'disabled' => 'disabled',
+                <?= $this->Form->input('master_calculator_value',
+                    ['type' => 'checkbox',
                         'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
             </div>
         </div>
