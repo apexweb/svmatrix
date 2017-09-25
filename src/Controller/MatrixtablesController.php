@@ -180,10 +180,10 @@ class MatrixtablesController extends AppController
 
 
             if ($this->Matrixtables->Prices->link($table, [$entity])) {
-                $this->Flash->success('Values were updated successfully.');
+                $this->Flash->success('Master Calculator values has been updated.');
                 return $this->redirect(['action' => 'edittable', $tableId]);
             } else {
-                $this->Flash->error('Values cannot be updated, Please try again.');
+                $this->Flash->error('Master Calculator values cannot be updated, Please try again.');
             }
         }
 
