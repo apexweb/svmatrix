@@ -1183,7 +1183,7 @@ $(document).ready(function () {
                     $lockType.val('Triple');
                     return $lockCount.val('1').trigger('change', {a: true});
                 } else if (productConf == 'DBHD') {
-                    $('option[data-code="DRCLS"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
+                    $('option[data-code="DRFLUBLT"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
                     $('option[data-code="DBLHNGDRCV"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
 
                     $lockType.val('Triple');
