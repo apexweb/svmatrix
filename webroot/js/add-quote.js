@@ -213,8 +213,10 @@ function getPerMeterMarkups() {
     var markup = 0;
     
     $.each(additionalPerMeter, function (i, item) {
-        if( Number(item[1]) >= 0)
-            markup += Number(item[1]);
+        if(typeof item !== "undefined"){
+            if( Number(item[1]) >= 0)
+                markup += Number(item[1]);
+        }
     });
     if (markup) {
         return markup.toFixed(2);
@@ -227,8 +229,10 @@ function getPerLengthMarkups() {
     var markup = 0;
     
     $.each(additionalPerLength, function (i, item) {
-        if( Number(item[1]) >= 0)
-            markup += Number(item[1]);
+        if(typeof item !== "undefined"){
+            if( Number(item[1]) >= 0)
+                markup += Number(item[1]);
+        }
 
     });
     if (markup) {
@@ -828,6 +832,7 @@ $(document).ready(function () {
         //***************
 
         additionalMeters.splice(index, 1);
+        additionalPerMeter.splice(index, 1);
         calculateAddtionalsTotal();
     });
     
@@ -897,6 +902,7 @@ $(document).ready(function () {
         //***************
 
         additonalLengths.splice(index, 1);
+        additionalPerLength.splice(index, 1);
         calculateAddtionalsTotal();
     });
 
@@ -1406,7 +1412,7 @@ $(document).ready(function () {
         } else {
             additionalRow.find('.additional-total-price').val('');
             additionalMeters[index] = 0;
-            additionalPerMeter[index] = 0;
+            additionalPerMeter[index] = [];
         }
         
         
@@ -1437,7 +1443,7 @@ $(document).ready(function () {
             
         } else {
             additionalRow.find('.additional-total-price').val('');
-            additionalPerLength[index] = 0;
+            additionalPerLength[index] = [];
         }
 
         calculateAddtionalsTotal();
