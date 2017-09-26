@@ -729,8 +729,32 @@ class Calculator
             $id = $part->id;
             $title = $part->title;
             $price = $part->users_parts[0]->price_per_unit;
-
-            if ($part->show_in_additional_section_dropdown) {
+            
+            if ($part->users_parts[0]->show_in_additional_section_dropdown) {
+                $this->additionals_m[$title] = $price;
+            } else if ($part->show_in_additional_section_by_length_dropdown) {
+                $this->additionals_l[$title] = $price;
+            }
+                                   
+            if ($part->users_parts[0]->show_in_additional_section_by_length_dropdown) {
+                $this->additionals_l[$title] = $price;
+            } else if ($part->show_in_additional_section_by_length_dropdown) {
+                $this->additionals_l[$title] = $price;
+            }
+            
+            if ($part->users_parts[0]->show_in_accessories_dropdown) {
+                $this->accessories[$title] = $price;
+            } else if ($part->show_in_accessories_dropdown) {
+                $this->accessories[$title] = $price;
+            }
+            
+            if ($part->users_parts[0]->master_calculator_value) {
+                $this->mc_parts[$id] = ['title' => $title, 'price' => $price];
+            } else if ($part->master_calculator_value) {
+                $this->mc_parts[$id] = ['title' => $title, 'price' => $price];
+            }
+            
+            /*if ($part->show_in_additional_section_dropdown) {
                 $this->additionals_m[$title] = $price;
             }
             if ($part->show_in_additional_section_by_length_dropdown) {
@@ -741,7 +765,7 @@ class Calculator
             }
             if ($part->master_calculator_value) {
                 $this->mc_parts[$id] = ['title' => $title, 'price' => $price];
-            }
+            }*/
         }
     }
 
