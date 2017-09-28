@@ -653,7 +653,7 @@ class QuotesController extends AppController
             }
 
 
-            if ($this->request->data['is_ordered']) {
+            if ($this->request->data['is_ordered'] && $this->request->data['is_ordered']!= 'false') {
                 $quote->status = 'in progress';
                 $quote->orderin_date = (new \DateTime())->format('d/m/Y');
                 $ordered = true;
@@ -661,6 +661,7 @@ class QuotesController extends AppController
             if ($this->request->data['sendtoinstaller']) {
                 $sendToInstaller = true;
             }
+                      
 
             $Stockmetas = TableRegistry::get('Stockmetas');
             $cal = new Calculator($quote, $this->Auth, $Stockmetas);
