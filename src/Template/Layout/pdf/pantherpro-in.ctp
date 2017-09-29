@@ -74,7 +74,7 @@
             border-spacing: 0 0;
             /*border: 1px solid #1f1f1f;*/
         }
-
+        
         .table td,
         .table th {
             padding: 3px 4px;
@@ -92,6 +92,12 @@
         .table th {
             color: #000000;
             font-size: 12px;
+        }
+        .noborder td,
+        .noborder th {
+            padding: 3px 4px;
+            border: 1px solid #fff !important; 
+            /*border-bottom: none;*/
         }
 
         .font-bold {
@@ -132,6 +138,29 @@
 
         .no-border{
             border:none !important;
+            vertical-align:top;
+        }
+        .no-top-bottom{
+            border-bottom:none !important;
+            border-top:none !important;
+            vertical-align:top;
+        }
+        
+        .no-top{
+            border-top:none !important;
+            vertical-align:top;
+        }
+
+        .no-right{
+            border-right:none !important;
+            vertical-align:top;
+        }
+        .no-left{
+            border-left:none !important;
+            vertical-align:top;
+        }
+        .no-bottom{
+            border-bottom:none !important;
             vertical-align:top;
         }
         .x{
@@ -181,10 +210,25 @@
         .width-100{
             width: 100px;
         }
-
+        .width-120{
+            width: 120px;
+        }
+        .width-150{
+            width: 150px;
+        }
+        .width-180{
+            width:180px;
+        }
         .width-200{
             width:200px;
         }
+        .width-220{
+            width:220px;
+        }
+        .width-250{
+            width:250px;
+        }
+
         .at{
           font-size: 6px;  
         }

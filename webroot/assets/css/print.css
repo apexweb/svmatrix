@@ -48,3 +48,16 @@ and open the template in the editor.
 .text-left{
     text-align: right;    
 }
+.right-align {
+    float:right;
+}
+
+
+
+ .col-lg-12 {
+    width: 100%;
+    float: left;
+    min-height: 1px;
+    clear:both;
+    display:block;
+  }
