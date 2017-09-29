@@ -362,9 +362,8 @@ if ($quote->override_final_price) {
             <td colspan="3" class="no-border"></td>
         </tr>
         <tr>
-            <td class="no-border" style="padding: 40px 0;"></td>
-            <td class="no-border" colspan="2"><strong>Customers Signature</strong></td>
-            <td class="no-border"></td>
+            <td class="no-border" style="padding: 30px 0;"></td>
+            <td class="no-border" colspan="3"><strong>Customers Signature</strong></td>
             <td class="no-border" colspan="4" style="vertical-align: middle;">
                 
             </td>

@@ -5,7 +5,17 @@
     </td>
 
     <td>
-        <?= $this->Form->input('cutsheets.' . $i . '.section', ['label' => false, 'class' => 'form-control input-sm']); ?>
+        <?php //$this->Form->input('cutsheets.' . $i . '.section', ['label' => false, 'class' => 'form-control input-sm']); ?>
+        <?= $this->Form->input(
+            'cutsheets.' . $i . '.section',
+            [
+                'type' => 'select',
+                'options' => $additional_per_meter,
+                'empty' => true,
+                'label' => false,
+                'class' => 'form-control input-sm'
+            ]
+        ); ?>
     </td>
 
     <td>

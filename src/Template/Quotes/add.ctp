@@ -339,15 +339,15 @@ foreach ($parts as $part) {
                                 foreach ($quote['cutsheets'] as $cutsheet): ?>
 
                                     <?= $this->element('Quotes/cutsheet_row',
-                                        ['i' => $i]); ?>
-
+                                        ['i' => $i, 'additional_per_meter' => $additional_per_meter]); ?>
+                                    
                                     <?php $i++; endforeach; ?>
 
                             <?php else: ?>
                                 <?php for ($i = 0; $i < 3; $i++): ?>
 
                                     <?= $this->element('Quotes/cutsheet_row',
-                                        ['i' => $i]); ?>
+                                        ['i' => $i, 'additional_per_meter' => $additional_per_meter]); ?>
 
                                 <?php endfor; ?>
 
