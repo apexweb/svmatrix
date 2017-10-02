@@ -1411,6 +1411,7 @@ $(document).ready(function () {
 
         } else {
             additionalRow.find('.additional-total-price').val('');
+            additionalRow.find('.additional-charged').val('');
             additionalMeters[index] = 0;
             additionalPerMeter[index] = [];
         }
@@ -1443,6 +1444,7 @@ $(document).ready(function () {
             
         } else {
             additionalRow.find('.additional-total-price').val('');
+            additionalRow.find('.additional-charged').val(totalCharged);
             additionalPerLength[index] = [];
         }
 

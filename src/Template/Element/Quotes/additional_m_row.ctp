@@ -40,7 +40,7 @@
     <td class="width-75">
 
         <?= $this->Form->input('additionalpermeters.' . $i . '.additional_charged',
-            ['label' => false, 'class' => 'form-control span-input additional-charged', 'readonly' => 'readonly']); ?>
+            ['label' => false, 'class' => 'form-control span-input additional-charged', 'readonly' => 'readonly', 'style'=>'font-weight:bold; text-align:center !important;']); ?>
 
     </td>
     
