@@ -2193,7 +2193,7 @@ function validate(type) {
     if (type == 'order') {
         $('.product-options-row').each(function(i, el) {
             var winDoor = $(el).find('.product-win-door').val();
-            if (winDoor == 'Window' || !error) {
+            if (winDoor == 'Window' ) {//|| !error
                 if (!$(el).find('.product-frame-type').val()) {
                     errorMsg += 'You are not allowed to convert to order without having the frame type selected. \n';
                     error = true;

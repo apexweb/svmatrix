@@ -2997,6 +2997,12 @@ a.underline:hover {
     margin: 10px;
 }
 
+.cutsheets-table select, .cutsheets-table input {
+    padding: 2px;
+    height: 25px;
+    font-size: 12px;
+}
+
 /* DropDown Page */
 
 .drop-downs-table td {
