@@ -61,3 +61,12 @@ and open the template in the editor.
     clear:both;
     display:block;
   }
+  
+  .th-bg{
+       font-size: 9px !important;
+  }
+  .installsheet-notes{
+      background-color: #EEEEEE;
+  }
+  
+  

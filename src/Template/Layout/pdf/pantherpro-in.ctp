@@ -187,7 +187,9 @@
         .width, .height{
             width:40px;
         }
-        
+        .width-20{
+            width:20px;
+        }
         .width-40{
             width:40px;
         }
