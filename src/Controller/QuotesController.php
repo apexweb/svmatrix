@@ -126,10 +126,33 @@ class QuotesController extends AppController
         ]);
             
         $filename = $quote->customer_name . '-' . $quote->qId;
+        
         if($name == 'CheckMeasure-InstallSheet') {            
             $filename = $quote->customer_name. '-Check Measure' ;             
+        }elseif($name == 'Invoice'){
+            $flagSecurity = false;
+            foreach ($quote->products as $product) {
+
+                if ($product->product_qty > 0) {
+                    if ($product->product_sec_dig_perf_fibr == 'Security') {
+                        $flagSecurity = true;
+                    }
+                }
+            }
+            
+            $total = $quote->invoiceCost;
+            if ($flagSecurity) {
+                $total = (float)$total + 8;
+            }
+
+            $additiona1 = $quote->invoice_second_1_price;
+            $additiona2 = $quote->invoice_second_2_price;
+
+
+            $final = round($total + $additiona1 + $additiona2, 0);
+            $filename = $quote->customer_name . '-' . $final . '-' . $quote->qId;  
         }
-        
+               
         $this->viewBuilder()->options([
             'pdfConfig' => [
                 'filename' =>  $filename . '.pdf',
