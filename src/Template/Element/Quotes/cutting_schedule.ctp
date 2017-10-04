@@ -423,7 +423,7 @@
     </div>
 
 
-
+    <?php if(false){ //Will implement later?>
     <div class="col-md-7 col-md-offset-2 col-sm-offset-0">
         <div class="panel panel-default panel-border">
             <div class="panel-body">
@@ -582,4 +582,5 @@
             </div>
         </div>
     </div>
+    <?php }?>
 </div> <!-- .row -->
