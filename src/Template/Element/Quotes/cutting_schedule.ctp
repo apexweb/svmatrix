@@ -1,10 +1,17 @@
 <div class="card-box cuttings-customer-info font-13">
 
     <p>
-        <span>Created By: </span><span class="big-span"><?= h($quote->user->username) ?></span>
+        <span>Created By: <span class="big-span"><?= h($quote->user->username) ?></span></span>
         <span class="width-100 inline-block"></span>
-        <span>Cust. Order No. </span> <span class="big-span"><?= h($quote->qId) ?></span>
+        <span class="width-250">Cust. Order No.  <span class="big-span"><?= h($quote->qId) ?></span></span>
         <span class="width-100 inline-block"></span>
+        <span style="float: right;">Order Date: 
+            <?php
+                if ($quote->orderin_date != null) {
+                    echo '<span class="big-span">' . h($quote->orderin_date) . '</span>';
+                }
+            ?>
+        </span>
     </p>
     <p class="pull-right">
         <span class="">Date Required: </span>
