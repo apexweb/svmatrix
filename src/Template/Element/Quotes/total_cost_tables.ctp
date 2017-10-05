@@ -61,16 +61,16 @@
             <tbody class="markup-section">
 
             <tr>
-                <td class="font-bold">S/S Marked Up %:</td>
-                <td>
+                <td class="font-bold SS316">S/S Marked Up %:</td>
+                <td class="SS316">
 
                     <?= $this->Form->input('ss_markup', ['class' => 'form-control input-sm markups-percent', 'label' => false]) ?>
 
                 </td>
             </tr>
             <tr>
-                <td>SS Marked Up Amount:</td>
-                <td>
+                <td class="SS316">SS Marked Up Amount:</td>
+                <td class="SS316">
                     <?= $this->Form->input('ss_markup_amount',
                         ['class' => 'form-control input-sm markups-percent', 'label' => false, 'readonly' => 'readonly']) ?>
                 </td>
@@ -83,14 +83,14 @@
             </tr>
 
             <tr>
-                <td class="font-bold">DG Marked Up %:</td>
-                <td>
+                <td class="font-bold dgrill">DG Marked Up %:</td>
+                <td class="dgrill">
                     <?= $this->Form->input('dg_markup', ['class' => 'form-control input-sm markups-percent', 'label' => false]) ?>
                 </td>
             </tr>
             <tr>
-                <td>DG Marked Up Amount:</td>
-                <td>
+                <td class="dgrill">DG Marked Up Amount:</td>
+                <td class="dgrill">
                     <?= $this->Form->input('dg_markup_amount',
                         ['class' => 'form-control input-sm markups-percent', 'label' => false, 'readonly' => 'readonly']) ?>
                 </td>
@@ -104,14 +104,14 @@
 
 
             <tr>
-                <td class="font-bold">XCeed Marked Up %:</td>
-                <td>
+                <td class="font-bold xceed">XCeed Marked Up %:</td>
+                <td class="xceed">
                     <?= $this->Form->input('perf_markup', ['class' => 'form-control input-sm markups-percent', 'label' => false]) ?>
                 </td>
             </tr>
             <tr>
-                <td>XCeed Marked Up Amount:</td>
-                <td>
+                <td class="xceed">XCeed Marked Up Amount:</td>
+                <td class="xceed">
                     <?= $this->Form->input('perf_markup_amount',
                         ['class' => 'form-control input-sm markups-percent', 'label' => false, 'readonly' => 'readonly']) ?>
                 </td>
@@ -124,14 +124,14 @@
             </tr>
 
             <tr>
-                <td class="font-bold">Insect Marked Up %:</td>
-                <td>
+                <td class="font-bold insect">Insect Marked Up %:</td>
+                <td class="insect">
                     <?= $this->Form->input('fibr_markup', ['class' => 'form-control input-sm markups-percent', 'label' => false]) ?>
                 </td>
             </tr>
             <tr>
-                <td>Insect Marked Up Amount:</td>
-                <td>
+                <td class="insect">Insect Marked Up Amount:</td>
+                <td class="insect">
                     <?= $this->Form->input('fibr_markup_amount',
                         ['class' => 'form-control input-sm markups-percent', 'label' => false, 'readonly' => 'readonly']) ?>
                 </td>
