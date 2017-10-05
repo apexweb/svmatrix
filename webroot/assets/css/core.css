@@ -3417,3 +3417,10 @@ td.fc-today:before {
 .insect{
     background-color:#F2F1EF;
 }
+.additional-m-table th, .additional-l-table th, .accessories-table th, .cutsheets-table th, .customitem-table th{
+    background-color:#FBEADB;
+}
+
+.additional-m-table tbody, .additional-l-table tbody, .accessories-table tbody, .cutsheets-table tbody, .customitem-table tbody{
+    background-color:#F8F8F8;
+}

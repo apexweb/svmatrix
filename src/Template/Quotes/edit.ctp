@@ -350,7 +350,7 @@ foreach ($parts as $part) {
                         <table class="table-bordered cutsheets-table">
 
                             <tr>
-                                <th class="text-center" colspan="5"><strong>Additional Sections Cut Sheet</strong></th>
+                                <th class="text-center" colspan="6"><strong>Additional Sections Cut Sheet</strong></th>
                             </tr>
                             <tr>
                                 <th class="width-60 text-center">Qty</th>
@@ -367,7 +367,7 @@ foreach ($parts as $part) {
                                 foreach ($quote['cutsheets'] as $cutsheet): ?>
 
                                     <?= $this->element('Quotes/cutsheet_row',
-                                        ['i' => $i]); ?>
+                                        ['i' => $i, 'additional_per_meter' => $additional_per_meter]); ?>
 
                                     <?php $i++; endforeach; ?>
 
@@ -375,7 +375,7 @@ foreach ($parts as $part) {
                                 <?php for ($i = 0; $i < 3; $i++): ?>
 
                                     <?= $this->element('Quotes/cutsheet_row',
-                                        ['i' => $i]); ?>
+                                        ['i' => $i, 'additional_per_meter' => $additional_per_meter]); ?>
 
                                 <?php endfor; ?>
 

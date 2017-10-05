@@ -322,7 +322,7 @@ foreach ($parts as $part) {
                         <table class="table-bordered cutsheets-table">
 
                             <tr>
-                                <th class="text-center" colspan="5"><strong>Additional Sections Cut Sheet</strong></th>
+                                <th class="text-center" colspan="6"><strong>Additional Sections Cut Sheet</strong></th>
                             </tr>
                             <tr>
                                 <th class="width-60 text-center">Qty</th>
