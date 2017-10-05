@@ -11,44 +11,44 @@
             </tr>
             <tr>
                 <td colspan="2">
-                    <strong>Created By:</strong>
-                    <span><?= h($quote->user->username) ?></span>                    
+                    Created By:
+                    <span><strong><?= h($quote->user->username) ?></strong></span>                    
                 </td>
                 <td colspan="2">
-                    <strong>Cust. Order No.</strong>
-                    <span><?= h($quote->qId) ?></span>                    
+                    Cust. Order No.
+                    <span><strong><?= h($quote->qId) ?></strong></span>                    
                 </td>
                 <td align="right">
-                    <strong>Date Required:</strong>
-                        <span>
+                    Date Required:
+                        <span><strong>
                             <?php if ($quote->required_date != null) {
                                 echo h($quote->required_date);
                             }; ?>
-                        </span> 
+                        </strong></span> 
                 </td>
             </tr>
                 <tr>
                     <td>
-                        <strong>Name:</strong>
-                        <span><?= h($quote->customer_name) ?></span>                    
+                        Name:
+                        <span><strong><?= h($quote->customer_name) ?></strong></span>                    
                     </td>
                     <td>
-                        <strong>Home Phone:</strong>
-                        <span><?= h($quote->phone) ?></span>                    
+                        Home Phone:
+                        <span><strong><?= h($quote->phone) ?></strong></span>                    
                     </td>
                     <td>
-                        <strong>Ph. No:</strong>
-                        <span><?= h($quote->mobile) ?></span>                    
+                        Ph. No:
+                        <span><strong><?= h($quote->mobile) ?></strong></span>                    
                     </td>
                     <td colspan="2">
-                        <strong>Street:</strong>
-                        <span><?= h($quote->street . ' ' . $quote->suburb) ?></span>                    
+                        Street:
+                        <span><strong><?= h($quote->street . ' ' . $quote->suburb) ?></strong></span>                    
                     </td>                    
                 </tr>
                 <tr>
                     <td colspan="5">
-                        <strong>Colour:</strong>
-                        <span class="colors-td">
+                        Colour:
+                        <span class="colors-td"><strong>
                             <?php if ($quote->standard) {
                                 echo h($quote->standard_color);
                             }
@@ -65,7 +65,7 @@
                                 echo h($quote->color4_color);
                             }
                             ?>
-                        </span>                    
+                        </strong></span>                    
                     </td>                
                 </tr>
         </table>
@@ -228,6 +228,9 @@
 <style>
 @page {
     margin: 0.2cm 0.3cm 0.2cm 0.2cm;  
+    }
+    .print{
+        font-size: 11.5px !important;
     }
 </style>
 <?= $this->Html->css('/assets/css/print.css', ['fullBase' => true]); ?>
