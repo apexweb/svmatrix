@@ -6,3 +6,8 @@
 ALTER TABLE `additionalpermeters` ADD `additional_markup` VARCHAR(5) NULL AFTER `additional_price`, ADD `additional_charged` VARCHAR(50) NULL AFTER `additional_markup`;
 
 ALTER TABLE `additionalperlength` ADD `additional_markup` VARCHAR(5) NULL AFTER `additional_price`, ADD `additional_charged` VARCHAR(50) NULL AFTER `additional_markup`;
+
+
+#06/10/2017
+
+ALTER TABLE `users_parts` ADD `unit` VARCHAR(10) NULL DEFAULT NULL AFTER `buy_price_include_GST`, ADD `size` FLOAT NULL DEFAULT NULL AFTER `unit`; 

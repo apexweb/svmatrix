@@ -5,7 +5,6 @@
     <?= $this->Form->create($part, ['class' => 'form-horizontal']); ?>
 
 
-
     <div class="form-group ">
         <div class="col-lg-3 col-md-4 col-xs-12">
             <?= $this->Form->input('part.title', ['class' => 'form-control input-sm', 'label' => 'Part Name', 'disabled' => 'disabled']) ?>
@@ -39,13 +38,13 @@
 
     <div class="form-group ">
         <div class="col-lg-3 col-md-4 col-xs-12">
-            <?= $this->Form->input('part.unit', ['class' => 'form-control input-sm', 'disabled' => 'disabled']) ?>
+            <?= $this->Form->input('unit', ['class' => 'form-control input-sm']) ?>
         </div>
     </div>
 
     <div class="form-group ">
         <div class="col-lg-3 col-md-4 col-xs-12">
-            <?= $this->Form->input('part.size', ['class' => 'form-control input-sm size', 'disabled' => 'disabled']) ?>
+            <?= $this->Form->input('size', ['class' => 'form-control input-sm size']) ?>
         </div>
     </div>
 

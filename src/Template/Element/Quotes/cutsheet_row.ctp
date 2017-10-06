@@ -5,17 +5,45 @@
     </td>
 
     <td>
-        <?php //$this->Form->input('cutsheets.' . $i . '.section', ['label' => false, 'class' => 'form-control input-sm']); ?>
-        <?= $this->Form->input(
-            'cutsheets.' . $i . '.section',
-            [
-                'type' => 'select',
-                'options' => $additional_per_meter,
-                'empty' => true,
-                'label' => false,
-                'class' => 'form-control input-sm'
-            ]
-        ); ?>
+        <div class="input select" style="height:30px;padding-top:2px;">
+            <?php    
+                $select_style = '';
+                $input_style = 'display:none;';
+                $select_name = 'section'; 
+                $input_name = 'sect_ion';
+
+                if(isset($quote->cutsheets[$i]->section)){
+                    if(!isset($additional_per_meter[$quote->cutsheets[$i]->section]) ){
+                        $select_style = '';
+                        $input_style = '';
+                        $select_name = 'sect_ion'; 
+                        $input_name = 'section';
+                    }
+                }
+            ?>       
+            <?= $this->Form->input(
+                'cutsheets.' . $i . '.'.$select_name,
+                [
+                    'type' => 'select',
+                    'options' => array_merge($additional_per_meter, array('Other'=>'Other')),
+                    'empty' => true,
+                    'label' => false,
+                    'class' => 'form-control input-sm cutsheets-additional-section additional-select-name',
+                    'templates' => [
+                        'inputContainer' => '{{content}}'],
+                    'style' => $select_style
+                    ]                    
+            ); ?>
+            <?= $this->Form->input('cutsheets.' . $i . '.'.$input_name,  [
+                    'label' => false, 
+                    'class' => 'form-control input-sm additional-input-name editOption', 
+                    'style' => $input_style, 
+                    'templates' => [
+                        'inputContainer' => '{{content}}']
+                    ]                    
+                );
+            ?>
+        </div>
     </td>
 
     <td>

@@ -23,7 +23,7 @@ $role = $authUser['role'];
 <html>
 <head>
     <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="SMS Screen Management System | Security Screen Calculator">
     <meta name="author" content="Coderthemes">
 
@@ -41,7 +41,8 @@ $role = $authUser['role'];
     <?= $this->element('Layout/cssfiles') ?>
 
     <?= $this->fetch('css') ?>
-
+    
+    <link media="only screen and (max-width: 768px), only screen and (max-device-width: 768px)" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"  crossorigin="anonymous">
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

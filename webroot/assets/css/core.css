@@ -3424,3 +3424,11 @@ td.fc-today:before {
 .additional-m-table tbody, .additional-l-table tbody, .accessories-table tbody, .cutsheets-table tbody, .customitem-table tbody{
     background-color:#F8F8F8;
 }
+.editOption{
+    width: 91%;
+    height: 26px;
+    position: relative;
+    top: -25px;
+    border: 0;
+    padding-left: 5px;
+}

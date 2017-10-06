@@ -88,9 +88,9 @@
             <th>Marked up Price</th>
             <th>Mark up %</th>
             <th>Price per unit</th>
-            <th>ASD</th>
-            <th>ASLD</th>
-            <th>AD</th>
+            <th>Per M</th>
+            <th>Per Ln</th>
+            <th>Acc</th>
             <th>MC</th>
             <th>Created Date</th>
             <th colspan="2">Edit / Delete</th>
@@ -111,7 +111,7 @@
                 <td><?= $part->price_per_unit ?></td>
                 <td>
                     <?php if ($part->show_in_additional_section_dropdown): ?>
-                        <div class="checkbox checkbox-custom checkbox-single">
+                        <div class="checkbox checkbox-custom checkbox-single" style="margin:0px;">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
                         </div>
@@ -119,7 +119,7 @@
                 </td>
                 <td>
                     <?php if ($part->show_in_additional_section_by_length_dropdown): ?>
-                        <div class="checkbox checkbox-custom checkbox-single">
+                        <div class="checkbox checkbox-custom checkbox-single" style="margin:0px;">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
                         </div>
@@ -127,7 +127,7 @@
                 </td>
                 <td>
                     <?php if ($part->show_in_accessories_dropdown): ?>
-                        <div class="checkbox checkbox-custom checkbox-single">
+                        <div class="checkbox checkbox-custom checkbox-single" style="margin:0px;">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
                         </div>
@@ -135,7 +135,7 @@
                 </td>
                 <td>
                     <?php if ($part->master_calculator_value): ?>
-                        <div class="checkbox checkbox-custom checkbox-single">
+                        <div class="checkbox checkbox-custom checkbox-single" style="margin:0px;">
                             <input type="checkbox" disabled="disabled" checked="checked">
                             <label></label>
                         </div>

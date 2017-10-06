@@ -431,11 +431,10 @@ foreach ($parts as $part) {
 
                 
                 <hr>
-
                 <fieldset>
-
-                    <?= $this->element('Quotes/installation_and_notes', ['installationType' => $quote->installation_type]); ?>
-
+                    <div class="col-lg-8 table-responsive text-center" style="float:right;">                      
+                        <?= $this->element('Quotes/notes'); ?>                      
+                    </div>
                 </fieldset>
 
 
@@ -455,10 +454,10 @@ foreach ($parts as $part) {
             <div class="panel-body">
 
                 <fieldset class="col-xs-12">
-
                     <?= $this->element('Quotes/total_cost_tables'); ?>
-
-
+                    <div class="panel panel-default panel-border col-md-5">
+                        <?php echo $this->element('Quotes/installation', ['installationType' => $quote->installation_type]); ?>
+                    </div>
                 </fieldset>
 
 

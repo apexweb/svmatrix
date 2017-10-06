@@ -1421,7 +1421,33 @@ $(document).ready(function () {
         calculateAddtionalsTotal();
     });
 
-
+    
+    $('body').on('change', '.cutsheets-additional-section', function () {
+        //var selected = $('option:selected', this).attr('class');
+        //var optionText = $('.editable').text();    
+        var additionalRow = $(this).parents('tr');
+        var name = additionalRow.find('.additional-select-name').val();
+        var select_name = additionalRow.find('.additional-select-name').attr('name');
+        var input_name = additionalRow.find('.additional-input-name').attr('name');
+        if (name) {
+            if(name == 'Other'){
+                additionalRow.find('.additional-input-name').show();
+                additionalRow.find('.additional-input-name').focus();
+                additionalRow.find('.additional-select-name').attr('name', select_name.replace('section', 'sect_ion'));
+                additionalRow.find('.additional-input-name').attr('name', input_name.replace('sect_ion', 'section'));
+                
+            }else{
+                additionalRow.find('.additional-input-name').hide();
+                additionalRow.find('.additional-select-name').attr('name', select_name.replace('sect_ion', 'section')); 
+                additionalRow.find('.additional-input-name').attr('name', input_name.replace('section', 'sect_ion'));
+            }
+        }else{
+            additionalRow.find('.additional-input-name').hide(); 
+            additionalRow.find('.additional-select-name').attr('name', select_name.replace('sect_ion', 'section'));
+            additionalRow.find('.additional-input-name').attr('name', input_name.replace('section', 'sect_ion'));            
+        }
+    });
+    
     $('body').on('change', '.additional-per-length', function () {
         var additionalRow = $(this).parents('tr');
         var name = additionalRow.find('.additional-name').val();

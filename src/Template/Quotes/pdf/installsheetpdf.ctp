@@ -229,8 +229,6 @@
 @page {
     margin: 0.2cm 0.3cm 0.2cm 0.2cm;  
     }
-    .print{
-        font-size: 11.5px !important;
-    }
+    
 </style>
 <?= $this->Html->css('/assets/css/print.css', ['fullBase' => true]); ?>

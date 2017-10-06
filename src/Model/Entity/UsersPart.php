@@ -36,4 +36,20 @@ class UsersPart extends Entity
         '*' => true,
         'id' => false
     ];
+    
+    protected function _getUnit()
+    {   
+        if($this->_properties['unit']){
+            return $this->_properties['unit'];
+        }
+        return $this->_properties['part']->unit;
+    }
+    
+    protected function _getSize()
+    {   
+        if($this->_properties['size']){
+            return $this->_properties['size'];
+        }
+        return $this->_properties['part']->size;
+    }
 }
