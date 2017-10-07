@@ -230,7 +230,7 @@ foreach ($parts as $part) {
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapseFour-2" class="collapsed" aria-expanded="false">
-                    ADDITIONAL SECTIONS/ACCESSORIES AND INSTALLATION
+                    ADDITIONAL SECTIONS/ACCESSORIES 
                 </a>
             </h4>
         </div>
@@ -413,7 +413,7 @@ foreach ($parts as $part) {
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapseFive-2" class="collapsed" aria-expanded="false">
-                    TOTAL COST
+                    TOTAL COST / INSTALLATION
                 </a>
             </h4>
         </div>

@@ -246,7 +246,7 @@ foreach ($parts as $part) {
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapseFour-2" class="collapsed" aria-expanded="false">
-                    ADDITIONAL SECTIONS/ACCESSORIES AND INSTALLATION
+                    ADDITIONAL SECTIONS/ACCESSORIES
                 </a>
             </h4>
         </div>
@@ -261,7 +261,7 @@ foreach ($parts as $part) {
                                 <th>PER METER</th>
                                 <th>ADDITIONAL SECTION</th>
                                 <th class="width-40">COST</th>
-                                <th>MARK UP %</th>
+                                <th class="width-40">MARK UP %</th>
                                 <th colspan="2">SELL PRICE</th>
                             </tr>
 
@@ -300,7 +300,7 @@ foreach ($parts as $part) {
                                 <th>PER LENGTH</th>
                                 <th>ADDITIONAL SECTION</th>
                                 <th class="width-40">COST</th>
-                                <th>MARK UP %</th>
+                                <th class="width-40">MARK UP %</th>
                                 <th colspan="2">SELL PRICE</th>
                             </tr>
 
@@ -391,12 +391,12 @@ foreach ($parts as $part) {
                     <div class="col-lg-6 table-responsive text-center">
                         <table class="table-bordered customitem-table products">
                             <tr>
-                                <th class="width-50">QTY</th>
+                                <th>QTY</th>
                                 <th colspan="2">ADD CUSTOM ITEM <br>
                                     TO BE INVOICED BY THE MANUFACTURER - TICK BOX
                                 </th>
-                                <th class="width-50">COST</th>
-                                <th class="width-50">MARK UP %</th>
+                                <th>COST</th>
+                                <th>MARK UP %</th>
                                 <th colspan="2">CHARGED OUT AT</th>
                             </tr>
 
@@ -446,7 +446,7 @@ foreach ($parts as $part) {
         <div class="panel-heading">
             <h4 class="panel-title">
                 <a data-toggle="collapse" href="#collapseFive-2" class="collapsed" aria-expanded="false">
-                    TOTAL COST
+                    TOTAL COST / INSTALLATION
                 </a>
             </h4>
         </div>

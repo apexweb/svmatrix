@@ -315,9 +315,9 @@ if ($quote->override_final_price) {
                 echo '$';
                 if ($authUser['deposit_percent'] > 0) {
                     if ($flatCustomPrice) {
-                        echo round($authUser['deposit_percent'] * $customQuotedAmount / 100, 2);
+                        echo floor($authUser['deposit_percent'] * $customQuotedAmount / 100);
                     } else {
-                        echo round($authUser['deposit_percent'] * $quote->total_sell_price / 100, 2);
+                        echo floor($authUser['deposit_percent'] * $quote->total_sell_price / 100);
                     }
                 } else {
                     echo '0';
