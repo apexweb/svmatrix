@@ -11,3 +11,6 @@ ALTER TABLE `additionalperlength` ADD `additional_markup` VARCHAR(5) NULL AFTER 
 #06/10/2017
 
 ALTER TABLE `users_parts` ADD `unit` VARCHAR(10) NULL DEFAULT NULL AFTER `buy_price_include_GST`, ADD `size` FLOAT NULL DEFAULT NULL AFTER `unit`; 
+
+ALTER TABLE `users` ADD `business_name` VARCHAR(200) NULL AFTER `lastname`; 
+ALTER TABLE `users` ADD `business_abrev` VARCHAR(100) NULL AFTER `business_name`; 

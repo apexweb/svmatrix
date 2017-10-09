@@ -70,6 +70,18 @@
             <?= $this->Form->input('confirm_password', ['class' => 'form-control', 'type' => 'password']) ?>
         </div>
     </div>
+    
+    <div class="form-group">
+        <div class="col-lg-3 col-md-4 col-xs-12">
+            <?= $this->Form->input('business_name', ['class' => 'form-control']) ?>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-lg-3 col-md-4 col-xs-12">
+            <?= $this->Form->input('business_abrev', ['class' => 'form-control']) ?>
+        </div>
+    </div>
 
 
     <?php if ($authUser['role'] == 'admin'): ?>

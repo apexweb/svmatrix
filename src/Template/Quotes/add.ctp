@@ -79,7 +79,7 @@ foreach ($parts as $part) {
 <input type="hidden" id="role" value="<?php echo $authUser['role']; ?>"/>
 
 
-<?= $this->Form->create($quote, ['class' => 'form-horizontal add-quote-form']) ?>
+<?= $this->Form->create($quote, ['class' => 'form-horizontal add-quote-form', 'enctype' => 'multipart/form-data']) ?>
 
 <?php if (isset($mfrole)): ?>
 

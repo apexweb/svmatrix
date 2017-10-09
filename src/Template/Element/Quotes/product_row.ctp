@@ -43,7 +43,7 @@
 
     </td>
 
-    <td>
+  <td>
 
         <?= $this->Form->select(
             'products.' . $i . '.product_window_or_door',

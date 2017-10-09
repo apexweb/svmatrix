@@ -136,11 +136,11 @@
                 </tr>
                 <tr>
                     <th class="grey">Single Lock</th>
-                    <td><?= $this->Form->input('single_lock', ['class' => 'form-control input-sm', 'label' => '- ']) ?></td>
+                    <td><?= $this->Form->input('single_lock', ['class' => 'form-control input-sm', 'label' => '']) ?></td>
                 </tr>
                 <tr>
                     <th class="grey">Triple Lock</th>
-                    <td><?= $this->Form->input('triple_lock', ['class' => 'form-control input-sm', 'label' => '- ']) ?></td>
+                    <td><?= $this->Form->input('triple_lock', ['class' => 'form-control input-sm', 'label' => '']) ?></td>
                 </tr>
             </table>
         </div>

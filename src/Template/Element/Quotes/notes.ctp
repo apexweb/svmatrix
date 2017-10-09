@@ -16,3 +16,9 @@
             ['class' => 'form-control notes-textarea', 'label' => false, 'placeholder' => 'Notes to Manufacturer']) ?>
     </div>
 </div>
+<div class="col-lg-12 form-inline text-right-lg">
+    <div class="form-group">
+        <label>Send File to manufacturer: </label>
+        <input type="file" name="file" class="m-t-10" style="display:inline;">
+    </div>    
+</div>
