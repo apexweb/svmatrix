@@ -3432,3 +3432,14 @@ td.fc-today:before {
     border: 0;
     padding-left: 5px;
 }
+
+.send-mf {
+    background: url('../images/paperclip.png') no-repeat left 0;
+    padding: 4px 0 4px 20px;
+    float: left;
+    margin-top: 10px;
+}
+#loading{
+    display: none;
+    font-size: 14px;
+}

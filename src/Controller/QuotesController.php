@@ -58,6 +58,7 @@ class QuotesController extends AppController
                 'invoicepdf',
                 'funnelwebpdf',
                 'pdf',
+                'sendattachment'
                 //'test'
             ]);
         }
@@ -527,20 +528,11 @@ class QuotesController extends AppController
 
             $cal = new Calculator($quote, $this->Auth, $this->Quotes->Stockmetas);
             $stocks = $cal->calculatePrices();
-                            
-
+            
+                          
             if ($this->Quotes->save($quote)) {
-                //$this->Quotes->Stockmetas->link($quote, $stocks);
-                if (!empty($this->request->data['file']['tmp_name'])) {
-                    //upload manufacturer file
-
-                    if ($role == 'manufacturer') {
-                        $file_name = md5($this->Auth->user('id').'-'.$this->Quotes->id);
-                    } else {
-                        $file_name = md5($this->Auth->user('parent_id').'-'.$this->Quotes->id);
-                    }
-                }
-                
+              
+                //$this->Quotes->Stockmetas->link($quote, $stocks);                
 
                 if ($ordered) { // SEND EMAILS:
                     $this->orderplaced($quote, $sendToInstaller);
@@ -711,6 +703,7 @@ class QuotesController extends AppController
             //         $stock->quote_id = $quote->id;
             //     }
             // }
+                        
 
             if ($this->Quotes->save($quote)) {
                 if ($isNew) {
@@ -1049,5 +1042,39 @@ class QuotesController extends AppController
             }
             $this->sendEmail($mail, 'installer_order_placed', $quote);
         }
+    }
+    
+    function sendattachment()
+    {
+        $this->autoRender = false;
+        $result['response'] = true;
+        
+        if (!empty($this->request->data['file']['tmp_name'])) {
+            //upload manufacturer file
+            $file_name = $this->request->data['file']['name'];
+            $folder_url = WWW_ROOT . 'assets' . DS. 'attachments' . DS . 'manufacturer' . DS ;
+            
+            if (move_uploaded_file($this->request->data['file']['tmp_name'], $folder_url . $file_name)) {
+                $id = $this->request->query['quote_id'];
+                $quote = $this->Quotes->get($id, ['contain' => 'Users']);
+                
+                $role = $this->Auth->user('role');
+                $quote->attachment = $folder_url . $file_name;
+                if ($role == 'manufacturer') {
+                    $this->sendEmail($this->Auth->user('email'), 'mf_attachment', $quote);
+                } else {
+                    // Get Parent MF User Email Address:
+                    $mfemail = $this->Quotes->Users->get($this->Auth->user('parent_id'))['email'];
+                    $this->sendEmail($mfemail, 'mf_attachment', $quote);                    
+                }
+                $result['message'] = 'File sent to manufacturer.';                
+            }
+        } else {
+            $result['response'] = false;  
+            $result['message'] = 'Please attache a file.';
+        }
+        
+        echo json_encode($result);
+        exit;
     }
 }

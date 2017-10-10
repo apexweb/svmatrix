@@ -2244,8 +2244,33 @@ function validate(type) {
 
 
 }
+jQuery(document).ready(function (e) {
 
-
-
-
+    $("#uploadForm").on('submit',(function(e){
+            
+        e.preventDefault();
+        jQuery("#message").empty();
+        jQuery('#loading').show();
+        var quote_id = jQuery('#hdn_quote_id').val();
+        jQuery.ajax({
+            url: ajaxurl + "quotes/sendattachment?quote_id=" + quote_id, // Url to which the request is send
+            type: "POST",             // Type of request to be send, called as method
+            data: new FormData(this), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false,        // To send DOMDocument or non processed data file it is set to false
+            success: function(res)   // A function to be called if request succeeds
+            {
+                res = JSON.parse(res);
+                jQuery('#loading').hide();
+                if(res.response){                    
+                    jQuery("#message").html(res.message);
+                }else{
+                    jQuery("#message").html(res.message);
+                }
+            }
+        });
+        
+}));
+});
 /*************************/

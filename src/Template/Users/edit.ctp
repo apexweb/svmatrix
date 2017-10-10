@@ -34,7 +34,7 @@
 
     <div class="form-group ">
         <div class="col-lg-3 col-md-4 col-xs-12">
-            <?= $this->Form->input('username', ['class' => 'form-control']) ?>
+            <?= $this->Form->input('username', ['class' => 'form-control', 'disabled' => 'disabled']) ?>
         </div>
     </div>
 
@@ -79,7 +79,7 @@
     
     <div class="form-group">
         <div class="col-lg-3 col-md-4 col-xs-12">
-            <?= $this->Form->input('business_abrev', ['class' => 'form-control']) ?>
+            <?= $this->Form->input('business_abrev', ['class' => 'form-control', 'disabled' => 'disabled']) ?>
         </div>
     </div>
 
@@ -119,7 +119,8 @@
                     'options' => $allMfs,
                     'class' => 'form-control',
                     'value' => $user->parent_id,
-                    'label' => 'Parent Manufacturer'
+                    'label' => 'Parent Manufacturer',
+                    'disabled' => 'disabled'
                 ]) ?>
             </div>
         </div>

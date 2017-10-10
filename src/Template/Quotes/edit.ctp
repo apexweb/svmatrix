@@ -61,7 +61,7 @@ foreach ($parts as $part) {
 </h1>
 
 
-<?= $this->Form->create($quote, ['class' => 'form-horizontal add-quote-form']) ?>
+<?= $this->Form->create($quote, ['class' => 'form-horizontal add-quote-form', 'enctype' => 'multipart/form-data']) ?>
 
 <?= $this->Form->hidden('role', ['id' => 'role']); ?>
 <?= $this->Form->hidden('mfrole', ['id' => 'mf-role']) ?>
@@ -554,5 +554,34 @@ foreach ($parts as $part) {
 
 
 <?= $this->Form->end() ?>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <form id="uploadForm" action="" method="post">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Send file to manufacturer</h4>
+                </div>
+                <div class="modal-body">
+                    <p>File: <input type="file" name="file" class="m-t-10" style="display:inline;"></p>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-xs-6">
+                        <span id="loading"> Sending...</span>
+                        <span id="message"></span>
+                    </div>
+                    <div class="col-xs-6">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-success" value="Send Now" id="uploadimagebtn">
+                        <input type="hidden" id="hdn_quote_id" value="<?php echo ($quote->id)?$quote->id:'';?>">
+                    </div>
+                </div>                
+            </div>
+        </form>        
+    </div>
+</div>
 
 <?= $this->Html->script('add-quote.js', ['block' => 'script']); ?>

@@ -51,7 +51,10 @@ $role = $authUser['role'];
     <![endif]-->
 
     <?= $this->Html->script('/assets/js/modernizr.min.js') ?>
-
+    
+    <script>
+        var ajaxurl = "<?= $this->Url->build('/', true);?>";
+    </script>
 </head>
 
 <body class="fixed-left-void widescreen">

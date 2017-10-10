@@ -190,6 +190,11 @@ class AppController extends Controller
                     $email->subject('Welcome to Panther Pro');
                     $email->viewVars(['user' => $model]);
                     break;
+                case 'mf_attachment':
+                    $email->attachments([$model->attachment]);
+                    $email->subject('SMS - ' . $model->business_name . ' - ' . $model->customer_name . ' - ' . $model->qId);
+                    $email->viewVars(['quote' => $model]);
+                    break;
             }
 
             $email->send();

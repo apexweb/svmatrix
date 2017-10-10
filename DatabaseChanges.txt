@@ -14,3 +14,5 @@ ALTER TABLE `users_parts` ADD `unit` VARCHAR(10) NULL DEFAULT NULL AFTER `buy_pr
 
 ALTER TABLE `users` ADD `business_name` VARCHAR(200) NULL AFTER `lastname`; 
 ALTER TABLE `users` ADD `business_abrev` VARCHAR(100) NULL AFTER `business_name`; 
+
+ALTER TABLE `quotes` ADD `file_to_manufacturer` VARCHAR(255) NULL AFTER `send_file_to_manufacturer`; 
