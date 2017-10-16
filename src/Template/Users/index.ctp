@@ -8,7 +8,7 @@
 
 <div class="card-box users font-13">
 
-    <table class="table table-bordered small-padding">
+    <table class="table table-bordered small-padding table-responsive">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>

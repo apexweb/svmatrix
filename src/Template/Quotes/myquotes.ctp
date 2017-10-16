@@ -13,7 +13,7 @@
 
     <?= $this->element('Quotes/search_form', ['search' => $search, 'status' => $status, 'limited' => 'all']); ?>
 
-    <table class="table table-bordered quotes-table small-padding font-500">
+    <table class="table table-bordered quotes-table small-padding font-500 table-responsive">
         <tr>
             <th>ORDER ID</th>
             <th>CUSTOMER NAME</th>

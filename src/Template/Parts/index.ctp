@@ -74,7 +74,7 @@
 
         <?= $this->Form->end(); ?>
     </div>
-    <table id="datatable" class="table table-striped table-bordered table-hover small-padding all-parts">
+    <table id="datatable" class="table table-striped table-bordered table-hover small-padding all-parts table-responsive">
         <thead>
         <tr>
 

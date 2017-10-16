@@ -3291,10 +3291,10 @@ td.fc-today:before {
     list-style: none;
     /*background-color: #7e57c2;*/
     /*text-align: center;*/
-    background-color: #325d81;
+    /*background-color: #325d81;*/
     padding: 0;
     margin: 0;
-    height: 60px;
+    /*height: 60px;*/
 }
 
 .custom-nav li {
@@ -3334,7 +3334,13 @@ td.fc-today:before {
    Using 650px (130px each * 5 items), but ems
    or other values could be used depending on other factors
 ********************************************/
+@media screen and (min-width: 768px) {
 
+    .custom-nav-left.custom-nav li:hover ul {
+            display: block;
+    }
+    
+}
 @media screen and (min-width: 650px) {
     .custom-nav li {
         width: 120px;
@@ -3366,17 +3372,62 @@ td.fc-today:before {
         width: inherit;
     }
 
-    .custom-nav li:hover ul {
-        display: block;
-    }
-
     .custom-nav li ul li {
         display: block;
         min-width: 200px;
         height: 45px;
         line-height: 45px;
     }
-
+   
+}
+@media screen and (max-width: 767px) {
+	.custom-nav li {width:100%;}
+	.custom-nav > li > a {text-align:left !important;padding-left:15px !important;}
+	.custom-nav.navbar-nav .open .dropdown-menu>li>a {padding:0 0 0 15px !important;line-height:unset;color:#fff;}
+	.custom-nav.navbar-nav .open .dropdown-menu {width:100%;}
+	.navbar-header {width:100%;}
+	.custom-nav li li {z-index:999;}
+    .font-13 {
+        font-size: 10px !important;
+    }
+    .quotes-table th {
+        font-size: 10px !important;
+        padding: 0px !important;
+    }
+    .table.small-padding td {
+        padding: 2px !important;
+    }
+    .font-15 {
+        font-size: 11px !important;
+    }
+    .font-12{
+        font-size: 10px !important;
+    }
+    .content-page > .content{
+        margin-bottom: 10px;
+        margin-top: 50px;
+        padding: 10px 5px 50px 5px;
+    }
+    .card-box {
+        padding: 5px 5px 25px 5px;
+    }
+    .table-responsive.table-bordered {
+        border: 1px solid #e9ecef;
+    }
+    
+    h1 {
+        line-height: 20px;
+        font-size: 18px
+    }
+    body{
+        font-size: 12px;
+    }
+    .btn-group-sm > .btn, .btn-sm{
+        margin:5px;
+    }
+    .panel .panel-body {
+        padding: 5px !important;
+    }
 }
 
 .custom-nav li:hover a {

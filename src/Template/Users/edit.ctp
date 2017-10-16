@@ -31,6 +31,7 @@
 
 <div class="card-box">
     <?= $this->Form->create($user, ['class' => 'form-horizontal', 'enctype' => 'multipart/form-data']) ?>
+    <?= $this->Form->hidden('parrentManufacturerId', array('value'=> $user->parent_id));?>
 
     <div class="form-group ">
         <div class="col-lg-3 col-md-4 col-xs-12">

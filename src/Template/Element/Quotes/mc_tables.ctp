@@ -11,7 +11,7 @@
         <input class="midrail-inc" data-table="<?= $table->name ?>" type="hidden"
                value="<?= htmlspecialchars($table->midrail_requirement); ?>">
 
-        <table class="table matrix-table small-padding" data-table="<?= $table->name ?>">
+        <table class="table matrix-table small-padding table-responsive" data-table="<?= $table->name ?>">
             <caption class="table-name-caption"><?= $table->name ?> Prices</caption>
         </table>
 

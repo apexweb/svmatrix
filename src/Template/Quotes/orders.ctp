@@ -15,7 +15,7 @@
         <?= $this->element('Quotes/search_form', ['search' => $search, 'status' => $status, 'limited' => 'orders']); ?>
 
 
-        <table class="table quotes-table table-bordered small-padding font-500">
+        <table class="table quotes-table table-bordered small-padding font-500 table-responsive">
             <tr>
                 <th>CREATED BY</th>
                 <th>CUSTOMER NAME</th>

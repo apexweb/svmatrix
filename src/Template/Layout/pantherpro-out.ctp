@@ -57,7 +57,27 @@ $cakeDescription = 'SMS Screen Management System';
 <div id="wrapper">
 
     <!-- Top Bar Start -->
-    <div class="topbar">
+	<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <?= $this->Html->link('<i class="md-local-parking icon-c-logo"></i><span>SMS', '/', ['class' => 'logo navbar-brand', 'escape' => false]) ?>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse " aria-expanded="false" style="height: 1px;">
+          <ul class="nav navbar-nav custom-nav">
+			<li><?= $this->Html->link('<span> Login </span>', ['controller' => 'users', 'action' => 'login'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+			<li><?= $this->Html->link('<span> Register </span>', ['controller' => 'users', 'action' => 'register'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+			<li><?= $this->Html->link('<span> About </span>', ['controller' => '/', 'action' => '/'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+		  </ul>
+		</div>
+	  </div>
+	</nav>
+    <div class="topbar" style="display:none;">
 
         <!-- LOGO -->
         <div class="topbar-left">
@@ -117,7 +137,9 @@ $cakeDescription = 'SMS Screen Management System';
 <script>
     var resizefunc = [];
 </script>
-
+<style>
+	.logo{line-height:100%;}
+</style>
 <!-- jQuery  -->
 <?= $this->element('Layout/jsfiles') ?>
 <?= $this->fetch('script') ?>

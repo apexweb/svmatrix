@@ -222,7 +222,7 @@ class UsersController extends AppController
                 }
             }
             if ($user->role != 'admin' && $user->role != 'factory' && $user->role != 'manufacturer' && $user->role != 'candidate') {
-                $user->parent_id = $this->request->data('parrentManufacturer');
+                $user->parent_id = $this->request->data('parrentManufacturerId');
                 $user->parentusername = $this->Users->get($user->parent_id)->username;
             } else {
                 $user->parent_id = null;
