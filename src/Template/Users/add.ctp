@@ -71,7 +71,7 @@ foreach ($mfs as $mf) {
 
                     <?php if ($authUser['role'] == 'admin'): ?>
                         <?= $this->Form->input('role', [
-                            'options' => ['admin' => 'Admin', 'factory' => 'Factory', 'manufacturer' => 'Manufacturer',
+                            'options' => ['admin' => 'Admin', 'supplier' => 'Supplier', 'manufacturer' => 'Manufacturer',
                                 'distributor' => 'Distributor', 'wholesaler' => 'Wholesaler', 'installer' => 'Installer',
                                 'retailer' => 'Retailer', 'candidate' => 'Candidate',],
                             'class' => 'form-control roles-dropdown'

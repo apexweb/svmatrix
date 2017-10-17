@@ -37,7 +37,7 @@ class PartsController extends AppController
 
     public function selectmf()
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
 
         $users = TableRegistry::get('Users');
         $mfs = $users->find('all')->where(['role' => 'manufacturer'])->select(['id', 'username']);
@@ -47,7 +47,7 @@ class PartsController extends AppController
 
     public function all()
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
 
         $parts = $this->Parts->find('all')->orderAsc('title');
 
@@ -76,7 +76,7 @@ class PartsController extends AppController
 
     public function index()
     {
-        $this->authorize(['factory', 'manufacturer']);
+        $this->authorize(['supplier', 'manufacturer']);
         $role = $this->Auth->user('role');
         $search = null;
         
@@ -88,7 +88,7 @@ class PartsController extends AppController
         $userparts = TableRegistry::get('users_parts');
 
         $parts = null;
-        if ($role == 'factory') {
+        if ($role == 'supplier') {
             $parts = $userparts->find('all')->where(['user_id' => $mf])->contain(['Parts']);
         } elseif ($role == 'manufacturer') {
             $id = $this->Auth->user('id');
@@ -149,7 +149,7 @@ class PartsController extends AppController
      */
     public function add()
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
 
         $part = $this->Parts->newEntity();
 
@@ -196,7 +196,7 @@ class PartsController extends AppController
      */
     public function edit($id = null)
     {
-        $this->authorize(['factory', 'manufacturer']);
+        $this->authorize(['supplier', 'manufacturer']);
         $role = $this->Auth->user('role');
 
         $userparts = TableRegistry::get('users_parts');
@@ -206,7 +206,7 @@ class PartsController extends AppController
             $userparts->patchEntity($part, $this->request->data);
             if ($userparts->save($part, ['associated' => false])) {
                 $this->Flash->success(__('Your part has been updated.'));
-                if ($role == 'factory') {
+                if ($role == 'supplier') {
                     return $this->redirect(['action' => 'index', 'mf' => $part->user_id]);
                 }
                 return $this->redirect(['action' => 'index']);
@@ -220,7 +220,7 @@ class PartsController extends AppController
 
     public function factoryedit($id = null)
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
 
         $part = $this->Parts->get($id);
 
@@ -248,7 +248,7 @@ class PartsController extends AppController
 
     public function delete($id = null)
     {
-        $this->authorize(['factory', 'manufacturer']);
+        $this->authorize(['supplier', 'manufacturer']);
         $this->request->allowMethod(['post', 'delete']);
         $role = $this->Auth->user('role');
 
@@ -258,7 +258,7 @@ class PartsController extends AppController
 
         if ($userparts->delete($userpart)) {
             $this->Flash->success(__('The part has been deleted.'));
-            if ($role == 'factory') {
+            if ($role == 'supplier') {
                 return $this->redirect(['action' => 'index', 'mf' => $userId]);
             }
             return $this->redirect(['action' => 'index']);
@@ -268,7 +268,7 @@ class PartsController extends AppController
 
     public function factorydelete($id = null)
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
         $this->request->allowMethod(['post', 'delete']);
 
         $part = $this->Parts->get($id);
@@ -281,7 +281,7 @@ class PartsController extends AppController
 
     public function uploadcsv()
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
 
         $parts = null;
         if ($this->request->is('post')) {

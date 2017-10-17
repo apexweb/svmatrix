@@ -15,7 +15,7 @@
         </ul>
         <?php
 
-    } elseif ($authUser['role'] == 'factory') {
+    } elseif ($authUser['role'] == 'supplier') {
         ?>
         <ul class="side-nav">
             <li><?= $this->Html->link(__('All Users'), ['action' => 'index']) ?></li>
@@ -88,13 +88,13 @@
     <?php if ($authUser['role'] == 'admin'): ?>
         <div class="form-group">
             <div class="col-lg-3 col-md-4 col-xs-12">
-                <?= $this->Form->input('role', ['options' => ['admin' => 'Admin', 'factory' => 'Factory',
+                <?= $this->Form->input('role', ['options' => ['admin' => 'Admin', 'supplier' => 'Supplier',
                     'manufacturer' => 'Manufacturer', 'distributor' => 'Distributor',
                     'wholesaler' => 'Wholesaler', 'retailer' => 'Retailer', 'installer' => 'Installer', 'candidate' => 'candidate'],
                     'class' => 'form-control roles-dropdown']); ?>
             </div>
         </div>
-    <?php elseif ($authUser['role'] == 'factory' && !$isOwned): ?>
+    <?php elseif ($authUser['role'] == 'supplier' && !$isOwned): ?>
         <div class="form-group">
             <div class="col-lg-3 col-md-4 col-xs-12">
                 <?= $this->Form->input('role', ['options' => [
@@ -110,7 +110,7 @@
             <?php
             $style = '';
             $role = $user['role'];
-            if ($role == 'admin' || $role == 'factory' || $role == 'manufacturer' || $role == 'candidate') {
+            if ($role == 'admin' || $role == 'supplier' || $role == 'manufacturer' || $role == 'candidate') {
                 $style = 'display:none;';
             }
 

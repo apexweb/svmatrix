@@ -37,7 +37,7 @@
 
         ?>
     </h1>
-    <?php if ($authUser['role'] == 'factory'): ?>
+    <?php if ($authUser['role'] == 'supplier'): ?>
         <div class="col-md-7" style="margin-bottom: 15px;">
             <?= $this->Html->link('Add Part', ['action' => 'add'], ['class' => 'btn btn-default'],
                 ['escape' => false]) ?>

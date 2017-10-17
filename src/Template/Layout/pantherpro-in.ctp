@@ -99,7 +99,7 @@ $role = $authUser['role'];
                             <li><?= $this->Html->link('Installations', ['controller' => 'installations', 'action' => 'index']) ?></li>
 
 
-                        <?php elseif ($role == 'factory'): ?>
+                        <?php elseif ($role == 'supplier'): ?>
                             <li class="partsli" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Parts</a>
                                 <ul class="dropdown-menu">
                                     <li><?= $this->Html->link('<span> All Parts </span>', ['controller' => 'parts', 'action' => 'all'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
@@ -230,7 +230,7 @@ $role = $authUser['role'];
                             <li><?= $this->Html->link('Installations', ['controller' => 'installations', 'action' => 'index']) ?></li>
 
 
-                        <?php elseif ($role == 'factory'): ?>
+                        <?php elseif ($role == 'supplier'): ?>
                             <li class="partsli"><a href="#">Parts</a>
                                 <ul>
                                     <li><?= $this->Html->link('<span> All Parts </span>', ['controller' => 'parts', 'action' => 'all'], ['class' => 'waves-effect', 'escape' => false]) ?></li>

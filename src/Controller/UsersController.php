@@ -36,7 +36,7 @@ class UsersController extends AppController
 
     public function index()
     {
-        $this->authorize(['admin', 'factory']);
+        $this->authorize(['admin', 'supplier']);
 
         $users = null;
         if ($this->Auth->user('role') == 'admin') {
@@ -67,7 +67,7 @@ class UsersController extends AppController
 
     public function manufacturers()
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
         $users = $this->paginate($this->Users->findAllByRole('manufacturer'),
             ['fields' => ['id', 'created', 'username', 'role', 'modified', 'email'],
                 'limit' => 20,
@@ -85,7 +85,7 @@ class UsersController extends AppController
     public function view($id)
     {
         $role = $this->Auth->user('role');
-        if ($role == 'factory') {
+        if ($role == 'supplier') {
             $user = $this->Users->get($id);
             $this->set(compact('user'));
         } else {
@@ -120,18 +120,18 @@ class UsersController extends AppController
 
     public function add()
     {
-        $this->authorize(['admin', 'factory']);
+        $this->authorize(['admin', 'supplier']);
         $role = $this->Auth->user('role');
 
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->data);
-            if ($role == 'factory') {
+            if ($role == 'supplier') {
                 if ($user->role == 'admin') {
                     $user->role = 'candidate';
                 }
             }
-            if ($user->role != 'admin' && $user->role != 'factory' && $user->role != 'manufacturer' && $user->role != 'candidate') {
+            if ($user->role != 'admin' && $user->role != 'supplier' && $user->role != 'manufacturer' && $user->role != 'candidate') {
                 $user->parent_id = $this->request->data('parrentManufacturer');
                 $parentUser = $this->Users->get($user->parent_id);
                 $user->parentusername = $parentUser->username;
@@ -158,7 +158,7 @@ class UsersController extends AppController
 
     public function addManufacturer()
     {
-        $this->authorize(['factory']);
+        $this->authorize(['supplier']);
 
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
@@ -188,7 +188,7 @@ class UsersController extends AppController
         $role = $this->Auth->user('role');
 
         if (!$isOwned) {
-            $this->authorize(['factory', 'admin']);
+            $this->authorize(['supplier', 'admin']);
         }
 
         $user = $this->Users->get($id);
@@ -216,12 +216,12 @@ class UsersController extends AppController
                 $this->Users->patchEntity($user, $this->request->data);
             }
 
-            if ($role == 'factory') {
+            if ($role == 'supplier') {
                 if ($user->role == 'admin') {
                     $user->role = 'candidate';
                 }
             }
-            if ($user->role != 'admin' && $user->role != 'factory' && $user->role != 'manufacturer' && $user->role != 'candidate') {
+            if ($user->role != 'admin' && $user->role != 'supplier' && $user->role != 'manufacturer' && $user->role != 'candidate') {
                 $user->parent_id = $this->request->data('parrentManufacturerId');
                 $user->parentusername = $this->Users->get($user->parent_id)->username;
             } else {
@@ -239,7 +239,7 @@ class UsersController extends AppController
                 if ($isOwned) {
                     $this->Auth->setUser($user);
                 }
-                if ($role == 'admin' || $role == 'factory') {
+                if ($role == 'admin' || $role == 'supplier') {
                     return $this->redirect(['action' => 'index']);
                 }
 
@@ -263,7 +263,7 @@ class UsersController extends AppController
     {
 //        not used anymore
         $role = $this->Auth->user('role');
-        if ($role == 'factory') {
+        if ($role == 'supplier') {
             if ($this->request->is(['post', 'put'])) {
                 $user = $this->Users->get($id);
                 if ($this->request->is(['post', 'put'])) {
@@ -316,13 +316,13 @@ class UsersController extends AppController
     /************************Start-delete*******************************/
     public function delete($id)
     {
-        $this->authorize(['admin', 'factory']);
+        $this->authorize(['admin', 'supplier']);
         $this->request->allowMethod(['post', 'delete']);
 
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
             $this->Flash->success(__('The user with id: {0} has been deleted.', h($id)));
-            if ($this->Auth->user('role') == 'factory') {
+            if ($this->Auth->user('role') == 'supplier') {
                 return $this->redirect(['action' => 'manufacturers']);
             }
             return $this->redirect(['action' => 'index']);

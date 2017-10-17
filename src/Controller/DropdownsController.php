@@ -45,7 +45,7 @@ class DropdownsController extends AppController
      */
     public function index()
     {
-        $this->authorize(['manufacturer', 'factory']);
+        $this->authorize(['manufacturer', 'supplier']);
 
         $dropdowns = $this->Dropdowns->find('all')->where(['user_id' => $this->Auth->user('id')])->orderAsc('manual_sort');
 
@@ -72,14 +72,14 @@ class DropdownsController extends AppController
 
     public function uploadcsv()
     {
-        $this->authorize(['manufacturer', 'factory']);
+        $this->authorize(['manufacturer', 'supplier']);
 
         
         $dropdowns = null;
         $role = $this->Auth->user('role');
         if ($role == 'manufacturer') {
             $userIds = array($this->Auth->user('id'));
-        }else if ($role == 'factory') {
+        }else if ($role == 'supplier') {
             $users = TableRegistry::get('Users');
             $userIds = $users->find('list', ['keyField' => 'id', 'valueField' => 'id'])
                 ->where(['Users.role' => 'manufacturer']);//'Users.parent_id' => $this->Auth->user('id')                
