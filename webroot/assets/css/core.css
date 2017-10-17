@@ -3494,3 +3494,8 @@ td.fc-today:before {
     display: none;
     font-size: 14px;
 }
+.aligncenter{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}

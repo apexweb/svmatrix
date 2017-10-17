@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 use Cake\Event\Event;
 use Cake\Core\Exception\Exception;
 
@@ -44,7 +45,7 @@ class DropdownsController extends AppController
      */
     public function index()
     {
-        $this->authorize(['manufacturer']);
+        $this->authorize(['manufacturer', 'factory']);
 
         $dropdowns = $this->Dropdowns->find('all')->where(['user_id' => $this->Auth->user('id')])->orderAsc('manual_sort');
 
@@ -71,10 +72,23 @@ class DropdownsController extends AppController
 
     public function uploadcsv()
     {
-        $this->authorize(['manufacturer']);
+        $this->authorize(['manufacturer', 'factory']);
 
-        $userId = $this->Auth->user('id');
+        
         $dropdowns = null;
+        $role = $this->Auth->user('role');
+        if ($role == 'manufacturer') {
+            $userIds = array($this->Auth->user('id'));
+        }else if ($role == 'factory') {
+            $users = TableRegistry::get('Users');
+            $userIds = $users->find('list', ['keyField' => 'id', 'valueField' => 'id'])
+                ->where(['Users.role' => 'manufacturer']);//'Users.parent_id' => $this->Auth->user('id')                
+            
+            $userIds = $userIds->toArray();
+            array_push($userIds, $this->Auth->user('id'));
+        }
+     
+        $saved = false;
 
         if ($this->request->is('post')) {
             if (!empty($this->request->data['file']['name']) || !isset($this->request->data['type'])) {
@@ -87,36 +101,46 @@ class DropdownsController extends AppController
                 } catch (Exception $e) {
                     $dropdowns = null;
                 }
+                
 
                 if (is_array($dropdowns)) {
-                    $type = $this->request->data['type'];
-                    $entities = [];
+                    
+                    if ($userIds) {
+                        
+                        foreach ($userIds as $userId) {
+                    
+                            $type = $this->request->data['type'];
+                            $entities = [];
 
-                    foreach ($dropdowns as $dropdown) {
-                        if (isset($dropdown[0]) && $dropdown[0] != null && !$this->strictEmpty($dropdown[0])) {
-                            $entity = $this->Dropdowns->newEntity();
-                            $entity->name = $dropdown[0];
-                            $entity->manual_sort = isset($dropdown[1]) ? $dropdown[1] : 1000;
-                            $entity->rule_code = isset($dropdown[2]) ? $dropdown[2] : '';
-                            $entity->type = $type;
-                            $entity->user_id = $userId;
+                            foreach ($dropdowns as $dropdown) {
+                                if (isset($dropdown[0]) && $dropdown[0] != null && !$this->strictEmpty($dropdown[0])) {
+                                    $entity = $this->Dropdowns->newEntity();
+                                    $entity->name = $dropdown[0];
+                                    $entity->manual_sort = isset($dropdown[1]) ? $dropdown[1] : 1000;
+                                    $entity->rule_code = isset($dropdown[2]) ? $dropdown[2] : '';
+                                    $entity->type = $type;
+                                    $entity->user_id = $userId;
 
-                            $entities[] = $entity;
+                                    $entities[] = $entity;
+                                }
+                            }
+
+                            if (isset($this->request->data['deleteall']) && $this->request->data['deleteall'] == 1) {
+                                $this->Dropdowns->deleteAll(['user_id' => $userId, 'type' => $type]);
+                            }
+                            if ($this->Dropdowns->saveMany($entities)) {
+                                $saved = true;
+                            }
                         }
-
-                    }
-
-
-                    if (isset($this->request->data['deleteall']) && $this->request->data['deleteall'] == 1) {
-                        $this->Dropdowns->deleteAll(['user_id' => $userId, 'type' => $type]);
-                    }
-                    if ($this->Dropdowns->saveMany($entities)) {
-                        $this->Flash->success(__('The CSV file has been successfully imported.'));
-                        return $this->redirect(['action' => 'index']);
                     }
                 }
             }
         }
+        if ($saved){
+            $this->Flash->success(__('The CSV file has been successfully imported.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        
         $this->Flash->error(__('Invalid CSV file, Please try again.'));
         return $this->redirect(['action' => 'index']);
     }

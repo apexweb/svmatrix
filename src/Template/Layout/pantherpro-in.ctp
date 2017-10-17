@@ -113,6 +113,7 @@ $role = $authUser['role'];
                                     <li><?= $this->Html->link('<span> All Manufacturers </span>', ['controller' => 'users', 'action' => 'manufacturers'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> Add New Manufacturer </span>', ['controller' => 'users', 'action' => 'addmanufacturer'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> Add New User </span>', ['controller' => 'users', 'action' => 'add'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                 </ul>
                             </li>
 
@@ -139,6 +140,12 @@ $role = $authUser['role'];
 
 
                         <?php if ($role): ?>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tech Assistance</a>
+                                <ul class="dropdown-menu">
+                                    <li><?= $this->Html->link('<span> Door Configurations </span>', ['controller' => 'pages', 'action' => 'door-configurations'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?= $this->Html->link('<span> Additional Sections </span>', ['controller' => 'pages', 'action' => 'additional-sections'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                </ul>
+                            </li>
                             <li><?= $this->Html->link('Important Info', ['controller' => 'pages', 'action' => 'importantinfo']) ?></li>
                         <?php endif; ?>
 
@@ -263,6 +270,12 @@ $role = $authUser['role'];
 
 
                         <?php if ($role): ?>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tech Assistance</a>
+                                <ul class="dropdown-menu">
+                                    <li><?= $this->Html->link('<span> Door Configurations </span>', ['controller' => 'pages', 'action' => 'door-configurations'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?= $this->Html->link('<span> Additional Sections </span>', ['controller' => 'pages', 'action' => 'additional-sections'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                </ul>
+                            </li>
                             <li><?= $this->Html->link('Important Info', ['controller' => 'pages', 'action' => 'importantinfo']) ?></li>
                         <?php endif; ?>
 
