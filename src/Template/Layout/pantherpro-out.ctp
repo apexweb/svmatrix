@@ -74,8 +74,8 @@ $cakeDescription = 'SMS Screen Management System';
 			<li><?= $this->Html->link('<span> Register </span>', ['controller' => 'users', 'action' => 'register'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
 			<li style="width:145px;" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tech Assistance</a>
                 <ul class="dropdown-menu">
-                    <li><?= $this->Html->link('<span> Door Configurations </span>', ['controller' => 'pages', 'action' => 'door-configurations'], ['class' => 'waves-effect', 'escape' => false, 'style' => 'color:#fff;']) ?></li>
-                    <li><?= $this->Html->link('<span> Additional Sections </span>', ['controller' => 'pages', 'action' => 'additional-sections'], ['class' => 'waves-effect', 'escape' => false, 'style' => 'color:#fff;']) ?></li>
+                    <li><?= $this->Html->link('<span> Door Configurations </span>', ['controller' => 'pages', 'action' => 'door-configurations'], ['class' => 'waves-effect', 'escape' => false, 'style' => 'color:#fff;', 'target' => '_blank']) ?></li>
+                    <li><?= $this->Html->link('<span> Additional Sections </span>', ['controller' => 'pages', 'action' => 'additional-sections'], ['class' => 'waves-effect', 'escape' => false, 'style' => 'color:#fff;', 'target' => '_blank']) ?></li>
                 </ul>
             </li>
             <li><?= $this->Html->link('<span> About </span>', ['controller' => '/', 'action' => '/'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
@@ -100,6 +100,12 @@ $cakeDescription = 'SMS Screen Management System';
                         <ul>
                             <li><?= $this->Html->link('<span> Login </span>', ['controller' => 'users', 'action' => 'login'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                             <li><?= $this->Html->link('<span> Register </span>', ['controller' => 'users', 'action' => 'register'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                            <li style="width:145px;" class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tech Assistance</a>
+                                <ul class="dropdown-menu">
+                                    <li><?= $this->Html->link('<span> Door Configurations </span>', ['controller' => 'pages', 'action' => 'door-configurations'], ['class' => 'waves-effect', 'escape' => false, 'style' => 'color:#fff;', 'target' => '_blank']) ?></li>
+                                    <li><?= $this->Html->link('<span> Additional Sections </span>', ['controller' => 'pages', 'action' => 'additional-sections'], ['class' => 'waves-effect', 'escape' => false, 'style' => 'color:#fff;', 'target' => '_blank']) ?></li>
+                                </ul>
+                            </li>
                             <li><?= $this->Html->link('<span> About </span>', ['controller' => '/', 'action' => '/'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                         </ul>
                     </div>

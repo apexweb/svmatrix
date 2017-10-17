@@ -82,7 +82,7 @@ class DropdownsController extends AppController
         }else if ($role == 'supplier') {
             $users = TableRegistry::get('Users');
             $userIds = $users->find('list', ['keyField' => 'id', 'valueField' => 'id'])
-                ->where(['Users.role' => 'manufacturer']);//'Users.parent_id' => $this->Auth->user('id')                
+                ->where(['Users.role' => 'manufacturer', 'Users.parent_id' => $this->Auth->user('id')]);//                
             
             $userIds = $userIds->toArray();
             array_push($userIds, $this->Auth->user('id'));

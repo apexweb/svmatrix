@@ -85,3 +85,52 @@
     </div>
 
 </div>
+
+<div class="form-group">
+
+
+    <div class="col-sm-2">
+        <div class="checkbox checkbox-primary">
+
+            <?= $this->Form->input('color3', ['type' => 'checkbox', 'class' => 'color_s', 'label' => 'Group 3', 'templates' => [
+                'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
+
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+
+        <?= $this->Form->select(
+            'color3_color',
+            $color3,
+            ['empty' => ' ', 'label' => false, 'class' => 'form-control color_s input-sm', 'data-style' => 'btn-primary']
+        );
+        ?>
+    </div>
+
+</div>
+
+
+<div class="form-group">
+
+
+    <div class="col-sm-2">
+        <div class="checkbox checkbox-primary">
+
+            <?= $this->Form->input('color4', ['type' => 'checkbox', 'class' => 'color_s', 'label' => 'Group 4', 'templates' => [
+                'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
+
+        </div>
+    </div>
+
+    <div class="col-sm-3">
+
+        <?= $this->Form->select(
+            'color4_color',
+            $color4,
+            ['empty' => ' ', 'label' => false, 'class' => 'form-control color_s input-sm', 'data-style' => 'btn-primary']
+        );
+        ?>
+    </div>
+
+</div>

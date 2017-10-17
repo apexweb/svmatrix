@@ -68,7 +68,7 @@ class UsersController extends AppController
     public function manufacturers()
     {
         $this->authorize(['supplier']);
-        $users = $this->paginate($this->Users->findAllByRole('manufacturer'),
+        $users = $this->paginate($this->Users->findAllByRole('manufacturer')->where(['Users.parent_id' => $this->Auth->user('id')]),
             ['fields' => ['id', 'created', 'username', 'role', 'modified', 'email'],
                 'limit' => 20,
                 'order' => [
@@ -164,6 +164,9 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $this->request->data['role'] = 'manufacturer';
             $user = $this->Users->patchEntity($user, $this->request->data);
+            $user->parent_id = $this->Auth->user('id');
+            $user->parentusername = $this->Users->get($user->parent_id)->username;
+            
             if ($this->Users->save($user)) {
                 $this->sendEmail($user->email, 'new_user', $user);
                 $this->copyallpartstomf($user->id);
