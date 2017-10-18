@@ -1386,6 +1386,11 @@ $(document).ready(function () {
         //     $(el).find('.midrail-qty').trigger('change');
         // });
     });
+    
+    $('.coating').on('click', function () {
+        $('.coating').prop ('checked', false);
+        $(this).prop ('checked', true);  
+    });
 
 
     /* Calculates Additional Sections Prices */
@@ -2271,6 +2276,8 @@ jQuery(document).ready(function (e) {
             }
         });
         
-}));
+    }));
+
+
 });
 /*************************/

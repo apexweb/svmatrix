@@ -70,7 +70,7 @@ $role = $authUser['role'];
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <?= $this->Html->link('<i class="md-local-parking icon-c-logo"></i><span>SMS', '/', ['class' => 'logo navbar-brand', 'escape' => false]) ?>
+          <?= $this->Html->link('<span>SMS', '/', ['class' => 'logo navbar-brand', 'escape' => false]) ?>
         </div>
         <div id="navbar" class="navbar-collapse collapse " aria-expanded="false" style="height: 1px;">
           <ul class="nav navbar-nav custom-nav custom-nav-left">
@@ -176,7 +176,7 @@ $role = $authUser['role'];
         <!-- LOGO -->
         <div class="topbar-left">
             <div class="text-center">
-                <?= $this->Html->link('<i class="md-local-parking icon-c-logo"></i><span>SMS', '/', ['class' => 'logo', 'escape' => false]) ?>
+                <?= $this->Html->link('<span>SMS', '/', ['class' => 'logo', 'escape' => false]) ?>
             </div>
         </div>
 

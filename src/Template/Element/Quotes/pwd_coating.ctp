@@ -4,7 +4,7 @@
     <div class="col-sm-2">
         <div class="checkbox checkbox-primary">
 
-            <?= $this->Form->input('standard', ['type' => 'checkbox', 'templates' => [
+            <?= $this->Form->input('standard', ['type' => 'checkbox', 'class' => 'coating',  'templates' => [
                 'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
 
         </div>
@@ -45,7 +45,7 @@
     <div class="col-sm-2">
         <div class="checkbox checkbox-primary">
 
-            <?= $this->Form->input('color1', ['type' => 'checkbox', 'class' => 'color_s', 'label' => 'Custom Colour', 'templates' => [
+            <?= $this->Form->input('color1', ['type' => 'checkbox', 'class' => 'color_s coating', 'label' => 'Custom Colour', 'templates' => [
                 'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
 
         </div>
@@ -68,7 +68,7 @@
     <div class="col-sm-2">
         <div class="checkbox checkbox-primary">
 
-            <?= $this->Form->input('color2', ['type' => 'checkbox', 'class' => 'color_s', 'label' => 'Premium Colour', 'templates' => [
+            <?= $this->Form->input('color2', ['type' => 'checkbox', 'class' => 'color_s coating', 'label' => 'Premium Colour', 'templates' => [
                 'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
 
         </div>
@@ -92,7 +92,7 @@
     <div class="col-sm-2">
         <div class="checkbox checkbox-primary">
 
-            <?= $this->Form->input('color3', ['type' => 'checkbox', 'class' => 'color_s', 'label' => 'Group 3', 'templates' => [
+            <?= $this->Form->input('color3', ['type' => 'checkbox', 'class' => 'color_s coating', 'label' => 'Anodized', 'templates' => [
                 'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
 
         </div>
@@ -117,7 +117,7 @@
     <div class="col-sm-2">
         <div class="checkbox checkbox-primary">
 
-            <?= $this->Form->input('color4', ['type' => 'checkbox', 'class' => 'color_s', 'label' => 'Group 4', 'templates' => [
+            <?= $this->Form->input('color4', ['type' => 'checkbox', 'class' => 'color_s coating', 'label' => 'Special Colour', 'templates' => [
                 'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']]) ?>
 
         </div>

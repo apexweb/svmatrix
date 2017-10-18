@@ -5,5 +5,6 @@
 
     </h1>
     <p><?=$this->Html->image('/assets/images/Security_Door_Configurations-1.png', array('class' => 'aligncenter'));?></p>
+    <p><?=$this->Html->image('/assets/images/Security_Door_Configurations-2.png', array('class' => 'aligncenter'));?></p>
 
 </div>

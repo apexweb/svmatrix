@@ -3343,7 +3343,9 @@ td.fc-today:before {
 }
 @media screen and (min-width: 650px) {
     .custom-nav li {
-        width: 120px;
+        /*width: 120px;*/
+        width: auto;
+        padding: 0px 15px 0px 10px;
         border-bottom: none;
         height: 60px;
         line-height: 60px;

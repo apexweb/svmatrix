@@ -34,11 +34,7 @@
 
                 <tr class="quote-<?= str_replace(" ", "-", h($quote->status)); ?>">
                     <td class="text-center font-15">
-                        <?= $this->Html->link(
-                            $quote->qId,
-                            ['controller' => 'Quotes', 'action' => 'edit', $quote->id],
-                            ['class' => 'primary',]
-                        ); ?>
+                        <?= h($quote->qId) ?>
                         <?php if ($quote->original_id > 0): ?>
                             <p class="font-11 no-margin">
                                 <?= $this->Html->link(
@@ -59,7 +55,13 @@
                         <?php endif; ?>
 
                     </td>
-                    <td><?= h($quote->customer_name) ?></td>
+                    <td>
+                        <?= $this->Html->link(
+                            $quote->customer_name,
+                            ['controller' => 'Quotes', 'action' => 'edit', $quote->id],
+                            ['class' => 'primary',]
+                        ); ?>
+                        </td>
                     <td><?= h($quote->created->format('d/m/Y')) ?></td>
                     <td>
                         <?php if ($quote->orderin_date != null) {
