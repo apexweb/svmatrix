@@ -101,7 +101,7 @@
                     <td><?= h($product->product_location_in_building) ?></td>
 
                     <td><?= h($product->product_configuration) ?></td>
-                    <td class="width-50">
+                    <td class="width-100">
                         <?php
                         echo h($product->product_sec_dig_perf_fibr);
                         ?>

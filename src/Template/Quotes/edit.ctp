@@ -518,9 +518,10 @@ foreach ($parts as $part) {
 
 
 <div class="form-inline date-inputs">
-
-    <?= $this->Form->Button('Save Changes', ['class' => 'btn btn-primary waves-effect save-quote-btn btn-sm', 'type' => 'button']) ?>
-
+    <?php 
+    if ( !in_array($quote->status, array('in progress', 'complete') )): ?>
+        <?= $this->Form->Button('Save Changes', ['class' => 'btn btn-primary waves-effect save-quote-btn btn-sm', 'type' => 'button']) ?>
+    <?php endif; ?>
     
     <?= $this->Form->Button('Save as a new Quote', ['class' => 'btn btn-primary waves-effect new-quote-btn btn-sm', 'type' => 'button']) ?>
 

@@ -253,7 +253,7 @@ if ($quote->override_final_price) {
             <tr>
                 <td colspan="2"></td>
                 <td colspan="7"></td>
-                <td>Discount Applied</td>
+                <td>Discount Applied <?php if($quote->discount) echo ' - '. $quote->discount .'%';?></td>
                 <td><span>$</span><?= h($quote->discount_amount); ?></td>
             </tr>
         <?php endif; ?>
