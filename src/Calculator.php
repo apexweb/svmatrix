@@ -467,29 +467,41 @@ class Calculator
     private function calculateAdditionalM($additionalM)
     {
         $perMeter = $additionalM->additional_per_meter;
+        $markup = $additionalM->additional_markup;
 
         $price = 0;
         if ($additionalM->additional_name) {
             $price = $this->additionals_m[$additionalM->additional_name];
         }
-
+        
+        $markedup = round($perMeter * $price * $markup / 100, 2);
+        
         $total = round($price * $perMeter, 2);
+        $totalCharged = round(($price * $perMeter) * ($markup + 100) / 100, 2);
+        
         $additionalM->additional_price = $total;
-        $this->totalSellPrice += $total;
+        $this->profit += $markedup;
+        $this->totalSellPrice += $totalCharged;
     }
 
     private function calculateAdditionalL($additionalL)
     {
         $perLength = $additionalL->additional_per_length;
+        $markup = $additionalL->additional_markup;
 
         $price = 0;
         if ($additionalL->additional_name) {
             $price = $this->additionals_l[$additionalL->additional_name];
         }
+        
+        $markedup = round($perLength * $price * $markup / 100, 2);
 
         $total = round($price * $perLength, 2);
+        $totalCharged = round(($price * $perLength) * ($markup + 100) / 100, 2);
+        
         $additionalL->additional_price = $total;
-        $this->totalSellPrice += $total;
+        $this->profit += $markedup;
+        $this->totalSellPrice += $totalCharged;
     }
 
     private function calculateAccessory($accessory)

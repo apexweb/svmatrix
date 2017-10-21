@@ -1,47 +1,45 @@
-<h1>
-    <small>Cutting Schedule</small>
-</h1>
 <div class="row">
     <div class="card-box cuttings-customer-info font-13">
-
-
-        <p>
-            <span class="col-3"><span>Created By: </span><span class="big-span"><?= h($quote->user->username) ?></span></span>
-            <span class="col-3"><span>Cust. Order No. </span> <span class="big-span"><?= h($quote->qId) ?></span></span>
-            <span style="float: right;"><span>Date Ordered: </span> 
-                <?php
-                if ($quote->orderin_date != null) {
-                    echo '<span class="big-span">' . h($quote->orderin_date) . '</span>';
-                }
-                ?>
-            </span>
-            <div style="clear: both;"></div>
-            <span class="width-100 inline-block"></span>        
-        </p>
-        <p style="float: right;">
-            <span class="">Date Required: </span>
-            <?php
-            if ($quote->required_date != null) {
-                echo '<span class="big-span">' . h($quote->required_date) . '</span>';
-            }
-            ?>
-        </p>
-
-
-        <p>
-            <span>Notes to Manufacturer: </span>
-            <span class="big-span"><?= h($quote->notes_manufacturer) ?></span>
-        </p>
+       
+        <table class="table small-padding">
+            <tr>
+                <td width="20%" class="no-border"><strong>Cutting Schedule</strong></td>
+                <td width="20%" class="no-border"><span>Created By: </span><span class="big-span"><?= h($quote->user->username) ?></span></td>
+                <td width="20%" class="no-border"><span>Cust. Order No. </span> <span class="big-span"><?= h($quote->qId) ?></span></td>
+                <td width="20%" class="no-border">
+                    <span>Date Ordered: </span> 
+                    <?php
+                    if ($quote->orderin_date != null) {
+                        echo '<span class="big-span">' . h($quote->orderin_date) . '</span>';
+                    }
+                    ?>
+                </td>
+                <td width="20%" class="no-border right-align">
+                    <span>Date Required: </span>
+                    <?php
+                    if ($quote->required_date != null) {
+                        echo '<span class="big-span">' . h($quote->required_date) . '</span>';
+                    }
+                    ?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5" class="no-border">
+                    <span>Notes to Manufacturer: </span>
+                    <span class="big-span"><?= h($quote->notes_manufacturer) ?></span>
+                </td>
+            </tr>
+        </table>       
     </div>
 
 </div>
 
     <div class="row">
         <div class="card-box table-responsive">
-            <table class="table table-bordered cuttings-table small-padding">
+            <table class="table table-bordered cuttings-table small-padding" style="margin-bottom:5px;">
                 <!--          15  -->
                 <tr>
-                    <th class="vertical-middle"><?= h($quote->created->format('d/m/Y')) ?></th>
+                    <th class="vertical-middle"></th>
                     <th colspan="9" class="text-center"><span class="font-18"><b><?= h($quote->customer_name) ?></b></span>
                     </th>
                     <th colspan="6"></th>
@@ -196,7 +194,7 @@
 
     <div class="row">
         <div class="col-12">
-            <table class="table table-bordered small-padding">
+            <table class="table table-bordered small-padding" style="margin-bottom:5px;">
                 <tr>
                     <th colspan="5" class="text-center">Additional Sections Cut Sheet</th>
                 </tr>
@@ -228,6 +226,27 @@
     <div class="col-12">
         <table class="table small-padding">
             <tr>
+                <td style="width:33%;" class="no-border">
+                    <div class="row">
+                        <table class="table table-bordered quote-installsheet small-padding">
+                            <tr>
+                                <th class="20_per">ITEM NO</th>
+                                <th class="20_per">PER METER</th>
+                                <th>ADDITIONAL SECTION</th>
+                            </tr>
+
+                            <?php foreach ($quote['additionalpermeters'] as $additionalpermeter): ?>
+                                <?php if ($additionalpermeter->additional_per_meter > 0): ?>
+                                    <tr>
+                                        <td><?= h($additionalpermeter->additional_item_number); ?></td>
+                                        <td><?= h($additionalpermeter->additional_per_meter) ?></td>
+                                        <td><?= h($additionalpermeter->additional_name) ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </table>   
+                    </div>
+                </td>
                 <td style="width:33%;" class="no-border">
                     <div class="row">
                         <table class="table table-bordered quote-installsheet small-padding">
@@ -269,26 +288,7 @@
                             <?php endforeach; ?>
                         </table>
                     </div>
-                </td>
-                <td style="width:33%;" class="no-border">
-                    <div class="row">
-                        <table class="table table-bordered quote-installsheet small-padding">
-                            <tr>
-                                <th class="qty">QTY</th>
-                                <th>CUSTOM ITEM</th>
-                            </tr>
-
-                            <?php foreach ($quote['customitems'] as $customitem): ?>
-                                <?php if ($customitem->custom_qty > 0 && $customitem->custom_tick): ?>
-                                    <tr>
-                                        <td><?= h($customitem->custom_qty) ?></td>
-                                        <td><?= h($customitem->custom_description) ?></td>
-                                    </tr>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </table>
-                    </div>
-                </td>
+                </td>                
             </tr>
         </table> 
     </div>
@@ -298,7 +298,7 @@
     <div class="col-12">
         <table class="table small-padding table-responsive">
             <tr>
-                <td width="50%" class="no-border">
+                <td width="65%" class="no-border">
                         <table class="table table-bordered small-padding">
                             <tr>
                                 <th colspan="9" class="text-center"><?= h($quote->customer_name) ?></th>
@@ -394,24 +394,22 @@
                             <?php endforeach; ?>
                         </table>
                 </td>
-                <td width="50%" class="no-border">
+                <td width="35%" class="no-border">
                         <table class="table table-bordered quote-installsheet small-padding">
                             <tr>
-                                <th class="20_per">ITEM NO</th>
-                                <th class="20_per">PER METER</th>
-                                <th>ADDITIONAL SECTION</th>
+                                <th class="qty">QTY</th>
+                                <th>CUSTOM ITEM</th>
                             </tr>
 
-                            <?php foreach ($quote['additionalpermeters'] as $additionalpermeter): ?>
-                                <?php if ($additionalpermeter->additional_per_meter > 0): ?>
+                            <?php foreach ($quote['customitems'] as $customitem): ?>
+                                <?php if ($customitem->custom_qty > 0 && $customitem->custom_tick): ?>
                                     <tr>
-                                        <td><?= h($additionalpermeter->additional_item_number); ?></td>
-                                        <td><?= h($additionalpermeter->additional_per_meter) ?></td>
-                                        <td><?= h($additionalpermeter->additional_name) ?></td>
+                                        <td><?= h($customitem->custom_qty) ?></td>
+                                        <td><?= h($customitem->custom_description) ?></td>
                                     </tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
-                        </table>
+                        </table>                        
                 </td>
             </tr>
         </table>

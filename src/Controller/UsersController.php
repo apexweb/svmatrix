@@ -125,6 +125,7 @@ class UsersController extends AppController
 
         $user = $this->Users->newEntity();
         if ($this->request->is('post')) {
+            
             $user = $this->Users->patchEntity($user, $this->request->data);
             if ($role == 'supplier') {
                 if ($user->role == 'admin') {
@@ -138,7 +139,11 @@ class UsersController extends AppController
             }
 
             if ($this->Users->save($user)) {
-                $this->sendEmail($user->email, 'new_user', $user);
+                
+                if (isset($this->request->data['send_notification'])) {
+                    $this->sendEmail($user->email, 'new_user', $user);
+                }
+                
                 $this->Flash->success(__('The new user has been saved.'));
                 if ($user->role == 'manufacturer') {
                     $this->copyallpartstomf($user->id);

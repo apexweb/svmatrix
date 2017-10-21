@@ -64,7 +64,7 @@ foreach ($mfs as $mf) {
             </div>
         </div>
         
-        
+            
         <div class="form-group">
             <div class="col-xs-12">
                 <div class="btn-group">
@@ -92,6 +92,8 @@ foreach ($mfs as $mf) {
                 </div>
             </div>
         </div>
+        
+        
 
 
         <div class="form-group">
@@ -105,6 +107,15 @@ foreach ($mfs as $mf) {
                 </div>
             </div>
         </div>
+        
+        <?php if ($authUser['role'] == 'admin'): ?>        
+        
+            <div class="checkbox checkbox-custom checkbox-single" style="margin:0px;">
+                <input type="checkbox" name="send_notification" value="1">
+                <label>Send a notification</label>
+            </div>    
+        
+        <?php endif; ?>
 
         <div class="form-group text-center m-t-40">
             <div class="col-lg-3 col-md-4 col-xs-12">

@@ -2758,6 +2758,10 @@ a.underline:hover {
     padding: 3px 10px;
 }
 
+.product-table td {
+    background-color: #EBEFF2;
+}
+
 .product-item-no {
     width: 60px;
 }

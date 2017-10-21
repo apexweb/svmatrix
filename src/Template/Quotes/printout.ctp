@@ -179,10 +179,12 @@ if ($quote->override_final_price) {
                 <tr>
                     <td></td>
                     <td><?= h($additionalpermeter->additional_per_meter) ?></td>
-                    <td colspan="8" class="text-center"><?= h($additionalpermeter->additional_name) ?></td>
+                    <td colspan="8" class="text-center"><?= h($additionalpermeter->additional_name) ?>
+                    <?php //pr($quote);?>
+                    </td>
                     <td>
                         <?php if (!$flatCustomPrice): ?>
-                            <span>$</span><?= h($additionalpermeter->additional_price); ?>
+                            <span>$</span><?= h($additionalpermeter->additional_charged); ?>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -199,7 +201,7 @@ if ($quote->override_final_price) {
                     <td colspan="8" class="text-center"><?= h($additionalperlength->additional_name) ?></td>
                     <td>
                         <?php if (!$flatCustomPrice): ?>
-                            <span>$</span><?= h($additionalperlength->additional_price); ?>
+                            <span>$</span><?= h($additionalperlength->additional_charged); ?>
                         <?php endif; ?>
                     </td>
                 </tr>

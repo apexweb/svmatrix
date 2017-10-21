@@ -128,9 +128,9 @@ class QuotesController extends AppController
             
         $filename = $quote->customer_name . '-' . $quote->qId;
         
-        if($name == 'CheckMeasure-InstallSheet') {            
+        if ($name == 'CheckMeasure-InstallSheet') {            
             $filename = $quote->customer_name. '-Check Measure' ;             
-        }elseif($name == 'Invoice'){
+        } elseif ($name == 'Invoice') {
             $flagSecurity = false;
             foreach ($quote->products as $product) {
 
@@ -152,6 +152,8 @@ class QuotesController extends AppController
 
             $final = round($total + $additiona1 + $additiona2, 0);
             $filename = $quote->customer_name . '-' . $final . '-' . $quote->qId;  
+        } elseif ( $name == 'CuttingSchedule'){
+            $filename = $quote->customer_name . '-' . $quote->qId . '-Cut Schedule';
         }
                
         $this->viewBuilder()->options([
@@ -372,7 +374,9 @@ class QuotesController extends AppController
                 return $q->select(['username']);
             }
         ]])
-            ->order(['Quotes.created' => 'DESC']);
+            //->order(['Quotes.created' => 'DESC']);
+            ->order(['Quotes.created' => 'DESC', 'FIELD(Quotes.role, "wholesaler", "manufacturer") DESC']);//, 
+         
 
         $quotes->where(['status !=' => 'pending']);
         $quotes->where(['status !=' => 'expired']);
@@ -529,7 +533,6 @@ class QuotesController extends AppController
             $cal = new Calculator($quote, $this->Auth, $this->Quotes->Stockmetas);
             $stocks = $cal->calculatePrices();
             
-                          
             if ($this->Quotes->save($quote)) {
               
                 //$this->Quotes->Stockmetas->link($quote, $stocks);                

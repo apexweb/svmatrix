@@ -186,7 +186,7 @@ if ($quote->override_final_price) {
                     <td colspan="2" class="no-top-bottom"></td>
                     <td class="text-left">
                         <?php if (!$flatCustomPrice): ?>
-                            <span>$</span><?= h($additionalpermeter->additional_price); ?>
+                            <span>$</span><?= h($additionalpermeter->additional_charged); ?>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -204,7 +204,7 @@ if ($quote->override_final_price) {
                     <td colspan="2" class="no-top-bottom"></td>
                     <td class="text-left">
                         <?php if (!$flatCustomPrice): ?>
-                            <span>$</span><?= h($additionalperlength->additional_price); ?>
+                            <span>$</span><?= h($additionalperlength->additional_charged); ?>
                         <?php endif; ?>
                     </td>
                 </tr>
@@ -382,7 +382,7 @@ if ($quote->override_final_price) {
 </div>
 <style>
 @page {
-    margin: 0.2cm 0.3cm 0.2cm 0.2cm;  
+    margin: 0.2cm 0.5cm 0.2cm 0.2cm;  
     }
 </style>
 <?= $this->Html->css('/assets/css/print.css', ['fullBase' => true]); ?>
