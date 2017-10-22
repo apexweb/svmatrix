@@ -473,7 +473,7 @@ class Calculator
         if ($additionalM->additional_name) {
             $price = $this->additionals_m[$additionalM->additional_name];
         }
-        
+        /** Added the marked up logic for Additional meter to calculate sell price */
         $markedup = round($perMeter * $price * $markup / 100, 2);
         
         $total = round($price * $perMeter, 2);
@@ -493,7 +493,7 @@ class Calculator
         if ($additionalL->additional_name) {
             $price = $this->additionals_l[$additionalL->additional_name];
         }
-        
+        /** Added the marked up logic for Additional length to calculate sell price */
         $markedup = round($perLength * $price * $markup / 100, 2);
 
         $total = round($price * $perLength, 2);
