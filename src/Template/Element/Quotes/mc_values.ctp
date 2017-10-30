@@ -284,7 +284,7 @@
     <table class="table table-no-border">
 
         <tr style="background:#99ccff;">
-            <td rowspan="4" style="vertical-align: middle;">Powder Coating<br>(per Item)</td>
+            <td rowspan="8" style="vertical-align: middle;">Powder Coating<br>(per Item)</td>
             <td></td>
             <td>Window</td>
             <td>Door</td>
@@ -315,6 +315,26 @@
             </td>
             <td class="pr-color-door">
                 <?= h($mcvalues['pr_color_door']) ?>
+            </td>
+        </tr>
+        
+        <tr style="background:#99ccff;">
+            <td>Anodized</td>
+            <td class="anodized-color-win">
+                <?= h($mcvalues['anodized_color_win']) ?>
+            </td>
+            <td class="anodized-color-door">
+                <?= h($mcvalues['anodized_color_door']) ?>
+            </td>
+        </tr>
+        
+        <tr style="background:#99ccff;">
+            <td>Special Colour</td>
+            <td class="special-color-win">
+                <?= h($mcvalues['special_color_win']) ?>
+            </td>
+            <td class="special-color-door">
+                <?= h($mcvalues['special_color_door']) ?>
             </td>
         </tr>
 

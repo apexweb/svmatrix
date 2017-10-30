@@ -27,6 +27,8 @@
                             ['value' => 'Standard Color', 'text' => 'Standard', 'checked' => 'checked'],
                             ['value' => 'Color 1', 'text' => 'Custom Colour'],
                             ['value' => 'Color 2', 'text' => 'Premium Colour'],
+                            ['value' => 'Color 3', 'text' => 'Anodized'],
+                            ['value' => 'Color 4', 'text' => 'Special Colour'],
                             ['value' => 'Door Configuration', 'text' => 'Configurations'],
                         ]
                     ) ?>
@@ -110,6 +112,42 @@
                     </td>
                     <td><?= $this->Form->button(__('Delete'), ['class' => 'btn btn-danger btn-delete btn-block waves-effect waves-light', 'data-type' => 'Color 2']); ?></td>
                 </tr>
+                
+                <tr>
+                    <td><h5>Anodized</h5></td>
+                    <td>
+
+                        <select id="color3" class="form-control">
+
+                            <?php foreach ($dropdowns as $dropdown): ?>
+                                <?php if ($dropdown->type == 'Color 3'): ?>
+                                    <option value="<?= $dropdown->id ?>"><?= h($dropdown->name); ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+
+                    </td>
+                    <td><?= $this->Form->button(__('Delete'), ['class' => 'btn btn-danger btn-delete btn-block waves-effect waves-light', 'data-type' => 'Color 3']); ?></td>
+                </tr>
+                
+                <tr>
+                    <td><h5>Special Colour</h5></td>
+                    <td>
+
+                        <select id="color4" class="form-control">
+
+                            <?php foreach ($dropdowns as $dropdown): ?>
+                                <?php if ($dropdown->type == 'Color 4'): ?>
+                                    <option value="<?= $dropdown->id ?>"><?= h($dropdown->name); ?></option>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </select>
+
+                    </td>
+                    <td><?= $this->Form->button(__('Delete'), ['class' => 'btn btn-danger btn-delete btn-block waves-effect waves-light', 'data-type' => 'Color 4']); ?></td>
+                </tr>
+                
+                
 
                 <tr>
                     <td><h5>Configurations</h5></td>

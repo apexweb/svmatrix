@@ -16,3 +16,8 @@ ALTER TABLE `users` ADD `business_name` VARCHAR(200) NULL AFTER `lastname`;
 ALTER TABLE `users` ADD `business_abrev` VARCHAR(100) NULL AFTER `business_name`; 
 
 ALTER TABLE `quotes` ADD `file_to_manufacturer` VARCHAR(255) NULL AFTER `send_file_to_manufacturer`; 
+
+
+ALTER TABLE `products` ADD `product_colour` VARCHAR(100) NULL AFTER `product_316_ss_gal_pet`; 
+
+ALTER TABLE `mcvalues` ADD `anodized_color_win` VARCHAR(10) NULL DEFAULT NULL AFTER `pr_color_win`, ADD `anodized_color_door` VARCHAR(10) NULL DEFAULT NULL AFTER `anodized_color_win`, ADD `special_color_win` VARCHAR(10) NULL DEFAULT NULL AFTER `anodized_color_door`, ADD `special_color_door` VARCHAR(10) NULL DEFAULT NULL AFTER `special_color_win`;

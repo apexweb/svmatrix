@@ -212,15 +212,19 @@ class UsersController extends AppController
 
 
             if ($this->request->data['new_password']) {
-                $this->Users->patchEntity($user, [
+                /*$this->Users->patchEntity($user, [
                     'password' => $this->request->data['new_password'],
                     'new_password' => $this->request->data['new_password'],
                     'confirm_password' => $this->request->data['confirm_password'],
                 ],
                     ['validate' => 'password']
-                );
+                );*/
+                $this->request->data['password'] = $this->request->data['new_password'];
+                $this->Users->patchEntity($user, $this->request->data);
 
             } else {
+                unset($this->request->data['new_password']);
+                unset($this->request->data['confirm_password']);
                 $this->Users->patchEntity($user, $this->request->data);
             }
 
@@ -229,6 +233,7 @@ class UsersController extends AppController
                     $user->role = 'candidate';
                 }
             }
+            
             if ($user->role != 'admin' && $user->role != 'supplier' && $user->role != 'manufacturer' && $user->role != 'candidate') {
                 $user->parent_id = $this->request->data('parrentManufacturerId');
                 $user->parentusername = $this->Users->get($user->parent_id)->username;
@@ -236,6 +241,7 @@ class UsersController extends AppController
                 $user->parent_id = null;
                 $user->parentusername = '';
             }
+           
 
             if ($this->Users->save($user)) {
                 if ($user->role == 'manufacturer') {

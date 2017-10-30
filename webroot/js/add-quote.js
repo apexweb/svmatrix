@@ -594,6 +594,7 @@ $(document).ready(function () {
         $('[name="products[' + productsCount + '][product_qty]"]').val($('[name="products[' + beforeLastRow + '][product_qty]"]').val());
         $('[name="products[' + productsCount + '][product_sec_dig_perf_fibr]"]').val($('[name="products[' + beforeLastRow + '][product_sec_dig_perf_fibr]"]').val());
         $('[name="products[' + productsCount + '][product_316_ss_gal_pet]"]').val($('[name="products[' + beforeLastRow + '][product_316_ss_gal_pet]"]').val());
+        $('[name="products[' + productsCount + '][product_colour]"]').val($('[name="products[' + beforeLastRow + '][product_colour]"]').val());
         $('[name="products[' + productsCount + '][product_window_or_door]"]').val($('[name="products[' + beforeLastRow + '][product_window_or_door]"]').val());
         $('[name="products[' + productsCount + '][product_window_frame_type]"]').val($('[name="products[' + beforeLastRow + '][product_window_frame_type]"]').val());
         $('[name="products[' + productsCount + '][product_configuration]"]').val($('[name="products[' + beforeLastRow + '][product_configuration]"]').val());
@@ -990,7 +991,7 @@ $(document).ready(function () {
         var $qty = product.find('.product-qty');
         var $lockCount = product.find('.product-lock-qty');
         var $lockType = product.find('.product-lock-type');
-
+        
         //Values
         var newQty = Number(product.find('.product-qty').val());
         var secDigFibr = product.find('.product-sec-dg-fibr').val();
@@ -1002,7 +1003,8 @@ $(document).ready(function () {
         var lockType = $lockType.val();
         var includeMidrailCheckbox = productOptions.find('.product-inc-midrail').is(':checked');
         var productConf = product.find('.product-conf').find('option:selected').attr('data-code');
-
+        var productColour = product.find('.product-colour').val();
+                
 
         //------ Change Dropdown Color on Window/Door change ------)
         var winDoorDropdown = product.find('.product-win-door');
@@ -1127,9 +1129,73 @@ $(document).ready(function () {
         // Custom And Premium Color Costs
         var customColor = 0;
         var prColor = 0;
+        var anodizedColor = 0;
+        var specialColor = 0;
+        
+        if (productColour) {
+            var productColourAttr = productColour.split('|');
+            var productColourGroup = productColourAttr[0];
+            var productColourOption = productColourAttr[1];
+            
+            if (winDoor == 'Door') {
+                if (productColourGroup == 'Custom Colour')
+                    customColor = (qty * Number($('.custom-color-door').text())).toFixed(2);
+                //if (productColourGroup == 'Standard Color')
+                    //customColor = (qty * Number($('.custom-color-door').text())).toFixed(2);
+                if (productColourGroup == 'Anodized')
+                    anodizedColor = (qty * Number($('.anodized-color-door').text())).toFixed(2);
+                if (productColourGroup == 'Premium Colour')
+                    prColor = (qty * Number($('.pr-color-door').text())).toFixed(2);
+                if (productColourGroup == 'Special Colour')
+                    specialColor = (qty * Number($('.special-color-door').text())).toFixed(2);                    
+            } else if (winDoor == 'Window') {
+                if (productColourGroup == 'Custom Colour')
+                    customColor = (qty * Number($('.custom-color-win').text())).toFixed(2);
+                //if (productColourGroup == 'Standard Color')
+                    //customColor = (qty * Number($('.custom-color-win').text())).toFixed(2);
+                if (productColourGroup == 'Anodized')
+                    anodizedColor = (qty * Number($('.anodized-color-win').text())).toFixed(2);
+                if (productColourGroup == 'Premium Colour')
+                    prColor = (qty * Number($('.pr-color-win').text())).toFixed(2);
+                if (productColourGroup == 'Special Colour')
+                    specialColor = (qty * Number($('.special-color-win').text())).toFixed(2);               
+            }            
+        }else{
+            if (winDoor == 'Door') {
+                if ($('[name="color1_color"]').val() && $('[name="color1"]').is(':checked')) {
+                    customColor = (qty * Number($('.custom-color-door').text())).toFixed(2);
+                }
+                if ($('[name="color2_color"]').val() && $('[name="color2"]').is(':checked')) {
+                    prColor = (qty * Number($('.pr-color-door').text())).toFixed(2);
+                }
+                if ($('[name="color3_color"]').val() && $('[name="color3"]').is(':checked')) {
+                    anodizedColor = (qty * Number($('.anodized-color-door').text())).toFixed(2);
+                }
+                if ($('[name="color4_color"]').val() && $('[name="color4"]').is(':checked')) {
+                    specialColor = (qty * Number($('.special-color-door').text())).toFixed(2);
+                }
+
+            } else if (winDoor == 'Window') {
+                if ($('[name="color1_color"]').val() && $('[name="color1"]').is(':checked')) {
+                    customColor = (qty * Number($('.custom-color-win').text())).toFixed(2);
+                }
+                if ($('[name="color2_color"]').val() && $('[name="color2"]').is(':checked')) {
+                    prColor = (qty * Number($('.pr-color-win').text())).toFixed(2);
+                }
+                if ($('[name="color3_color"]').val() && $('[name="color3"]').is(':checked')) {
+                    anodizedColor = (qty * Number($('.anodized-color-win').text())).toFixed(2);
+                }
+                if ($('[name="color4_color"]').val() && $('[name="color4"]').is(':checked')) {
+                    specialColor = (qty * Number($('.special-color-win').text())).toFixed(2);
+                }
+            }            
+        }
+        
+        
+        
 
         //*** Calculates Powder Coats ****
-        if (winDoor == 'Door') {
+        /*if (winDoor == 'Door') {
             if ($('[name="color1_color"]').val() && $('[name="color1"]').is(':checked')) {
                 customColor = (qty * Number($('.custom-color-door').text())).toFixed(2);
             }
@@ -1144,7 +1210,9 @@ $(document).ready(function () {
             if ($('[name="color2_color"]').val() && $('[name="color2"]').is(':checked')) {
                 prColor = (qty * Number($('.pr-color-win').text())).toFixed(2);
             }
-        }
+        }*/
+        
+        
 
 
         var price = 0;
@@ -1167,7 +1235,8 @@ $(document).ready(function () {
 
         priceWithLabourIncCutting = (Number(priceWithLabourIncCutting) * (Number(petMeshMarkup) + Number(100)) / 100).toFixed(2);
 
-        var noMarkupCost = (Number(price) + Number(customColor) + Number(prColor)).toFixed(2);
+        //var noMarkupCost = (Number(price) + Number(customColor) + Number(prColor)).toFixed(2);
+        var noMarkupCost = (Number(price) + Number(customColor) + Number(prColor) +  Number(anodizedColor) + Number(specialColor)).toFixed(2);
 
         price = priceWithLabourIncCutting;
 
@@ -1184,7 +1253,8 @@ $(document).ready(function () {
         calculateInstallation(product, productIndex, true);
 
         //Sum of price and Color costs
-        resultTotal = (Number(customColor) + Number(prColor) + Number(resultTotal)).toFixed(2);
+        //resultTotal = (Number(customColor) + Number(prColor) + Number(resultTotal)).toFixed(2);
+        resultTotal = (Number(customColor) + Number(prColor) + Number(anodizedColor) + Number(specialColor) + Number(resultTotal)).toFixed(2);
         if (includeMidrailCheckbox) {
             resultTotal = (Number(resultTotal) + Number($('span.inc-midrail-amount').text())).toFixed(2);
         }

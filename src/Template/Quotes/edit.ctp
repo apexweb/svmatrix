@@ -12,20 +12,25 @@ $additional_per_meter = [];
 $additional_per_length = [];
 $accessories = [];
 $mc_parts = [];
-
+$colours = [];
 
 foreach ($dropdowns as $dropdown) {
     $name = $dropdown->name;
     if ($dropdown->type == 'Standard Color') {
         $standards[$name] = $name;
+        $colours['Standard Color']['Standard Color|'.$name] = $name;
     } else if ($dropdown->type == 'Color 1') {
         $color1[$name] = $name;
+        $colours['Custom Colour']['Custom Colour|'.$name] = $name;
     } else if ($dropdown->type == 'Color 2') {
         $color2[$name] = $name;
+        $colours['Premium Colour']['Premium Colour|'.$name] = $name;
     } else if ($dropdown->type == 'Color 3') {
         $color3[$name] = $name;
+        $colours['Anodized']['Anodized|'.$name] = $name;
     } else if ($dropdown->type == 'Color 4') {
         $color4[$name] = $name;
+        $colours['Special Colour']['Special Colour|'.$name] = $name;
     } else if ($dropdown->type == 'Door Configuration') {
         $conf[$name] = ['text' => $name, 'code' => $dropdown->rule_code];
     }
@@ -162,6 +167,7 @@ foreach ($parts as $part) {
                                 <th>QTY</th>
                                 <th>PRODUCT TYPE</th>
                                 <th>INFILL</th>
+                                <th>COLOUR</th>
                                 <th>WINDOW or DOOR</th>
                                 <th>9 or 11mm</th>
                                 <th>CONFIGURATION</th>
@@ -178,13 +184,13 @@ foreach ($parts as $part) {
                                 <?php $i = 0;
                                 foreach ($quote['products'] as $product): ?>
 
-                                    <?= $this->element('Quotes/product_row', ['i' => $i, 'conf' => $conf, 'selected' => $product->product_configuration]); ?>
+                                    <?= $this->element('Quotes/product_row', ['i' => $i, 'conf' => $conf, 'selected' => $product->product_configuration, 'colours' => $colours]); ?>
 
                                     <?php $i++; endforeach; ?>
 
                             <?php else: ?>
 
-                                <?= $this->element('Quotes/product_row', ['i' => 0, 'conf' => $conf]); ?>
+                                <?= $this->element('Quotes/product_row', ['i' => 0, 'conf' => $conf, 'colours' => $colours]); ?>
 
                             <?php endif; ?>
 

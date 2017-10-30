@@ -42,6 +42,16 @@
         ?>
 
     </td>
+    
+    <td>
+        <?= $this->Form->select(
+            'products.' . $i . '.product_colour',
+            $colours,
+            ['empty' => ' ', 'label' => false,
+                'class' => 'product-options form-control product-colour', 'data-style' => 'btn-primary']
+        );
+        ?>
+    </td>
 
   <td>
 
@@ -127,7 +137,7 @@
 </tr>
 
 <tr id="product-prices-row-<?php echo $i; ?>" class="product-prices-row">
-    <td colspan="14">
+    <td colspan="15">
         <div class="value-holder">
             <span class="product-mf-role"></span>
 

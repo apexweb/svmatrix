@@ -334,7 +334,7 @@
         <div class="col-md-4">
             <table class="mcvalues-table table table-bordered small-padding">
                 <tr>
-                    <th class="grey" rowspan="4">Powder Coating<br>(per Item)</th>
+                    <th class="grey" rowspan="8">Powder Coating<br>(per Item)</th>
                     <td class="grey"></td>
                     <th class="grey">Window</th>
                     <th class="grey">Door</th>
@@ -365,6 +365,24 @@
                     </td>
                     <td>
                         <?= $this->Form->input('pr_color_door', ['class' => 'form-control input-sm', 'label' => false]) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="grey">Anodized</th>
+                    <td>
+                        <?= $this->Form->input('anodized_color_win', ['class' => 'form-control input-sm', 'label' => false]) ?>
+                    </td>
+                    <td>
+                        <?= $this->Form->input('anodized_color_door', ['class' => 'form-control input-sm', 'label' => false]) ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th class="grey">Special Colour</th>
+                    <td>
+                        <?= $this->Form->input('special_color_win', ['class' => 'form-control input-sm', 'label' => false]) ?>
+                    </td>
+                    <td>
+                        <?= $this->Form->input('special_color_door', ['class' => 'form-control input-sm', 'label' => false]) ?>
                     </td>
                 </tr>
             </table>
