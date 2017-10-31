@@ -47,7 +47,7 @@
             <td><span id="iw-deduction"><?= $mcvalues['iw_deduction']; ?></span></td>
         </tr>
         <tr>
-            <th class="grey">XCeed</th>
+            <th class="grey">Perf</th>
             <td><span id="pd-deduction"><?= $mcvalues['pd_deduction']; ?></span></td>
             <td><span id="pw-deduction"><?= $mcvalues['pw_deduction']; ?></span></td>
         </tr>

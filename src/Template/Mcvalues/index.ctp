@@ -443,7 +443,7 @@
                     <td><?= $this->Form->input('iw_deduction', ['class' => 'form-control input-sm', 'label' => false]) ?></td>
                 </tr>
                 <tr>
-                    <th class="grey">XCeed</th>
+                    <th class="grey">Perf</th>
                     <td><?= $this->Form->input('pd_deduction', ['class' => 'form-control input-sm', 'label' => false]) ?></td>
                     <td><?= $this->Form->input('pw_deduction', ['class' => 'form-control input-sm', 'label' => false]) ?></td>
                 </tr>

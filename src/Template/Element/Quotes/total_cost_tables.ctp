@@ -104,13 +104,13 @@
 
 
             <tr>
-                <td class="font-bold xceed">XCeed Marked Up %:</td>
+                <td class="font-bold xceed">Perf Marked Up %:</td>
                 <td class="xceed">
                     <?= $this->Form->input('perf_markup', ['class' => 'form-control input-sm markups-percent', 'label' => false]) ?>
                 </td>
             </tr>
             <tr>
-                <td class="xceed">XCeed Marked Up Amount:</td>
+                <td class="xceed">Perf Marked Up Amount:</td>
                 <td class="xceed">
                     <?= $this->Form->input('perf_markup_amount',
                         ['class' => 'form-control input-sm markups-percent', 'label' => false, 'readonly' => 'readonly']) ?>

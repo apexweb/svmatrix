@@ -227,14 +227,14 @@ class Calculator
             $cleanUp = $this->fibrWindowCleanup;
             $markup = $this->fwMarkup;
 
-        } else if ($secDigFibr == 'XCeed' && $winDoor == 'Door') {
+        } else if ($secDigFibr == 'Perf' && $winDoor == 'Door') {
             $matrixArr = $this->matrixTables['Perf Hinged and Sliding Doors']['prices'];
             $tableName = 'Perf Hinged and Sliding Doors';
             $hrlyRate = $this->pdHrlyRate;
             $cleanUp = $this->perfDoorCleanup;
             $markup = $this->pdMarkup;
 
-        } else if ($secDigFibr == 'XCeed' && $winDoor == 'Window') {
+        } else if ($secDigFibr == 'Perf' && $winDoor == 'Window') {
             $matrixArr = $this->matrixTables['Perf Windows']['prices'];
             $tableName = 'Perf Windows';
             $hrlyRate = $this->pwHrlyRate;
@@ -379,7 +379,7 @@ class Calculator
             case 'Insect':
                 $markup = $this->quote['fibr_markup'];
                 break;
-            case 'XCeed':
+            case 'Perf':
                 $markup = $this->quote['perf_markup'];
                 break;
         }
@@ -399,7 +399,7 @@ class Calculator
             case 'Insect':
                 $this->fibrMarkedup += $profit;
                 break;
-            case 'XCeed':
+            case 'Perf':
                 $this->perfMarkedup += $profit;
                 break;
         }
@@ -547,7 +547,7 @@ class Calculator
         $installation = 0;
 
         if ($qty > 0 && $this->userInstallations) {
-            if ($secDgFibr == '316 S/S' || $secDgFibr == 'D/Grille' || $secDgFibr == 'XCeed') {
+            if ($secDgFibr == '316 S/S' || $secDgFibr == 'D/Grille' || $secDgFibr == 'Perf') {
                 if ($winDoor == 'Door') {
                     $installation = $this->userInstallations->door_amount * $qty;
                 } else if ($winDoor == 'Window') {
@@ -875,9 +875,9 @@ class Calculator
                 $hourlyRate = $this->fdHrlyRate;
             } else if ($secdgfibr == 'Insect' && $winDoor == 'Window') {
                 $hourlyRate = $this->fwHrlyRate;
-            } else if ($secdgfibr == 'XCeed' && $winDoor == 'Door') {
+            } else if ($secdgfibr == 'Perf' && $winDoor == 'Door') {
                 $hourlyRate = $this->pdHrlyRate;
-            } else if ($secdgfibr == 'XCeed' && $winDoor == 'Window') {
+            } else if ($secdgfibr == 'Perf' && $winDoor == 'Window') {
                 $hourlyRate = $this->pwHrlyRate;
             }
         }

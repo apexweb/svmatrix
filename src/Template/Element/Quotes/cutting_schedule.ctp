@@ -298,7 +298,7 @@
 
                     <tr>
                         <th colspan="2"></th>
-                        <th>SEC - XCEED - DG</th>
+                        <th>SEC - PERF - DG</th>
                         <th></th>
                         <th>QTY</th>
                         <th></th>
@@ -336,7 +336,7 @@
                                     } else if ($product->product_window_or_door == 'Window') {
                                         echo ($product->product_height - $deductions['iw_deduction']);
                                     }
-                                } else if ($product->product_sec_dig_perf_fibr == 'XCeed') {
+                                } else if ($product->product_sec_dig_perf_fibr == 'Perf') {
                                     if ($product->product_window_or_door == 'Door') {
                                         echo ($product->product_height - $deductions['pd_deduction']);
                                     } else if ($product->product_window_or_door == 'Window') {
@@ -369,7 +369,7 @@
                                     } else if ($product->product_window_or_door == 'Window') {
                                         echo $product->product_width - $deductions['iw_deduction'];
                                     }
-                                } else if ($product->product_sec_dig_perf_fibr == 'XCeed') {
+                                } else if ($product->product_sec_dig_perf_fibr == 'Perf') {
                                     if ($product->product_window_or_door == 'Door') {
                                         echo $product->product_width - $deductions['pd_deduction'];
                                     } else if ($product->product_window_or_door == 'Window') {

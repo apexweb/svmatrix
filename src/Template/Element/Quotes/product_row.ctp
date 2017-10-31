@@ -20,7 +20,7 @@
 
         <?= $this->Form->select(
             'products.' . $i . '.product_sec_dig_perf_fibr',
-            ['316 S/S' => '316 S/S', 'XCeed' => 'XCeed', 'D/Grille' => 'D/Grille', 'Insect' => 'Insect'],
+            ['316 S/S' => '316 S/S', 'Perf' => 'Perf', 'D/Grille' => 'D/Grille', 'Insect' => 'Insect'],
             ['empty' => ' ', 'label' => false,
                 'class' => 'product-options form-control product-sec-dg-fibr',
                 'data-style' => 'btn-primary',

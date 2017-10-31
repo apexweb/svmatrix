@@ -327,7 +327,7 @@ function calculateInstallation(productRow, index, isAdd) {
         var secDgFibr = productRow.find('.product-sec-dg-fibr').val();
         var winDoor = productRow.find('.product-win-door').val();
 
-        if (secDgFibr == '316 S/S' || secDgFibr == 'D/Grille' || secDgFibr == 'XCeed') {
+        if (secDgFibr == '316 S/S' || secDgFibr == 'D/Grille' || secDgFibr == 'Perf') {
             if (winDoor == 'Window') {
                 installation = Number($('span.ins-ssperfdg-win').text()) * qty;
             } else if (winDoor == 'Door') {
@@ -1093,7 +1093,7 @@ $(document).ready(function () {
 
             productOptions.find('td').css('background-color', '#F2F1EF');
 
-        } else if (secDigFibr == 'XCeed') {
+        } else if (secDigFibr == 'Perf') {
             if (winDoor == 'Door') {
                 matrixArr = JSON.parse($('input[data-name="Perf Hinged and Sliding Doors"]').val());
                 tableName = $('input[data-name="Perf Hinged and Sliding Doors"]').data('name');
@@ -1615,7 +1615,7 @@ $(document).ready(function () {
                 secdgfibr = 'Insect';
                 break;
             case 'perf-markup':
-                secdgfibr = 'XCeed';
+                secdgfibr = 'Perf';
                 break;
         }
 
@@ -1712,7 +1712,7 @@ var markups = {
             case 'Insect':
                 this._addToFibr(markup, index);
                 break;
-            case 'XCeed':
+            case 'Perf':
                 this._addToPerf(markup, index);
                 break;
             default:
@@ -1769,7 +1769,7 @@ var markups = {
             case 'Insect':
                 this._removeFromFibr(index);
                 break;
-            case 'XCeed':
+            case 'Perf':
                 this._removeFromPerf(index);
                 break;
         }
@@ -1830,7 +1830,7 @@ function getMarkupInputID(secdgfibr) {
         case 'Insect':
             selector = 'fibr-markup';
             break;
-        case 'XCeed':
+        case 'Perf':
             selector = 'perf-markup';
             break;
     }
@@ -2125,10 +2125,10 @@ function getHourlyRate(secdgfibr, winDoor) {
         else if (secdgfibr == 'Insect' && winDoor == 'Window') {
             hourlyRate = fwHrlyRate;
         }
-        else if (secdgfibr == 'XCeed' && winDoor == 'Door') {
+        else if (secdgfibr == 'Perf' && winDoor == 'Door') {
             hourlyRate = pdHrlyRate;
         }
-        else if (secdgfibr == 'XCeed' && winDoor == 'Window') {
+        else if (secdgfibr == 'Perf' && winDoor == 'Window') {
             hourlyRate = pwHrlyRate;
         }
     }
