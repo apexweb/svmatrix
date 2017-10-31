@@ -226,6 +226,7 @@ class QuotesController extends AppController
             ->order(['Quotes.created' => 'DESC']);
 
         $quotes->where(['status !=' => 'paid']);
+        $quotes->where(['status !=' => 'archived']);
         $quotes->where(['user_id' => $this->Auth->user('id')]);
 
 
@@ -422,6 +423,7 @@ class QuotesController extends AppController
             ->order(['Quotes.created' => 'DESC']);
 
         $quotes->where(['user_id' => $this->Auth->user('id')]);
+        $quotes->where(['status !=' => 'archived']);
 
         if ($search != null) {
             $quotes->where(['customer_name LIKE' => '%' . $search . '%']);
@@ -431,7 +433,8 @@ class QuotesController extends AppController
         }
         if ($status != 'expired') {
             $quotes->where(['status !=' => 'expired']);
-        }
+        } 
+        
 
 
         $this->set(compact('quotes', 'search', 'status'));
@@ -874,8 +877,17 @@ class QuotesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $quote = $this->Quotes->get($id);
         
-        if ($page == 'myquotes') {
-            if ($this->Quotes->delete($quote)) {
+        $quote->status = 'archived';
+        if ($this->Quotes->save($quote)) {
+            $this->Flash->success(__('The quote has been deleted.'));
+        } else {
+            $this->Flash->error(__('The quote could not be deleted. Please, try again.'));
+        }
+        
+        /*if ($page == 'myquotes') {
+            $quote->status = 'archived';
+            //if ($this->Quotes->delete($quote)) {
+            if ($this->Quotes->save($quote)) {
                 $this->Flash->success(__('The quote has been deleted.'));
             } else {
                 $this->Flash->error(__('The quote could not be deleted. Please, try again.'));
@@ -883,7 +895,9 @@ class QuotesController extends AppController
         } elseif ($page == 'orders') {
             
             if ($quote->user_id == $this->Auth->user('id')) {
-                if ($this->Quotes->delete($quote)) {
+                //if ($this->Quotes->delete($quote)) {
+                $quote->status = 'archived';
+                if ($this->Quotes->save($quote)) {
                     $this->Flash->success(__('The quote has been deleted.'));
                 } else {
                     $this->Flash->error(__('The quote could not be deleted. Please, try again.'));
@@ -894,7 +908,7 @@ class QuotesController extends AppController
                     $this->Flash->success(__('The quote has been deleted.'));
                 }
             }
-        }
+        }*/
 
         return $this->redirect(['action' => $page]);
     }

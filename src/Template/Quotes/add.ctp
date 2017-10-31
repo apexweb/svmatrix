@@ -13,28 +13,45 @@ $additional_per_length = [];
 $accessories = [];
 $mc_parts = [];
 $colours = [];
-
+$StandardColor = $Anodized = $CustomColour = $PremiumColour = $SpecialColour = [];
 foreach ($dropdowns as $dropdown) {
     $name = $dropdown->name;
     if ($dropdown->type == 'Standard Color') {
         $standards[$name] = $name;
-        $colours['Standard Color']['Standard Color|'.$name] = $name;
+        $StandardColor['Standard Color|'.$name] = $name;
     } else if ($dropdown->type == 'Color 1') {
         $color1[$name] = $name;
-        $colours['Custom Colour']['Custom Colour|'.$name] = $name;
+        $CustomColour['Custom Colour|'.$name] = $name;
     } else if ($dropdown->type == 'Color 2') {
         $color2[$name] = $name;
-        $colours['Premium Colour']['Premium Colour|'.$name] = $name;
+        $PremiumColour['Premium Colour|'.$name] = $name;
     } else if ($dropdown->type == 'Color 3') {
         $color3[$name] = $name;
-        $colours['Anodized']['Anodized|'.$name] = $name;
+        $Anodized['Anodized|'.$name] = $name;
     } else if ($dropdown->type == 'Color 4') {
         $color4[$name] = $name;
-        $colours['Special Colour']['Special Colour|'.$name] = $name;
+        $colours['']['Special Colour|'.$name] = $name;
     } else if ($dropdown->type == 'Door Configuration') {
         $conf[$name] = ['text' => $name, 'code' => $dropdown->rule_code];
     }
 }
+if ($StandardColor)
+    $colours['Standard Color'] = $StandardColor;
+
+if ($Anodized)
+    $colours['Anodized'] = $Anodized;
+
+if ($CustomColour)
+    $colours['Custom Colour'] = $CustomColour;
+
+if ($PremiumColour)
+    $colours['Premium Colour'] = $PremiumColour;
+
+if ($SpecialColour)
+    $colours['Special Colour'] = $SpecialColour;
+
+
+
 
 
 foreach ($parts as $part) {

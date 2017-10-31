@@ -27,7 +27,7 @@
             <?= $this->Form->select(
                 'status',
                 ['' => 'All', 'pending' => 'Pending', 'in progress' => 'In Progress',
-                    'complete' => 'Complete', 'expired' => 'Expired', 'archived' => 'Archived'],
+                    'complete' => 'Complete', 'expired' => 'Expired'],
                 ['class' => 'form-control status-dropdown input-sm', 'data-style' => 'btn-primary', 'label' => true, 'value' => $status]
             );
             ?>
@@ -35,7 +35,7 @@
             <?= $this->Form->select(
                 'status',
                 ['' => 'All', 'pending' => 'Pending', 'in progress' => 'In Progress',
-                    'complete' => 'Complete', 'paid' => 'Paid', 'expired' => 'Expired', 'archived' => 'Archived'],
+                    'complete' => 'Complete', 'paid' => 'Paid', 'expired' => 'Expired'],
                 ['class' => 'form-control status-dropdown input-sm', 'data-style' => 'btn-primary', 'label' => true, 'value' => $status]
             );
             ?>

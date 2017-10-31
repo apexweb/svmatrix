@@ -1014,7 +1014,8 @@ $(document).ready(function () {
         } else if (winDoor == 'Window') {
             winDoorDropdown.css('background', 'lightblue');
         } else {
-            winDoorDropdown.css('background', 'none');
+            //winDoorDropdown.css('background', 'none');
+            winDoorDropdown.css('background', '#fff');
         }
 
 

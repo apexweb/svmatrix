@@ -117,9 +117,9 @@ if ($quote->override_final_price) {
             <th class="text-center width-120">Config</th>
             <th class="text-center width-180">Location</th>
             <th class="text-center height">Hght mm</th>
-            <th class="text-center width">Wdth mm</th>
-            <th class="text-center width-30">Lock Type</th>
-            <th class="text-center width-70">Amount Inc. GST</th>
+            <th class="text-center width-50">Wdth mm</th>
+            <th class="text-center width-50">Lock Type</th>
+            <th class="text-center width-60">Amount Inc. GST</th>
         </tr>
 
         <?php foreach ($quote['products'] as $product): ?>
@@ -248,18 +248,18 @@ if ($quote->override_final_price) {
         <tr>
             <td colspan="2" class="no-right no-bottom"></td>
             <td colspan="6" class="no-top-bottom"></td>
-            <td colspan="2">Screen Total incl. GST</td>
+            <td colspan="2" style="font-size:8px !important;">Screen Total incl. GST</td>
             <td class="text-left">
                 <?php if (!$flatCustomPrice): ?>
                     <span>$</span><?= h($quote->total_sell_price - $quote->installation_total_cost); ?>
                 <?php endif; ?>
             </td>
         </tr>
-        <?php if (isset($quote->discount_amount) && $quote->discount_amount > 0): ?>
+        <?php if (isset($quote->discount_amount) && $quote->discount_amount > 0 && (!$flatCustomPrice)): ?>
             <tr>
                 <td colspan="2" class="no-top-bottom"></td>
                 <td colspan="6" class="no-top-bottom"></td>
-                <td colspan="2">Discount Applied <?php if($quote->discount) echo ' - '. $quote->discount .'%';?></td>
+                <td colspan="2" style="font-size:8px !important;">Discount Applied <?php if($quote->discount) echo ' - '. $quote->discount .'%';?></td>
                 <td class="text-left"><span>$</span><?= h($quote->discount_amount); ?></td>
             </tr>
         <?php endif; ?>
