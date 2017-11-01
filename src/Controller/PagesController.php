@@ -15,6 +15,7 @@
 namespace App\Controller;
 
 use Cake\Core\Configure;
+use Cake\ORM\TableRegistry;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 
@@ -72,7 +73,12 @@ class PagesController extends AppController
         $this->set(compact('page', 'subpage'));
 
         try {
-            $this->render(implode('/', $path));
+            if ($page == 'importantinfo') {
+                $this->importantinfo();
+                $this->render('importantinfo');
+            } else {
+                $this->render(implode('/', $path));
+            }
         } catch (MissingTemplateException $e) {
             if (Configure::read('debug')) {
                 throw $e;
@@ -85,5 +91,14 @@ class PagesController extends AppController
     public function importantinfo()
     {
         //Silence is Golden!
+        $content = TableRegistry::get('contents')
+                    ->findByLabel('importantinfo')
+                    ->where(['user_id' => $this->Auth->user('id')])
+                    ->first();
+        
+        //pr($content->toArray());
+        $this->set(compact('content'));
+        $this->set('_serialize', ['content']);
+        
     }
 }

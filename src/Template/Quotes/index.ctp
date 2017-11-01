@@ -57,7 +57,7 @@
                     </td>
                     <td>
                         <?= $this->Html->link(
-                            $quote->customer_name,
+                            ($quote->customer_name)?$quote->customer_name:'Update',
                             ['controller' => 'Quotes', 'action' => 'edit', $quote->id],
                             ['class' => 'primary',]
                         ); ?>

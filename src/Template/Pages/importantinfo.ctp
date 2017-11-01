@@ -1,6 +1,30 @@
 <div class="card-box">
+<?php 
+$role = $authUser['role'];
+if ($content) { ?>
+    <h1><?= h($content->title);?> 
+    
+        <?php 
+            if ($role == 'manufacturer'): ?>
+                <small style="float:right;font-size:12px;">
+                <?php echo $this->Html->link('Edit', ['controller' => 'contents', 'action' => 'edit', $content->id]);?></small>
+        <?php endif; ?>
+    
+    </h1>
 
-    <h1>Important Info</h1>
+
+    <p><?php echo ($content->description);?> </p>
+
+<?php } else { ?>
+    <h1>Important Info 
+        
+        <?php 
+        if ($role == 'manufacturer'): ?>
+            <small style="float:right;font-size:12px;">
+            <?php echo $this->Html->link('Edit', ['controller' => 'contents', 'action' => 'add']);?></small>
+        <?php endif; ?>
+    
+    </h1>
 
 
     <p>
@@ -22,5 +46,5 @@
         “Flush Bolt Dble Sec Door” from the Accessories for each set of doors added.</p>
     <p>6. All Screens are collect unless otherwise agreed.</p>
     </p>
-
+<?php } ?>
 </div>
