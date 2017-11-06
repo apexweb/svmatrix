@@ -24,3 +24,13 @@ ALTER TABLE `mcvalues` ADD `anodized_color_win` VARCHAR(10) NULL DEFAULT NULL AF
 
 
 UPDATE `products` SET `product_sec_dig_perf_fibr` = 'Perf' WHERE `products`.`product_sec_dig_perf_fibr` = 'Xceed' 
+
+
+CREATE TABLE `contents` (
+  `id` int(11) NOT NULL,
+  `label` varchar(255) NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` text NOT NULL,
+  `created` datetime NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;

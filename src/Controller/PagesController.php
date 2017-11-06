@@ -91,10 +91,21 @@ class PagesController extends AppController
     public function importantinfo()
     {
         //Silence is Golden!
-        $content = TableRegistry::get('contents')
-                    ->findByLabel('importantinfo')
-                    ->where(['user_id' => $this->Auth->user('id')])
-                    ->first();
+        
+        if ($this->Auth->user('role') != 'manufacturer' && $this->Auth->user('parent_id')!= null ) {
+           
+            $content = TableRegistry::get('contents')
+                        ->findByLabel('importantinfo')
+                        ->where(['user_id' => $this->Auth->user('parent_id')])
+                        ->first();
+           
+        } else {
+            
+            $content = TableRegistry::get('contents')
+                        ->findByLabel('importantinfo')
+                        ->where(['user_id' => $this->Auth->user('id')])
+                        ->first();
+        }
         
         //pr($content->toArray());
         $this->set(compact('content'));
