@@ -1310,7 +1310,7 @@ $(document).ready(function () {
             $lockType.val('').prop('disabled', true);
         }
         //--------------
-
+           
         productsNoMarkup[productIndex] = noMarkupCost;
         screensTotal[productIndex] = resultTotal;
         calculateScreensTotal();
@@ -1326,12 +1326,13 @@ $(document).ready(function () {
         }
         var profit = (Number(sellPrice) - Number(resultTotal)).toFixed(2);
 
-        markups.addToMarkups(profit, productIndex, secDigFibr);
-
+        
         productOptions.find('input.product-price-incl-gst').val(resultTotal);
         productOptions.find('input.product-sell-price').val(sellPrice);
         productOptions.find('input.product-profit').val(profit);
 
+        markups.addToMarkups(profit, productIndex, secDigFibr);
+        
         var includeMidrail = $('.midrail-inc[data-table="' + tableName + '"]').val();
 
         var incMidrail = false;
@@ -1600,9 +1601,10 @@ $(document).ready(function () {
     $('.markups-percent').on('change', function () {
         var inputId = $(this).attr('id');
         var markupAmount = Number($(this).val());
-
+        var discountPercentage = Number($('input[name=discount]').val());
         //console.log(markupAmount);
-
+        //console.log(discountPercentage);
+        
         var secdgfibr = '';
         switch (inputId) {
             case 'ss-markup':
@@ -1628,12 +1630,23 @@ $(document).ready(function () {
                 var priceInclGst = Number(productOptions.find('input.product-price-incl-gst').val()).toFixed(2);
                 var profit = Number(priceInclGst * Number(markupAmount) / 100).toFixed(2);
                 var sellPrice = Number(Number(priceInclGst) + Number(profit)).toFixed(2);
+                
+                var profitAfterDiscount = profit;
+                var sellPriceAfterDiscount = sellPrice;
+                                
+                if(discountPercentage > 0){
+                    var discountPrice = Number(sellPrice * Number(discountPercentage) / 100).toFixed(2);
+                    profitAfterDiscount =  Number(profit - discountPrice).toFixed(2);
+                    sellPriceAfterDiscount = Number(sellPrice - discountPrice).toFixed(2);
+                }
+                productOptions.find('input.product-sell-price').val(sellPriceAfterDiscount);
+                productOptions.find('input.product-profit').val(profitAfterDiscount);
+                
+               
+                //productOptions.find('input.product-sell-price').val(sellPrice);
+                //productOptions.find('input.product-profit').val(profit);
 
-                productOptions.find('input.product-sell-price').val(sellPrice);
-                productOptions.find('input.product-profit').val(profit);
-
-
-                markups.addToMarkups(profit, productIndex, secdgfibr, true);
+                markups.addToMarkups(profitAfterDiscount, productIndex, secdgfibr, true);
             }
             markups._updateMarkups();
 
@@ -1650,11 +1663,62 @@ $(document).ready(function () {
         DISCOUNT = percent;
         DISCOUNT_AMOUNT = discountedAmount;
         calculateProfit();
-        calculateTotalSell();
+        calculateTotalSell();        
+        updateOrderTablePrice();
     });
 
     /************************************/
+    function updateOrderTablePrice() {
+      var discountPercentage = Number($('input[name=discount]').val());
+      
+      $('.product-sec-dg-fibr').each(function (i, el) {
+            var producType = $(el).val();
+            if (producType) {
+                var markupId = '';
+                switch (producType) {
+                  case '316 S/S':
+                      var markupId = 'ss-markup';
+                      break;
+                  case 'D/Grille':
+                      var markupId = 'dg-markup';
+                      break;
+                  case 'Insect':
+                      var markupId = 'fibr-markup';
+                      break;
+                  case 'Perf':
+                      var markupId = 'perf-markup';
+                      break;
+                }
+                var markupAmount = Number($('#'+markupId).val());
 
+                var product = $(el).parents('tr');
+                var productOptions = product.next();
+                var productIndex = findIndexById(product);
+                var priceInclGst = Number(productOptions.find('input.product-price-incl-gst').val()).toFixed(2);
+                //console.log(priceInclGst);
+                var profit =  0;
+                var sellPrice = 0;
+                var profitAfterDiscount = 0;
+                var sellPriceAfterDiscount = 0;
+
+                var profit = Number(priceInclGst * Number(markupAmount) / 100).toFixed(2);
+                var sellPrice = Number(Number(priceInclGst) + Number(profit)).toFixed(2);
+
+                var profitAfterDiscount = profit;
+                var sellPriceAfterDiscount = sellPrice;
+                //alert(discountPercentage); 
+
+                if(discountPercentage > 0){
+                    var discountPrice = Number(sellPrice * Number(discountPercentage) / 100).toFixed(2);
+                    profitAfterDiscount =  Number(profit - discountPrice).toFixed(2);
+                    sellPriceAfterDiscount = Number(sellPrice - discountPrice).toFixed(2);
+                }
+
+                productOptions.find('input.product-sell-price').val(sellPriceAfterDiscount);
+                productOptions.find('input.product-profit').val(profitAfterDiscount);
+            }
+        });
+    }
 
     $('.save-quote-btn').on('click', function () {
         var self = $(this);
