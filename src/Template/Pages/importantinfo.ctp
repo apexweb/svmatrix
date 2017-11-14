@@ -28,7 +28,7 @@ if ($content) { ?>
 
 
     <p>Please refer to your Manufacturer for specific Terms of Trade
-   <!-- <p>1. VERY IMPORTANT - The measurements supplied to the Manufacturer must be the <b>build sizes</b>. Please do not supply
+    <!--<p>1. VERY IMPORTANT - The measurements supplied to the Manufacturer must be the <b>build sizes</b>. Please do not supply
         frame
         or
         opening sizes.</p>-->
@@ -36,7 +36,7 @@ if ($content) { ?>
         of
         the
         10 Warranty that the Security Screens are maintained according to the ScreenGuard Maintenance Chart.</p> -->
-    <!--<p>2. 16mm Fringe Pile is included in the cost and will be supplied with Bug Strip.</p>
+   <!-- <p>2. 16mm Fringe Pile is included in the cost and will be supplied with Bug Strip.</p>
     <p>3. Both Horizontals and Verticals must be equal. No Trapezoids/Trapeziums</p>
     <p>4. Additional Sections will be supplied at the same colour of the Security Screens unless otherwise
         requested.</p>
