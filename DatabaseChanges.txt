@@ -1,4 +1,11 @@
 /**
+14/11/2017 Added Field for Markup %  (Ramandeep)
+
+*/
+ALTER TABLE `accessories` ADD `accessory_markup` VARCHAR(5) NULL DEFAULT NULL AFTER `quote_id`, ADD `accessory_charged` VARCHAR(50) NULL DEFAULT NULL AFTER `accessory_markup`;
+
+
+/**
 20/09/2017 Added Field for Markup %  (Ramandeep)
 
 */

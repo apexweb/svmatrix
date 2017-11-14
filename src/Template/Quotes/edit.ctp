@@ -347,7 +347,10 @@ foreach ($parts as $part) {
                                 <th>ITEM NO.</th>
                                 <th>EACH</th>
                                 <th>ACCESSORIES</th>
-                                <th class="width-50">PRICE</th>
+                                <!--<th class="width-50">PRICE</th>-->
+                                <th class="width-40">COST</th>
+                                <th class="width-40">MARK UP %</th>
+                                <th colspan="2">SELL PRICE</th>
                             </tr>
 
                             <?php for ($i = 0; $i < 3; $i++): ?>

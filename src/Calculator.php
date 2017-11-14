@@ -507,15 +507,21 @@ class Calculator
     private function calculateAccessory($accessory)
     {
         $each = $accessory->accessory_each;
-
+        $markup = $accessory->accessory_markup;
+        
         $price = 0;
         if ($accessory->accessory_name) {
             $price = $this->accessories[$accessory->accessory_name];
         }
-
+        $markedup = round($each * $price * $markup / 100, 2);
+        
         $total = round($price * $each, 2);
+        $totalCharged = round(($price * $each) * ($markup + 100) / 100, 2);
+        
         $accessory->accessory_price = $total;
-        $this->totalSellPrice += $total;
+        $this->profit += $markedup;
+       // $this->totalSellPrice += $total;
+        $this->totalSellPrice += $totalCharged;
     }
 
     private function calculateCustomItem($customItem)
