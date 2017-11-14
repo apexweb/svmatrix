@@ -7,15 +7,15 @@ var midrailMax = 2;
 var midrailMIN = 0;
 
 var additionalsCount = 4;
-var additionalMAX = 9;
+var additionalMAX = 19;
 var additionalMIN = 4;
 
 var additionalsLengthCount = 4;
-var additionalLengthMAX = 9;
+var additionalLengthMAX = 19;
 var additionalLengthMIN = 4;
 
 var customitemsCount = 2;
-var customitemMAx = 9;
+var customitemMAx = 19;
 var customitemMIN = 2;
 var cutsheetsCount = 2;
 
@@ -1563,10 +1563,14 @@ $(document).ready(function () {
         if (name) {
             var price = additionalRow.find('.accessory-name').find(':selected').data('price');
             var each = additionalRow.find('.accessory-each').val();
-
+            var markup = Number(additionalRow.find('.accessory-markup').val());
 
             var totalPrice = Number(price * each).toFixed(2);
+            
+            var markedup = totalPrice * markup / 100;
+            var totalCharged = (Number(totalPrice) + Number(markedup)).toFixed(2); 
             additionalRow.find('.accessory-total-price').val(totalPrice);
+            additionalRow.find('.accessory-charged').val(totalCharged);
             accessories[index] = totalPrice;
         } else {
             additionalRow.find('.accessory-total-price').val('');
