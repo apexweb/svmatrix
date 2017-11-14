@@ -221,7 +221,7 @@ if ($quote->override_final_price) {
                     <td colspan="2" class="no-top-bottom"></td>
                     <td class="text-left">
                         <?php if (!$flatCustomPrice): ?>
-                            <span>$</span><?= h($accessory->accessory_price); ?>
+                            <span>$</span><?= h($accessory->accessory_charged); ?>
                         <?php endif; ?>
                     </td>
                 </tr>
