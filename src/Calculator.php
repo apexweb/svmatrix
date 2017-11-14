@@ -96,7 +96,11 @@ class Calculator
     private $custom_color_door;
     private $custom_color_win;
     private $pr_color_door;
-    private $pr_color_win;
+    private $pr_color_win;    
+    private $anodized_color_door;
+    private $anodized_color_win;
+    private $special_color_door;
+    private $special_color_win;
 
 
     private $dgInsDoorPetMarkup;// = 0;
@@ -177,6 +181,9 @@ class Calculator
         $lockCount = $product->product_lock_qty;
         $lockType = $product->product_lock_type;
         $incMidrail = $product->product_inc_midrail;
+        
+        $productColour = $product->product_colour;
+        
 
 
         $matrixArr = null;
@@ -262,24 +269,73 @@ class Calculator
 
         $customColor = 0;
         $premiumColor = 0;
+        $anodizedColor = 0;
+        $specialColor = 0;
 
-
-        //*** Calculates Powder Coats ****
-        if ($winDoor == 'Door') {
-            if (!empty($this->quote['color1_color']) && $this->quote['color1']) {
-                $customColor = ($qty * $this->custom_color_door);
-            }
-            if (!empty($this->quote['color2_color']) && $this->quote['color2']) {
-                $premiumColor = ($qty * $this->pr_color_door);
-            }
-        } else if ($winDoor == 'Window') {
-            if (!empty($this->quote['color1_color']) && $this->quote['color1']) {
-                $customColor = ($qty * $this->custom_color_win);
-            }
-            if (!empty($this->quote['color2_color']) && $this->quote['color2']) {
-                $premiumColor = ($qty * $this->pr_color_win);
+        if ($productColour) {
+            list($colourGroup, $pColour) = explode('|', $productColour);
+            
+            if ($winDoor == 'Door') {
+                if ($colourGroup == 'Custom Colour') {
+                    $customColor = ($qty * $this->custom_color_door);
+                }
+                if ($colourGroup == 'Anodized') {
+                    $anodizedColor = ($qty * $this->anodized_color_door);
+                }
+                if ($colourGroup == 'Premium Colour') {
+                    $premiumColor = ($qty * $this->pr_color_door);
+                }
+                if ($colourGroup == 'Special Colour') {
+                    $specialColor = ($qty * $this->special_color_door);
+                }                    
+            } else if ($winDoor == 'Window') {
+                if ($colourGroup == 'Custom Colour') {
+                    $customColor = ($qty * $this->custom_color_win);
+                }
+                if ($colourGroup == 'Anodized') {
+                    $anodizedColor = ($qty * $this->anodized_color_win);
+                }
+                if ($colourGroup == 'Premium Colour') {
+                    $premiumColor = ($qty * $this->pr_color_win);
+                }
+                if ($colourGroup == 'Special Colour') {
+                    $specialColor = ($qty * $this->special_color_win);
+                } 
+            }               
+        
+        } else {
+            //*** Calculates Powder Coats ****
+            if ($winDoor == 'Door') {
+                
+                if (!empty($this->quote['color1_color']) && $this->quote['color1']) {
+                    $customColor = ($qty * $this->custom_color_door);
+                }
+                if (!empty($this->quote['color2_color']) && $this->quote['color2']) {
+                    $premiumColor = ($qty * $this->pr_color_door);
+                }
+                if (!empty($this->quote['color3_color']) && $this->quote['color3']) {
+                    $anodizedColor = ($qty * $this->anodized_color_door);
+                }
+                if (!empty($this->quote['color4_color']) && $this->quote['color4']) {
+                    $specialColor = ($qty * $this->special_color_door);
+                }
+            } else if ($winDoor == 'Window') { 
+                
+                if (!empty($this->quote['color1_color']) && $this->quote['color1']) {
+                    $customColor = ($qty * $this->custom_color_win);
+                }
+                if (!empty($this->quote['color2_color']) && $this->quote['color2']) {
+                    $premiumColor = ($qty * $this->pr_color_win);
+                }
+                if (!empty($this->quote['color3_color']) && $this->quote['color3']) {
+                    $anodizedColor = ($qty * $this->anodized_color_win);
+                }
+                if (!empty($this->quote['color4_color']) && $this->quote['color4']) {
+                    $specialColor = ($qty * $this->special_color_win);
+                }
             }
         }
+       
 
         $petMeshMarkup = 0;
         if (($secDigFibr == 'Insect' || $secDigFibr == 'D/Grille') && $infill == 'Pet Mesh') {
@@ -304,7 +360,7 @@ class Calculator
         $masterMarkup = $this->getMasterMarkupByMatrixTable($tableName);
         $totalPrice = $totalPrice * ($masterMarkup + 100) / 100;
 
-        $totalPrice = $totalPrice + $customColor + $premiumColor;
+        $totalPrice = $totalPrice + $customColor + $premiumColor + $anodizedColor + $specialColor;
 
 
 //        $this->fillStocks($frame, 'frame');
@@ -709,7 +765,13 @@ class Calculator
         $this->custom_color_win = $mcvalues->custom_color_win;
         $this->pr_color_door = $mcvalues->pr_color_door;
         $this->pr_color_win = $mcvalues->pr_color_win;
-
+        $this->anodized_color_door = $mcvalues->anodized_color_door;
+        $this->anodized_color_win = $mcvalues->anodized_color_win;
+        $this->special_color_door = $mcvalues->special_color_door;
+        $this->special_color_win = $mcvalues->special_color_win;
+         
+        
+        
         $this->incMidrail = $mcvalues->include_midrail_amount;
 
         $this->initializeParts($parts);
