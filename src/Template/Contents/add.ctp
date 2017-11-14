@@ -20,8 +20,8 @@
     </div>
     
     <div class="form-group ">
-        <div class="col-lg-12 col-md-12 col-xs-12">
-            <?= $this->Form->textarea('description', ['id' => 'description', 'class' => 'form-control']) ?>
+        <div class="col-lg-12 col-md-12 col-xs-12 test">
+            <?= $this->Form->textarea('description', ['id' => 'description', 'class' => 'form-control','default'=>'Please refer to your Manufacturer for specific Terms of Trade' ]) ?>
         </div>
     </div>
     
