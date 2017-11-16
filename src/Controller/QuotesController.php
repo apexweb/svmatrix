@@ -343,8 +343,9 @@ class QuotesController extends AppController
             }
         }
 
-
-        $this->set('quote', $quote);
+        $fieldSettings = TableRegistry::get('Settings');
+        $fieldSettings = $fieldSettings->find('all')->where(['user_id' => $this->Auth->user('id')])->first();
+        $this->set(compact('quote', 'fieldSettings'));
         $this->set('_serialize', ['quote']);
     }
 
