@@ -14,7 +14,10 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
     $h1 = 'Retailer Invoice';
 }
 
-
+$selected_fields = "";
+if(isset($fieldSettings->data) && $fieldSettings->data != '') {
+    $selected_fields = unserialize(base64_decode($fieldSettings->data));
+}
 ?>
 
 <h1>
@@ -56,8 +59,17 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
         <table class="table table-responsive invoice-table table-bordered text-center">
 
             <tr>
-                <th class="light-grey text-center width-150">Qty</th>
-                <th class="light-grey text-center">Description of Goods</th>
+                <!--<th class="light-grey text-center width-150">Qty</th>
+                <th class="light-grey text-center">Description of Goods</th>-->
+                <?php
+                        if(isset($selected_fields['settings']['products']['value']) && !empty($selected_fields['settings']['products']['value'])){
+                            foreach($selected_fields['settings']['products']['value'] as $name => $val) {
+                                if($val == 1){ ?>
+                                    <th class="light-grey text-center"><?= $selected_fields['settings']['products']['label'][$name] ?></th>
+                        <?php   }
+                            }
+                        }
+                    ?>
             </tr>
 
             <?php
@@ -69,14 +81,27 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
             foreach ($quote['products'] as $product) {
 
                 if ($product->product_qty > 0) {
-                    if ($product->product_window_or_door == 'Door') {
+                    /*if ($product->product_window_or_door == 'Door') {
                         $sum_doors += $product->product_qty;
                     } else if ($product->product_window_or_door == 'Window') {
                         $sum_windows += $product->product_qty;
                     }
                     if ($product->product_sec_dig_perf_fibr == 'Security') {
                         $flagSecurity = true;
-                    }
+                    }*/
+                    ?>
+                    <tr>
+                        <?php
+                        if(isset($selected_fields['settings']['products']['value']) && !empty($selected_fields['settings']['products']['value'])){
+                            foreach($selected_fields['settings']['products']['value'] as $name => $val) {
+                                if($val == 1){ ?>
+                                    <td><?= $product->$name ?></td>
+                        <?php   }
+                            }
+                        }
+                        ?>
+                    </tr>
+                    <?php
                 }
 
             }
@@ -84,15 +109,15 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
 
             ?>
 
-            <tr>
-                <td><?= $sum_windows ?></td>
+            <!--<tr>
+                <td><?//= $sum_windows ?></td>
                 <td>Windows</td>
             </tr>
 
             <tr>
-                <td><?= $sum_doors ?></td>
+                <td><?//= $sum_doors ?></td>
                 <td>Doors</td>
-            </tr>
+            </tr>-->
 
             <table class="table table-responsive invoice-table table-bordered text-center">
                 <tr>
@@ -103,9 +128,18 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
                     <?php if ($accessory->accessory_each > 0): ?>
 
                         <tr>
-                            <td><?= h($accessory->accessory_each) ?></td>
-                            <td><?= h($accessory->accessory_name) ?></td>
-                            <td style="width: 20%;"></td>
+                            <?php
+                            if(isset($selected_fields['settings']['accessories']['value']) && !empty($selected_fields['settings']['accessories']['value'])){
+                                foreach($selected_fields['settings']['accessories']['value'] as $name => $val) {
+                                    if($val == 1){ ?>
+                                        <td><?= $accessory->$name ?></td>
+                            <?php   }
+                                }
+                            }
+                            ?>
+                            <!--<td><?//= h($accessory->accessory_each) ?></td>
+                            <td><?//= h($accessory->accessory_name) ?></td>
+                            <td class="width-150"></td>-->
                         </tr>
 
                     <?php endif; ?>
@@ -123,7 +157,9 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
             <tr>
                 <th colspan="3" class="light-grey text-center">Additional Sections</th>
             </tr>
-
+            <tr>
+                <th colspan="3" class="light-grey text-center">Additional Sections Per Meter</th>
+            </tr>
 
             <?php
             $sum_mtrs = 0;
@@ -132,30 +168,59 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
             foreach ($quote['additionalpermeters'] as $additionalpermeter) {
 
                 if ($additionalpermeter->additional_per_meter > 0) {
-                    $sum_mtrs += $additionalpermeter->additional_per_meter;
+                    //$sum_mtrs += $additionalpermeter->additional_per_meter;?>
+                    <tr>
+                        <?php
+                        if(isset($selected_fields['settings']['additional_per_meter']['value']) && !empty($selected_fields['settings']['additional_per_meter']['value'])){
+                            foreach($selected_fields['settings']['additional_per_meter']['value'] as $name => $val) {
+                                if($val == 1){ ?>
+                                    <td><?= $additionalpermeter->$name ?></td>
+                        <?php   }
+                            }
+                        }
+                        ?>
+                    </tr>
+                    <?php
                 }
             }
-
+            ?>
+            <tr>
+                <th colspan="3" class="light-grey text-center">Additional Sections Per Length</th>
+            </tr>
+            <?php
             foreach ($quote['additionalperlength'] as $additionalperlength) {
                 if ($additionalperlength->additional_per_length > 0) {
-                    $sum_length += $additionalperlength->additional_per_length;
+                   // $sum_length += $additionalperlength->additional_per_length;
+                ?>
+                    <tr>
+                        <?php
+                        if(isset($selected_fields['settings']['additional_per_length']['value']) && !empty($selected_fields['settings']['additional_per_length']['value'])){
+                            foreach($selected_fields['settings']['additional_per_length']['value'] as $name => $val) {
+                                if($val == 1){ ?>
+                                    <td><?= $additionalperlength->$name ?></td>
+                        <?php   }
+                            }
+                        }
+                        ?>
+                    </tr>
+                <?php
                 }
             }
 
             ?>
 
 
-            <tr>
-                <td><?= $sum_mtrs ?></td>
+            <!--<tr>
+                <td><?//= $sum_mtrs ?></td>
                 <td>Meters</td>
                 <td style="width: 35%;"></td>
             </tr>
 
             <tr>
-                <td><?= $sum_length ?></td>
+                <td><?//= $sum_length ?></td>
                 <td>Length</td>
                 <td style="width: 35%;"></td>
-            </tr>
+            </tr>-->
 
         </table>
 

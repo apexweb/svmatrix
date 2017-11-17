@@ -29,12 +29,12 @@ $accessories_fields = $fields['additional_section']['accessories'];
                                 <div class="col-sm-12">
                                     <div class="checkbox checkbox-primary">
                                         <?php
-                                          $checked = (isset($selected_fields['settings']['products'][$name]) && $selected_fields['settings']['products'][$name] == 1) ? "checked":"";
+                                          $checked = (isset($selected_fields['settings']['products']['value'][$name]) && $selected_fields['settings']['products']['value'][$name] == 1) ? "checked":"";
                                         ?>
-                                        <?= $this->Form->input("settings[products][$name]", ['type' => 'checkbox', 'label' => $label,$checked,
+                                        <?= $this->Form->input("settings[products][value][$name]", ['type' => 'checkbox', 'label' => $label,$checked,
                                                 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']])
-                                    ?>
-
+                                        ?>
+                                        <?= $this->Form->input("settings[products][label][$name]", ['type' => 'hidden', 'value' => $label]) ?>
                                     </div>
                                 </div>
                             <?php } ?>
@@ -61,12 +61,12 @@ $accessories_fields = $fields['additional_section']['accessories'];
                                 <?php foreach($additional_per_meter_fields as $name => $label){?>
                                     <div class="checkbox checkbox-primary">
                                         <?php
-                                          $checked = (isset($selected_fields['settings']['additional_per_meter'][$name]) &&  $selected_fields['settings']['additional_per_meter'][$name] == 1) ? "checked":"";
+                                          $checked = (isset($selected_fields['settings']['additional_per_meter']['value'][$name]) &&  $selected_fields['settings']['additional_per_meter']['value'][$name] == 1) ? "checked":"";
                                         ?>
-                                        <?= $this->Form->input("settings[additional_per_meter][$name]", ['type' => 'checkbox', 'label' => $label, $checked, 
+                                        <?= $this->Form->input("settings[additional_per_meter][value][$name]", ['type' => 'checkbox', 'label' => $label, $checked, 
                                                 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']])
                                     ?>
-
+                                    <?= $this->Form->input("settings[additional_per_meter][label][$name]", ['type' => 'hidden', 'value' => $label]) ?>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -75,12 +75,12 @@ $accessories_fields = $fields['additional_section']['accessories'];
                                 <?php foreach($additional_per_length_fields as $name => $label){?>
                                     <div class="checkbox checkbox-primary">
                                         <?php
-                                          $checked = (isset($selected_fields['settings']['additional_per_length'][$name] ) &&  $selected_fields['settings']['additional_per_length'][$name] == 1) ? "checked":"";
+                                          $checked = (isset($selected_fields['settings']['additional_per_length']['value'][$name] ) &&  $selected_fields['settings']['additional_per_length']['value'][$name] == 1) ? "checked":"";
                                         ?>
-                                        <?= $this->Form->input("settings[additional_per_length][$name]", ['type' => 'checkbox', 'label' => $label, $checked, 
+                                        <?= $this->Form->input("settings[additional_per_length][value][$name]", ['type' => 'checkbox', 'label' => $label, $checked, 
                                                 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']])
                                     ?>
-
+                                    <?= $this->Form->input("settings[additional_per_length][label][$name]", ['type' => 'hidden', 'value' => $label]) ?>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -89,11 +89,12 @@ $accessories_fields = $fields['additional_section']['accessories'];
                                 <?php foreach($accessories_fields as $name => $label){?>
                                     <div class="checkbox checkbox-primary">
                                         <?php
-                                          $checked = (isset($selected_fields['settings']['accessories'][$name]) &&  $selected_fields['settings']['accessories'][$name] == 1) ? "checked":"";
+                                          $checked = (isset($selected_fields['settings']['accessories']['value'][$name]) &&  $selected_fields['settings']['accessories']['value'][$name] == 1) ? "checked":"";
                                         ?>
-                                    <?= $this->Form->input("settings[accessories][$name]", ['type' => 'checkbox', 'label' => $label, $checked, 
+                                    <?= $this->Form->input("settings[accessories][value][$name]", ['type' => 'checkbox', 'label' => $label, $checked, 
                                                 'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']])
                                     ?>
+                                    <?= $this->Form->input("settings[accessories][label][$name]", ['type' => 'hidden', 'value' => $label]) ?>
                                     </div>
                                 <?php } ?>
                             </div>

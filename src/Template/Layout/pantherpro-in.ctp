@@ -77,12 +77,13 @@ $role = $authUser['role'];
             <?php if ($role == 'manufacturer'): ?>
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Orders</a>
                                 <ul class="dropdown-menu">
-                                    <li><?= $this->Html->link('<span> Orders Scheduler </span>', ['controller' => 'quotes', 'action' => 'scheduler'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                                    <li><?= $this->Html->link('<span> Add Quote </span>', ['controller' => 'quotes', 'action' => 'roleselect'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> All Orders </span>', ['controller' => 'quotes', 'action' => 'orders'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?= $this->Html->link('<span> Orders Scheduler </span>', ['controller' => 'quotes', 'action' => 'scheduler'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?= $this->Html->link('<span> My Quotes </span>', ['controller' => 'quotes', 'action' => 'myquotes'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?= $this->Html->link('<span> Add Quote </span>', ['controller' => 'quotes', 'action' => 'roleselect'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> Master Calculator Values </span>', ['controller' => 'mcvalues', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                                    <li><?= $this->Html->link('<span> My Quotes </span>', ['controller' => 'quotes', 'action' => 'myquotes'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    
                                 </ul>
                             </li>
 

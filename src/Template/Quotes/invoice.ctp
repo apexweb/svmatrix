@@ -75,10 +75,10 @@ if(isset($fieldSettings->data) && $fieldSettings->data != '') {
                     <!--<th class="light-grey text-center width-150">Qty</th>
                     <th class="light-grey text-center">Description of Goods</th>-->
                     <?php
-                        if(isset($selected_fields['settings']['products']) && !empty($selected_fields['settings']['products'])){
-                            foreach($selected_fields['settings']['products'] as $name => $val) {
+                        if(isset($selected_fields['settings']['products']['value']) && !empty($selected_fields['settings']['products']['value'])){
+                            foreach($selected_fields['settings']['products']['value'] as $name => $val) {
                                 if($val == 1){ ?>
-                                    <th class="light-grey text-center"><?= $name ?></th>
+                                    <th class="light-grey text-center"><?= $selected_fields['settings']['products']['label'][$name] ?></th>
                         <?php   }
                             }
                         }
@@ -106,8 +106,8 @@ if(isset($fieldSettings->data) && $fieldSettings->data != '') {
                     ?>
                     <tr>
                         <?php
-                        if(isset($selected_fields['settings']['products']) && !empty($selected_fields['settings']['products'])){
-                            foreach($selected_fields['settings']['products'] as $name => $val) {
+                        if(isset($selected_fields['settings']['products']['value']) && !empty($selected_fields['settings']['products']['value'])){
+                            foreach($selected_fields['settings']['products']['value'] as $name => $val) {
                                 if($val == 1){ ?>
                                     <td><?= $product->$name ?></td>
                         <?php   }
@@ -141,8 +141,8 @@ if(isset($fieldSettings->data) && $fieldSettings->data != '') {
 
                             <tr>
                                 <?php
-                                if(isset($selected_fields['settings']['accessories']) && !empty($selected_fields['settings']['accessories'])){
-                                    foreach($selected_fields['settings']['accessories'] as $name => $val) {
+                                if(isset($selected_fields['settings']['accessories']['value']) && !empty($selected_fields['settings']['accessories']['value'])){
+                                    foreach($selected_fields['settings']['accessories']['value'] as $name => $val) {
                                         if($val == 1){ ?>
                                             <td><?= $accessory->$name ?></td>
                                 <?php   }
@@ -185,8 +185,8 @@ if(isset($fieldSettings->data) && $fieldSettings->data != '') {
                     ?>
                     <tr>
                         <?php
-                        if(isset($selected_fields['settings']['additional_per_meter']) && !empty($selected_fields['settings']['additional_per_meter'])){
-                            foreach($selected_fields['settings']['additional_per_meter'] as $name => $val) {
+                        if(isset($selected_fields['settings']['additional_per_meter']['value']) && !empty($selected_fields['settings']['additional_per_meter']['value'])){
+                            foreach($selected_fields['settings']['additional_per_meter']['value'] as $name => $val) {
                                 if($val == 1){ ?>
                                     <td><?= $additionalpermeter->$name ?></td>
                         <?php   }
@@ -198,13 +198,13 @@ if(isset($fieldSettings->data) && $fieldSettings->data != '') {
                 }
                 ?>
                 <?php
-                    if(isset($selected_fields['settings']['additional_per_length']) && !empty($selected_fields['settings']['additional_per_length'])){
-                        $colspan = array_count_values($selected_fields['settings']['additional_per_length']);
+                    if(isset($selected_fields['settings']['additional_per_length']['value']) && !empty($selected_fields['settings']['additional_per_length']['value'])){
+                        $colspan = array_count_values($selected_fields['settings']['additional_per_length']['value']);
                         $colspanval = (isset($colspan[1])) ? $colspan[1] : 1;
                     }
                 ?>
                 <tr>
-                    <th colspan="<?= $colspanval ?>" class="light-grey text-center">Additional Sections Per Length</th>
+                    <th colspan="3" class="light-grey text-center">Additional Sections Per Length</th>
                 </tr>
                 <?php
                 foreach ($quote['additionalperlength'] as $additionalperlength) {
@@ -214,8 +214,8 @@ if(isset($fieldSettings->data) && $fieldSettings->data != '') {
                     ?>
                     <tr>
                         <?php
-                        if(isset($selected_fields['settings']['additional_per_length']) && !empty($selected_fields['settings']['additional_per_length'])){
-                            foreach($selected_fields['settings']['additional_per_length'] as $name => $val) {
+                        if(isset($selected_fields['settings']['additional_per_length']['value']) && !empty($selected_fields['settings']['additional_per_length']['value'])){
+                            foreach($selected_fields['settings']['additional_per_length']['value'] as $name => $val) {
                                 if($val == 1){ ?>
                                     <td><?= $additionalperlength->$name ?></td>
                         <?php   }

@@ -97,6 +97,7 @@ class QuotesController extends AppController
 
     private function pdf($id, $name, $orientation)
     {
+        $fieldSettings = '';
         $quote = $this->Quotes->get($id, [
             'contain' => [
                 'Products' => [
@@ -151,7 +152,9 @@ class QuotesController extends AppController
 
 
             $final = round($total + $additiona1 + $additiona2, 0);
-            $filename = $quote->customer_name . '-' . $final . '-' . $quote->qId;  
+            $filename = $quote->customer_name . '-' . $final . '-' . $quote->qId; 
+            $fieldSettings = TableRegistry::get('Settings');
+            $fieldSettings = $fieldSettings->find('all')->where(['user_id' => $this->Auth->user('id')])->first();
         } elseif ( $name == 'CuttingSchedule'){
             $filename = $quote->customer_name . '-' . $quote->qId . '-Cut Schedule';
         }
@@ -171,7 +174,7 @@ class QuotesController extends AppController
         }
 
 
-        $this->set(compact('quote','deductions'));
+        $this->set(compact('quote','deductions','fieldSettings'));
     }
 
 
