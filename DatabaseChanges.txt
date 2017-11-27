@@ -1,4 +1,14 @@
 /**
+14/11/2017 Invioce setting table %  (Ramandeep)
+
+*/
+CREATE TABLE `settings` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `data` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/**
 14/11/2017 Added Field for Markup %  (Ramandeep)
 
 */
