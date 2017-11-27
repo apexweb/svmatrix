@@ -385,6 +385,7 @@ function calculateMfTotalCost() {
 
 
 $(document).ready(function () {
+    alert('2');
     window.onbeforeunload = null;
 
     $(window).on('beforeunload',function(){
