@@ -7,8 +7,8 @@ $accessories_fields = $fields['additional_section']['accessories'];
 ?>
 <?= $this->Form->create($settings, ['class' => 'form-horizontal field-settings', 'enctype' => 'multipart/form-data']) ?>
 <?php 
-    if(isset($settings->data) && $settings->data != ''){
-       $selected_fields = unserialize(base64_decode($settings->data));
+    if(isset($settings->meta_value) && $settings->meta_value != ''){
+       $selected_fields = unserialize(base64_decode($settings->meta_value));
     }
 ?>
     <div class="panel-group">

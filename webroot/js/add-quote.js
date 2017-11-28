@@ -385,7 +385,6 @@ function calculateMfTotalCost() {
 
 
 $(document).ready(function () {
-    alert('2');
     window.onbeforeunload = null;
 
     $(window).on('beforeunload',function(){
@@ -2417,6 +2416,42 @@ jQuery(document).ready(function (e) {
         });
         
     }));
+    
+    function autoSaveQuote(){
+        var myForm = document.getElementById('add-quote-form');
+        if(myForm){
+            jQuery.ajax({
+                url: ajaxurl + "quotes/autosavequote", // Url to which the request is send
+                type: "POST",             // Type of request to be send, called as method
+                data: new FormData(myForm), // Data sent to server, a set of key/value pairs (i.e. form fields and values)
+                contentType: false,       // The content type used when sending data to the server.
+                cache: false,             // To unable request pages to be cached
+                processData:false,        // To send DOMDocument or non processed data file it is set to false
+                success: function(res)   // A function to be called if request succeeds
+                {
+                    res = JSON.parse(res);
+                    console.log(res.response);
+                    $('#quote-id').val(res.response.id);
+                    $('input[name=products_to_delete]').val('');
+                    $('input[name=midrails_to_delete]').val('');
+                    $('input[name=additional_m_to_delete]').val('');
+                    $('input[name=customitems_to_delete]').val('');
+                    $('input[name=cutsheets_to_delete]').val('');
+
+                    $.each(res.response.products, function(i, item) {
+                        if(i == 0){
+                            autoSaveProduct = true;
+                        }
+                        console.log(i+'products'+item.id);
+                        $('input[name="products['+ i +'][id]"]').val(item.id);
+                    });
+                }
+            });
+        }
+    }
+
+    setInterval(function(){
+        autoSaveQuote()}, 30000);
 
 
 });

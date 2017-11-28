@@ -411,7 +411,9 @@ foreach ($parts as $part) {
                         <button type="button" id="add-row-cutsheet" class="btn btn-primary waves-effect btn-sm">Add
                             next item
                         </button>
-
+                        <button id="copy-cutsheet-btn" type="button" class="btn btn-primary waves-effect btn-sm">Copy
+                                above line
+                        </button>
                     </div>
 
                     <div class="col-lg-6 table-responsive text-center">

@@ -58,7 +58,8 @@ class QuotesController extends AppController
                 'invoicepdf',
                 'funnelwebpdf',
                 'pdf',
-                'sendattachment'
+                'sendattachment',
+                'autosavequote'
                 //'test'
             ]);
         }
@@ -154,7 +155,7 @@ class QuotesController extends AppController
             $final = round($total + $additiona1 + $additiona2, 0);
             $filename = $quote->customer_name . '-' . $final . '-' . $quote->qId; 
             $fieldSettings = TableRegistry::get('Settings');
-            $fieldSettings = $fieldSettings->find('all')->where(['user_id' => $this->Auth->user('id')])->first();
+            $fieldSettings = $fieldSettings->find('all')->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'invoice-settings'])->first();
         } elseif ( $name == 'CuttingSchedule'){
             $filename = $quote->customer_name . '-' . $quote->qId . '-Cut Schedule';
         }
@@ -347,7 +348,7 @@ class QuotesController extends AppController
         }
 
         $fieldSettings = TableRegistry::get('Settings');
-        $fieldSettings = $fieldSettings->find('all')->where(['user_id' => $this->Auth->user('id')])->first();
+        $fieldSettings = $fieldSettings->find('all')->where(['user_id' => $this->Auth->user('id') , 'meta_key' => 'invoice-settings'])->first();
         $this->set(compact('quote', 'fieldSettings'));
         $this->set('_serialize', ['quote']);
     }
@@ -411,7 +412,17 @@ class QuotesController extends AppController
         $this->authorize(['manufacturer']);
         $search = null;
         $status = null;
-
+        
+        $fieldSettings = TableRegistry::get('Settings');
+        $settings = $fieldSettings->find('all')
+                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'quote-draft'])->first();
+        if($settings){
+            $selected_fields = unserialize(base64_decode($settings->meta_value));
+            if($this->saveQuote($selected_fields)){
+                $fieldSettings->delete($settings);
+            }
+        }
+        
         if (isset($this->request->query['search'])) {
             $search = $this->request->query['search'];
         }
@@ -509,6 +520,10 @@ class QuotesController extends AppController
         $quote = $this->Quotes->newEntity();
 
         if ($this->request->is('post')) {
+            
+            $fieldSettings = TableRegistry::get('Settings');
+            $settings = $fieldSettings->find('all')
+                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'quote-draft'])->first();
 
             $this->delete_blank_models($this->request->data);
 
@@ -541,7 +556,7 @@ class QuotesController extends AppController
             $stocks = $cal->calculatePrices();
                        
             if ($this->Quotes->save($quote)) {
-              
+                $fieldSettings->delete($settings);
                 //$this->Quotes->Stockmetas->link($quote, $stocks);                
 
                 if ($ordered) { // SEND EMAILS:
@@ -1095,6 +1110,89 @@ class QuotesController extends AppController
             $result['message'] = 'Please attache a file.';
         }
         
+        echo json_encode($result);
+        exit;
+    }
+    function saveQuote($data){
+        $this->authorize(['manufacturer', 'distributor', 'wholesaler', 'retailer']);
+        $role = $this->Auth->user('role');
+
+        $quote = $this->Quotes->newEntity();
+
+        $this->request->data = $data;
+        $this->delete_blank_models($this->request->data);
+
+        $quote = $this->Quotes->patchEntity($quote, $this->request->data, [
+            'associated' =>
+                ['Products', 'Midrails', 'Additionalpermeters',
+                    'Additionalperlength', 'Accessories', 'Customitems', 'Stockmetas', 'Cutsheets']
+        ]);
+
+
+        $quote->user_id = $this->Auth->user('id');
+        $quote->role = $role;
+
+        $ordered = false;
+        $sendToInstaller = false;
+
+        if ($this->request->data['is_ordered']) {
+            $quote->status = 'in progress';
+            $quote->orderin_date = (new \DateTime())->format('d/m/Y');
+            $ordered = true;
+        } else {
+            $quote->status = 'pending';
+        }
+
+        if ($this->request->data['sendtoinstaller']) {
+            $sendToInstaller = true;
+        }
+
+        $cal = new Calculator($quote, $this->Auth, $this->Quotes->Stockmetas);
+        $stocks = $cal->calculatePrices();
+
+        if ($this->Quotes->save($quote)) {            
+            //$this->Quotes->Stockmetas->link($quote, $stocks);                
+
+            if ($ordered) { // SEND EMAILS:
+                $this->orderplaced($quote, $sendToInstaller);
+            }
+            /*$this->Flash->success(__('The quote has been saved.'));
+            $this->request->session()->delete('mfrole');
+            if ($this->Auth->user('role') == 'manufacturer') {
+                return $this->redirect(['action' => 'myquotes']);
+            }
+            return $this->redirect(['action' => 'index']);*/
+            return true;
+        } else {
+            return false;
+            //$this->Flash->error(__('The quote could not be saved. Please, try again.'));
+        }
+        
+    }
+    function autosavequote(){
+        $this->autoRender = false;
+        $result['response'] = true;
+        
+        $fieldSettings = TableRegistry::get('Settings');
+        $settings = $fieldSettings->find('all')
+                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'quote-draft'])->first();
+        if(empty($settings)){
+            $settings = $fieldSettings->newEntity();
+        }
+        
+        if ($this->request->is(['patch', 'post', 'put'])) {            
+            $settings = $fieldSettings->patchEntity($settings, $this->request->data);
+            $settings->user_id = $this->Auth->user('id');
+            $settings->meta_key = 'quote-draft';
+            $settings->meta_value = base64_encode(serialize($this->request->data));
+            if ($fieldSettings->save($settings)) {
+                $result['response'] = $settings;  
+                $result['message'] = 'The quote has been saved.';
+            } else {
+                $result['response'] = false;  
+                $result['message'] = 'The quote could not be saved. Please, try again.';
+            }
+        }
         echo json_encode($result);
         exit;
     }

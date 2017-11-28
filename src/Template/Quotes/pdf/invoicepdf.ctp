@@ -15,8 +15,8 @@ if ($role == 'distributor' || $mfrole == 'distributor') {
 }
 
 $selected_fields = "";
-if(isset($fieldSettings->data) && $fieldSettings->data != '') {
-    $selected_fields = unserialize(base64_decode($fieldSettings->data));
+if(isset($fieldSettings->meta_value) && $fieldSettings->meta_value != '') {
+    $selected_fields = unserialize(base64_decode($fieldSettings->meta_value));
 }
 ?>
 

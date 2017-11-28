@@ -23,7 +23,7 @@ class SettingsController extends AppController
     public function index()
     {
         $settings = $this->Settings->find('all')
-                        ->where(['user_id' => $this->Auth->user('id')])->first();
+                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'invoice-settings'])->first();
         $fields = array('products' => array('product_item_number'           => 'NO.',
                                             'product_qty'     => 'Quantity',
                                             'product_sec_dig_perf_fibr' => 'Product Type',
@@ -48,7 +48,8 @@ class SettingsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {            
             $settings = $this->Settings->patchEntity($settings, $this->request->data);
             $settings->user_id = $this->Auth->user('id');
-            $settings->data = base64_encode(serialize($this->request->data));
+            $settings->meta_key = 'invoice-settings';
+            $settings->meta_value = base64_encode(serialize($this->request->data));
             if ($this->Settings->save($settings)) {
                 $this->Flash->success(__('The field settings has been saved.'));
 
