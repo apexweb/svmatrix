@@ -415,12 +415,14 @@ class QuotesController extends AppController
         
         $fieldSettings = TableRegistry::get('Settings');
         $settings = $fieldSettings->find('all')
-                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'quote-draft'])->first();
+                        ->where(['user_id' => $this->Auth->user('id'), 'meta_key' => 'quote-draft'])->first();
         if($settings){
+            
             $selected_fields = unserialize(base64_decode($settings->meta_value));
             if($this->saveQuote($selected_fields)){
                 $fieldSettings->delete($settings);
             }
+            
         }
         
         if (isset($this->request->query['search'])) {
@@ -519,11 +521,8 @@ class QuotesController extends AppController
 
         $quote = $this->Quotes->newEntity();
 
-        if ($this->request->is('post')) {
+        if ($this->request->is('post')) {  
             
-            $fieldSettings = TableRegistry::get('Settings');
-            $settings = $fieldSettings->find('all')
-                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'quote-draft'])->first();
 
             $this->delete_blank_models($this->request->data);
 
@@ -556,12 +555,21 @@ class QuotesController extends AppController
             $stocks = $cal->calculatePrices();
                        
             if ($this->Quotes->save($quote)) {
-                $fieldSettings->delete($settings);
+                
                 //$this->Quotes->Stockmetas->link($quote, $stocks);                
 
                 if ($ordered) { // SEND EMAILS:
                     $this->orderplaced($quote, $sendToInstaller);
                 }
+                
+                //Check if this Quote is autosaved, if yes then delete
+                if ($this->request->data['draftid']){
+                    $fieldSettings = TableRegistry::get('Settings');
+                    $settings = $fieldSettings->find('all')
+                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'quote-draft'])->first();
+                    $fieldSettings->delete($settings);                   
+                }
+                                                
                 $this->Flash->success(__('The quote has been saved.'));
                 $this->request->session()->delete('mfrole');
                 if ($this->Auth->user('role') == 'manufacturer') {
@@ -1114,9 +1122,9 @@ class QuotesController extends AppController
         exit;
     }
     function saveQuote($data){
+        
         $this->authorize(['manufacturer', 'distributor', 'wholesaler', 'retailer']);
         $role = $this->Auth->user('role');
-
         $quote = $this->Quotes->newEntity();
 
         $this->request->data = $data;
@@ -1141,35 +1149,20 @@ class QuotesController extends AppController
             $ordered = true;
         } else {
             $quote->status = 'pending';
-        }
-
-        if ($this->request->data['sendtoinstaller']) {
-            $sendToInstaller = true;
-        }
+        }       
 
         $cal = new Calculator($quote, $this->Auth, $this->Quotes->Stockmetas);
         $stocks = $cal->calculatePrices();
 
         if ($this->Quotes->save($quote)) {            
-            //$this->Quotes->Stockmetas->link($quote, $stocks);                
-
-            if ($ordered) { // SEND EMAILS:
-                $this->orderplaced($quote, $sendToInstaller);
-            }
-            /*$this->Flash->success(__('The quote has been saved.'));
-            $this->request->session()->delete('mfrole');
-            if ($this->Auth->user('role') == 'manufacturer') {
-                return $this->redirect(['action' => 'myquotes']);
-            }
-            return $this->redirect(['action' => 'index']);*/
             return true;
         } else {
             return false;
-            //$this->Flash->error(__('The quote could not be saved. Please, try again.'));
         }
         
     }
-    function autosavequote(){
+    function autosavequote() {
+        
         $this->autoRender = false;
         $result['response'] = true;
         
@@ -1186,10 +1179,11 @@ class QuotesController extends AppController
             $settings->meta_key = 'quote-draft';
             $settings->meta_value = base64_encode(serialize($this->request->data));
             if ($fieldSettings->save($settings)) {
-                $result['response'] = $settings;  
+                $result['result'] = true;
+                $result['id'] = $settings->id;
                 $result['message'] = 'The quote has been saved.';
             } else {
-                $result['response'] = false;  
+                $result['result'] = false;  
                 $result['message'] = 'The quote could not be saved. Please, try again.';
             }
         }

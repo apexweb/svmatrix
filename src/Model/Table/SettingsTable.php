@@ -32,7 +32,7 @@ class SettingsTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('user_meta');
+        $this->table('users_settings');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

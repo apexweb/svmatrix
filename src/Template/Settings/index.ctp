@@ -1,3 +1,33 @@
+<?php
+$fields = [
+        'products' => [
+            'product_item_number' => 'NO.',
+            'product_qty' => 'Quantity',
+            'product_sec_dig_perf_fibr' => 'Product Type',
+            'product_window_or_door'  => 'Window/Door',
+            'product_configuration' => 'Configuration',
+        ],
+        'additional_section' => [
+            'additional_section_per_meter' => 
+                [
+                    'additional_item_number' => 'Item No.',
+                    'additional_per_meter' => 'Per Meter',
+                    'additional_name' => 'Additional Section'
+                ],
+            'additional_section_per_length' => 
+                [
+                    'additional_item_number' => 'Item No.',
+                    'additional_per_length' => 'Per Length',
+                    'additional_name' => 'Additional Section'
+                ],
+            'accessories' => 
+                [
+                    'accessory_item_number' => 'Item No.',
+                    'accessory_each' => 'Each',
+                    'accessory_name' => 'Accessories Section'],
+            ]
+    ];
+?>
 <h1><small><?= __('Settings') ?></small></h1>
 <?php 
 $product_fields = $fields['products'];

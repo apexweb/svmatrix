@@ -491,7 +491,7 @@ foreach ($parts as $part) {
         </div>
     </div>
 </div> <!-- .panel-group -->
-
+<input type="hidden" id="draftid" name="draftid">
 <input type="hidden" id="is-ordered" name="is_ordered">
 <input type="hidden" id="sendtoinstaller" name="sendtoinstaller">
 
