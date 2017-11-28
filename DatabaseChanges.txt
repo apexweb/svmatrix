@@ -1,11 +1,12 @@
 /**
-14/11/2017 Invioce setting table %  (Ramandeep)
+14/11/2017 User meta table %  (Ramandeep)
 
 */
-CREATE TABLE `settings` (
+CREATE TABLE `user_meta` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `data` text NOT NULL
+  `meta_key` text NOT NULL,
+  `meta_value` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /**
