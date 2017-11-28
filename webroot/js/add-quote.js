@@ -1002,6 +1002,7 @@ $(document).ready(function () {
         var lockCounts = Number($lockCount.val());
         var lockType = $lockType.val();
         var includeMidrailCheckbox = productOptions.find('.product-inc-midrail').is(':checked');
+        var includeIncorporateInstallCheckbox = productOptions.find('.product-incorporate-install').is(':checked');
         var productConf = product.find('.product-conf').find('option:selected').attr('data-code');
         var productColour = product.find('.product-colour').val();
                 
@@ -1259,7 +1260,9 @@ $(document).ready(function () {
         if (includeMidrailCheckbox) {
             resultTotal = (Number(resultTotal) + Number($('span.inc-midrail-amount').text())).toFixed(2);
         }
-
+        if (includeIncorporateInstallCheckbox) {
+            resultTotal = (Number(resultTotal) + Number($('span.inc-incorporate-install').text())).toFixed(2);
+        }
         noMarkupCost = (Number(noMarkupCost) * Number(newQty)).toFixed(2);
         resultTotal = (Number(resultTotal) * Number(newQty)).toFixed(2);
 
@@ -1359,7 +1362,9 @@ $(document).ready(function () {
     $('body').on('change', '.product-inc-midrail', function () {
         $(this).parents('tr').prev().find('.product-qty').trigger('change');
     });
-
+    $('body').on('change', '.product-incorporate-install', function () {
+        $(this).parents('tr').prev().find('.product-qty').trigger('change');
+    });
 
     /* Midrails On change Event => Calculator */
     $('body').on('change', '.midrail-options', function () {

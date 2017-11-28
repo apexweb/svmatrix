@@ -175,6 +175,14 @@
                         'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
                         'inputContainer' => '<div class="input inline-block {{type}}{{required}}">{{content}}</div>',]])
             ?>
+            <?= $this->Form->input('products.' . $i . '.product_incorporate_install',
+                ['type' => 'checkbox',
+                    'class' => 'product-incorporate-install',
+                    'label' => 'Include Incorporate Install',
+                    'templates' => [
+                        'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
+                        'inputContainer' => '<div class="input inline-block {{type}}{{required}}">{{content}}</div>',]])
+            ?>
 
         </div>
     </td>
