@@ -2,13 +2,13 @@
 28/11/2017 Added fields for incorporate and separate installment in mcvalues table %  (Ramandeep)
 
 */
-ALTER TABLE `mcvalues` ADD `incorporate_install` INT(11) NOT NULL AFTER `triple_lock`, ADD `separate_install` INT(11) NOT NULL AFTER `incorporate_install`;
+ALTER TABLE `mcvalues` ADD `incorporate_install` INT(11) NOT NULL AFTER `triple_lock`;
 
 /**
 14/11/2017 User meta table %  (Ramandeep)
 
 */
-CREATE TABLE `user_meta` (
+CREATE TABLE `users_settings` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `meta_key` text NOT NULL,

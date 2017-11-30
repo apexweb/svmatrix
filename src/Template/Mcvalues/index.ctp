@@ -152,10 +152,6 @@
                     <th class="grey">Incorporate Install</th>
                     <td><?= $this->Form->input('incorporate_install', ['class' => 'form-control input-sm', 'label' => '']) ?></td>
                 </tr>
-                <tr>
-                    <th class="grey">Separate Install</th>
-                    <td><?= $this->Form->input('separate_install', ['class' => 'form-control input-sm', 'label' => '']) ?></td>
-                </tr>
             </table>
         </div>
         <div class="col-md-4">

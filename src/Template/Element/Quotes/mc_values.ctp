@@ -370,11 +370,5 @@
                 <span class="inc-incorporate-install"><?= h($mcvalues['incorporate_install']); ?></span>
             </td>
         </tr>
-        <tr>
-            <th class="grey">Separate Install</th>
-            <td>
-                <span class="inc-separate-install"><?= h($mcvalues['separate_install']); ?></span>
-            </td>
-        </tr>
     </table>
 </div>
