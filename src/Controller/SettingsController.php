@@ -23,42 +23,26 @@ class SettingsController extends AppController
     public function index()
     {
         $settings = $this->Settings->find('all')
-                        ->where(['user_id' => $this->Auth->user('id'),'meta_key' => 'invoice-settings'])->first();
-        $fields = array('products' => array('product_item_number'           => 'NO.',
-                                            'product_qty'     => 'Quantity',
-                                            'product_sec_dig_perf_fibr' => 'Product Type',
-                                            'product_window_or_door'  => 'Window/Door',
-                                            'product_configuration' => 'Configuration',
-                                            ),
-                        'additional_section' => array('additional_section_per_meter' => array('additional_item_number' => 'Item No.',
-                                                                                              'additional_per_meter' => 'Per Meter',
-                                                                                              'additional_name' => 'Additional Section'
-                                                                                            ),
-                                                      'additional_section_per_length' => array('additional_item_number' => 'Item No.',
-                                                                                              'additional_per_length' => 'Per Length',
-                                                                                              'additional_name' => 'Additional Section'),
-                                                      'accessories' => array('accessory_item_number' => 'Item No.',
-                                                                             'accessory_each' => 'Each',
-                                                                             'accessory_name' => 'Accessories Section'),
-                                                    )
-                 );
-        if(empty($settings)){
+                        ->where(['user_id' => $this->Auth->user('id'), 'meta_key' => 'invoice-settings'])->first();
+                    
+        if (empty($settings)) {
             $settings = $this->Settings->newEntity();
         }
+        
         if ($this->request->is(['patch', 'post', 'put'])) {            
             $settings = $this->Settings->patchEntity($settings, $this->request->data);
             $settings->user_id = $this->Auth->user('id');
             $settings->meta_key = 'invoice-settings';
             $settings->meta_value = base64_encode(serialize($this->request->data));
+            
             if ($this->Settings->save($settings)) {
                 $this->Flash->success(__('The field settings has been saved.'));
-
-               // return $this->redirect(['controller' => 'pages', 'action' => 'importantinfo']);
             } else {
                 $this->Flash->error(__('The field settings could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('fields' , 'settings'));
+        
+        $this->set(compact('settings'));
         $this->set('_serialize', ['settings']);
     }
 }

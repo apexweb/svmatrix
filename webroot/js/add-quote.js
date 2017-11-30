@@ -2432,24 +2432,12 @@ jQuery(document).ready(function (e) {
                 contentType: false,       // The content type used when sending data to the server.
                 cache: false,             // To unable request pages to be cached
                 processData:false,        // To send DOMDocument or non processed data file it is set to false
-                success: function(res)   // A function to be called if request succeeds
+                success: function(response)   // A function to be called if request succeeds
                 {
-                    res = JSON.parse(res);
-                    console.log(res.response);
-                    $('#quote-id').val(res.response.id);
-                    $('input[name=products_to_delete]').val('');
-                    $('input[name=midrails_to_delete]').val('');
-                    $('input[name=additional_m_to_delete]').val('');
-                    $('input[name=customitems_to_delete]').val('');
-                    $('input[name=cutsheets_to_delete]').val('');
-
-                    $.each(res.response.products, function(i, item) {
-                        if(i == 0){
-                            autoSaveProduct = true;
-                        }
-                        console.log(i+'products'+item.id);
-                        $('input[name="products['+ i +'][id]"]').val(item.id);
-                    });
+                    response = JSON.parse(response);
+                    if(response.result) {
+                        jQuery("#draftid").val(response.id);  
+                    }
                 }
             });
         }
