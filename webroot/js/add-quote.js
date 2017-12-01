@@ -412,18 +412,34 @@ $(document).ready(function () {
 
 
     $('input[name="installation_type"]').on('change', function () {
-        var value = $(this).val();
-        if (value == 'preset amount') {
-            $('input[name="installation_preset_amount"]').show();
-            $('input[name="installation_custom_amount"]').hide();
-            $('.installation-label').text('Preset Amount:');
-
-        } else if (value == 'custom amount') {
-            $('input[name="installation_preset_amount"]').hide();
-            $('input[name="installation_custom_amount"]').show();
-            $('.installation-label').text('Custom Amount:');
-        }
-        calculateTotalInstallation();
+	var value = $(this).val();
+	if (value == 'preset amount') {
+		$('input[name="installation_preset_amount"]').show();
+		$('input[name="installation_custom_amount"]').hide();
+		$('.installation-label').text('Preset Amount:');
+		$('input[name="installation_preset_amount"]').parents('tr').show();
+		$('input[name="freight_cost"]').parents('tr').show();
+		$('input[name="installation_total_cost"]').parents('tr').show();
+	} else if (value == 'custom amount') {
+		$('input[name="installation_preset_amount"]').hide();
+		$('input[name="installation_custom_amount"]').show();
+		$('.installation-label').text('Custom Amount:');
+		$('input[name="installation_preset_amount"]').parents('tr').show();
+		$('input[name="freight_cost"]').parents('tr').show();
+		$('input[name="installation_total_cost"]').parents('tr').show();
+	}else if (value == 'incorporate install') {
+		$('input[name="installation_preset_amount"]').hide();
+		$('input[name="installation_custom_amount"]').hide();
+		$('input[name="installation_preset_amount"]').parents('tr').hide();
+		$('input[name="installation_total_cost"]').parents('tr').hide();
+		$('input[name="freight_cost"]').parents('tr').hide();
+		$('.installation-label').text('Incorporate Install:');
+	}
+        
+	$('.product-options-row').each(function(){
+            $(this).find('.product-qty').trigger('change');
+	});
+	calculateTotalInstallation();
     });
 
     $('input[name="installation_custom_amount"]').on('change', function () {
@@ -1002,6 +1018,7 @@ $(document).ready(function () {
         var lockCounts = Number($lockCount.val());
         var lockType = $lockType.val();
         var includeMidrailCheckbox = productOptions.find('.product-inc-midrail').is(':checked');
+        var includeIncorporateInstallCheckbox = $('#installation-type-incorporate-install').is(':checked');
         var productConf = product.find('.product-conf').find('option:selected').attr('data-code');
         var productColour = product.find('.product-colour').val();
                 
@@ -1259,7 +1276,9 @@ $(document).ready(function () {
         if (includeMidrailCheckbox) {
             resultTotal = (Number(resultTotal) + Number($('span.inc-midrail-amount').text())).toFixed(2);
         }
-
+        if (includeIncorporateInstallCheckbox) {
+            resultTotal = (Number(resultTotal) + Number($('span.inc-incorporate-install').text())).toFixed(2);
+        }
         noMarkupCost = (Number(noMarkupCost) * Number(newQty)).toFixed(2);
         resultTotal = (Number(resultTotal) * Number(newQty)).toFixed(2);
 
@@ -1368,7 +1387,6 @@ $(document).ready(function () {
     $('body').on('change', '.product-inc-midrail', function () {
         $(this).parents('tr').prev().find('.product-qty').trigger('change');
     });
-
 
     /* Midrails On change Event => Calculator */
     $('body').on('change', '.midrail-options', function () {

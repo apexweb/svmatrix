@@ -17,6 +17,16 @@
                             [
                                 ['value' => 'preset amount', 'text' => 'Preset Amount', 'checked' => 'checked'],
                                 ['value' => 'custom amount', 'text' => 'Custom Amount'],
+                                ['value' => 'incorporate install', 'text' => 'Incorporate Install'],
+                            ]
+                        ) ?>
+                    <?php elseif ($installationType == 'custom amount'): ?>
+                        <?= $this->Form->radio(
+                            'installation_type',
+                            [
+                                ['value' => 'preset amount', 'text' => 'Preset Amount'],
+                                ['value' => 'custom amount', 'text' => 'Custom Amount','checked' => 'checked'],
+                                ['value' => 'incorporate install', 'text' => 'Incorporate Install'],
                             ]
                         ) ?>
                     <?php else: ?>
@@ -25,6 +35,7 @@
                             [
                                 ['value' => 'preset amount', 'text' => 'Preset Amount'],
                                 ['value' => 'custom amount', 'text' => 'Custom Amount','checked' => 'checked'],
+                                ['value' => 'incorporate install', 'text' => 'Incorporate Install','checked' => 'checked'],
                             ]
                         ) ?>
                     <?php endif; ?>
@@ -33,7 +44,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr style="<?php echo ($installationType == 'incorporate install') ? 'display:none' : ''; ?>">
 
             <td><label class="installation-label">Preset Amount:</label></td>
             <td>
@@ -58,7 +69,7 @@
         </tr>
 
 
-        <tr>
+        <tr style="<?php echo ($installationType == 'incorporate install') ? 'display:none' : ''; ?>">
             <td><?= $this->Form->label('freight_cost') ?></td>
             <td>
                 <?= $this->Form->input('freight_cost', ['label' => false, 'class' => 'form-control frieght-cost input-sm']) ?>
@@ -66,7 +77,7 @@
         </tr>
 
 
-        <tr>
+        <tr style="<?php echo ($installationType == 'incorporate install') ? 'display:none' : ''; ?>">
             <td><?= $this->Form->label('installation_total_cost') ?></td>
             <td>
 

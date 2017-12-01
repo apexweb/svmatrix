@@ -175,7 +175,6 @@
                         'nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>',
                         'inputContainer' => '<div class="input inline-block {{type}}{{required}}">{{content}}</div>',]])
             ?>
-
         </div>
     </td>
 </tr>
