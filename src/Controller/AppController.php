@@ -187,7 +187,7 @@ class AppController extends Controller
                     $email->viewVars(['quote' => $model]);
                     break;
                 case 'new_user':
-                    $email->subject('Welcome to Panther Pro');
+                    $email->subject('Welcome to SMS');
                     $email->viewVars(['user' => $model]);
                     break;
                 case 'mf_attachment':

@@ -214,6 +214,17 @@ class QuotesController extends AppController
         $search = null;
         $status = null;
 
+        $fieldSettings = TableRegistry::get('Settings');
+        $settings = $fieldSettings->find('all')
+                        ->where(['user_id' => $this->Auth->user('id'), 'meta_key' => 'quote-draft'])->first();
+        if($settings){
+            
+            $selected_fields = unserialize(base64_decode($settings->meta_value));
+            if($this->saveQuote($selected_fields)){
+                $fieldSettings->delete($settings);
+            }            
+        }
+
         if (isset($this->request->query['search'])) {
             $search = $this->request->query['search'];
         }
@@ -421,8 +432,7 @@ class QuotesController extends AppController
             $selected_fields = unserialize(base64_decode($settings->meta_value));
             if($this->saveQuote($selected_fields)){
                 $fieldSettings->delete($settings);
-            }
-            
+            }            
         }
         
         if (isset($this->request->query['search'])) {
@@ -1123,7 +1133,7 @@ class QuotesController extends AppController
     }
     function saveQuote($data){
         
-        $this->authorize(['manufacturer', 'distributor', 'wholesaler', 'retailer']);
+        //$this->authorize(['manufacturer', 'distributor', 'wholesaler', 'retailer']);
         $role = $this->Auth->user('role');
         $quote = $this->Quotes->newEntity();
 

@@ -1280,21 +1280,30 @@ $(document).ready(function () {
 
 
             var confRuled = product.attr('data-conf-rule');
-            if ($(this).hasClass('product-conf') || (isEdit && !data && !$(this).hasClass('product-lock-type') && !$(this).hasClass('product-lock-qty'))) {
-                $lockType.find('option:eq(0)').prop('disabled', false);
-                if (productConf == 'SD' || productConf == 'HD') {
-                    $lockType.val('Triple');
-                    return $lockCount.val('1').trigger('change', {a: true});
-                } else if (productConf == 'DBHD') {
-                    $('option[data-code="DRFLUBLT"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
-                    $('option[data-code="DBLHNGDRCV"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
+            /*if ($(this).hasClass('product-conf') || (isEdit && !data && !$(this).hasClass('product-lock-type') && !$(this).hasClass('product-lock-qty'))) {
+                
+                if(secDigFibr != 'Insect'){
+                    $lockType.find('option:eq(0)').prop('disabled', false);
+                    if (productConf == 'SD' || productConf == 'HD') {
+                        $lockType.val('Triple');
+                        return $lockCount.val('1').trigger('change', {a: true});
+                    } else if (productConf == 'DBHD') {
+                        $('option[data-code="DRFLUBLT"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
+                        $('option[data-code="DBLHNGDRCV"]:first').prop('selected', true).parents('tr').find('input:eq(2)').val('1').trigger('change');
 
-                    $lockType.val('Triple');
-                    $lockType.find('option:eq(0)').prop('disabled', true);
+                        $lockType.val('Triple');
+                        $lockType.find('option:eq(0)').prop('disabled', true);
+                        return $lockCount.val('1').trigger('change', {a: true});
+                    }
+                }else{
+                    
+                    $lockType.val('Single');
                     return $lockCount.val('1').trigger('change', {a: true});
+                    
                 }
+                
 
-            }
+            }*/
 
             //Decrease cost when LOCK Type is Changed
             if (lockType == 'Single' && lockCounts) {
