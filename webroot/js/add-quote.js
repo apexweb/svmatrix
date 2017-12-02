@@ -164,6 +164,7 @@ var DISCOUNT_AMOUNT = 0;
 
 var PRESET_INSTALLATION = 0;
 var CUSTOM_INSTALLATION = 0;
+var INCORPORATE_INSTALLATION = 0;
 var FREIGHTCOST = 0;
 var INSTALLATION_TOTAL = 0;
 
@@ -302,6 +303,9 @@ function calculateTotalBuy() {
 
 
 function calculateTotalSell() {
+    if($('#installation-type-incorporate-install').is(':checked') == true){
+        INSTALLATION_TOTAL = 0;
+    }
     TOTAL_SELL_PRICE = (Number(TOTAL_BUY_PRICE) + Number(markups.getTotalMarkups()) - Number(DISCOUNT_AMOUNT) + Number(INSTALLATION_TOTAL)).toFixed(2);
     TOTAL_SELL_PRICE = (Number(TOTAL_SELL_PRICE) + Number(getCustomItemsCharged()) - Number(CUSTOM_ITEMS_TOTAL)).toFixed(2);
     
@@ -350,8 +354,40 @@ function calculateInstallation(productRow, index, isAdd) {
 
     PRESET_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
     $('input[name="installation_preset_amount"]').val(PRESET_INSTALLATION);
+    
+    INCORPORATE_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
+    $('input[name="installation_incorporate_amount"]').val(INCORPORATE_INSTALLATION);
     calculateTotalInstallation();
     // }
+}
+
+function calculateIncorporateInstallation(productRow) {
+    var installation = 0;
+
+
+    var qty = Number(productRow.find('.product-qty').val());
+
+
+    if (qty > 0) {
+
+        var secDgFibr = productRow.find('.product-sec-dg-fibr').val();
+        var winDoor = productRow.find('.product-win-door').val();
+
+        if (secDgFibr == '316 S/S' || secDgFibr == 'D/Grille' || secDgFibr == 'Perf') {
+            if (winDoor == 'Window') {
+                installation = Number($('span.ins-ssperfdg-win').text());
+            } else if (winDoor == 'Door') {
+                installation = Number($('span.ins-ssperfdg-door').text());
+            }
+        } else if (secDgFibr == 'Insect') {
+            if (winDoor == 'Window') {
+                installation = Number($('span.ins-insect-win').text());
+            } else if (winDoor == 'Door') {
+                installation = Number($('span.ins-insect-door').text());
+            }
+        }
+    }
+    return installation;
 }
 
 
@@ -363,6 +399,8 @@ function calculateTotalInstallation() {
         installationValue = PRESET_INSTALLATION;
     } else if (installationType == 'custom amount') {
         installationValue = CUSTOM_INSTALLATION;
+    } else if (installationType == 'incorporate install') {
+        installationValue = INCORPORATE_INSTALLATION;
     }
 
 
@@ -1277,7 +1315,7 @@ $(document).ready(function () {
             resultTotal = (Number(resultTotal) + Number($('span.inc-midrail-amount').text())).toFixed(2);
         }
         if (includeIncorporateInstallCheckbox) {
-            resultTotal = (Number(resultTotal) + Number($('span.inc-incorporate-install').text())).toFixed(2);
+            resultTotal = (Number(resultTotal) + Number(calculateIncorporateInstallation(product)));
         }
         noMarkupCost = (Number(noMarkupCost) * Number(newQty)).toFixed(2);
         resultTotal = (Number(resultTotal) * Number(newQty)).toFixed(2);
@@ -1682,8 +1720,6 @@ $(document).ready(function () {
             markups._updateMarkups();
 
         });
-
-
     });
 
 
@@ -1731,7 +1767,7 @@ $(document).ready(function () {
                 var sellPrice = 0;
                 var profitAfterDiscount = 0;
                 var sellPriceAfterDiscount = 0;
-
+                
                 var profit = Number(priceInclGst * Number(markupAmount) / 100).toFixed(2);
                 var sellPrice = Number(Number(priceInclGst) + Number(profit)).toFixed(2);
 

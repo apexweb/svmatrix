@@ -143,16 +143,6 @@
                     <td><?= $this->Form->input('triple_lock', ['class' => 'form-control input-sm', 'label' => '']) ?></td>
                 </tr>
             </table>
-
-            <table class="table table-bordered mcvalues-table small-padding">
-                <tr>
-                    <th class="grey" colspan="2">Installment Amount</th>
-                </tr>
-                <tr>
-                    <th class="grey">Incorporate Install</th>
-                    <td><?= $this->Form->input('incorporate_install', ['class' => 'form-control input-sm', 'label' => '']) ?></td>
-                </tr>
-            </table>
         </div>
         <div class="col-md-4">
             <table class="table mcvalues-table table-bordered small-padding master-markup-table">

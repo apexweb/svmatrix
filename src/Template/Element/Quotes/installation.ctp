@@ -44,7 +44,7 @@
             </td>
         </tr>
 
-        <tr style="<?php echo ($installationType == 'incorporate install') ? 'display:none' : ''; ?>">
+        <tr>
 
             <td><label class="installation-label">Preset Amount:</label></td>
             <td>
@@ -55,13 +55,29 @@
 
                     <?= $this->Form->input('installation_custom_amount',
                         ['class' => 'form-control input-sm', 'label' => false, 'style' => 'display:none;']) ?>
-                <?php else: ?>
+                
+                    <?= $this->Form->input('installation_incorporate_amount',
+                        ['class' => 'form-control input-sm', 'label' => false, 'style' => 'display:none;']) ?>
+                <?php elseif ($installationType == 'custom amount'): ?>
                     <?= $this->Form->input('installation_preset_amount',
                         ['class' => 'form-control span-input', 'readonly' => 'true', 'label' => false, 'style' => 'display:none;']) ?>
 
 
                     <?= $this->Form->input('installation_custom_amount',
                         ['class' => 'form-control input-sm', 'label' => false]) ?>
+                
+                    <?= $this->Form->input('installation_incorporate_amount',
+                        ['class' => 'form-control input-sm', 'label' => false, 'style' => 'display:none;']) ?>
+                <?php else: ?>
+                    <?= $this->Form->input('installation_preset_amount',
+                        ['class' => 'form-control span-input', 'readonly' => 'true', 'label' => false, 'style' => 'display:none;']) ?>
+
+
+                    <?= $this->Form->input('installation_custom_amount',
+                        ['class' => 'form-control input-sm', 'label' => false, 'style' => 'display:none;']) ?>
+                
+                    <?= $this->Form->input('installation_incorporate_amount',
+                        ['class' => 'form-control input-sm', 'label' => false]) ?> 
                 <?php endif; ?>
 
             </td>

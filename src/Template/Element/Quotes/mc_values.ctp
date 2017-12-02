@@ -360,15 +360,4 @@
             </td>
         </tr>
     </table>
-    <table class="table table-bordered mcvalues-table small-padding">
-        <tr>
-            <th class="grey" colspan="2">Installment Amount</th>
-        </tr>
-        <tr>
-            <th class="grey">Incorporate Install</th>
-            <td>
-                <span class="inc-incorporate-install"><?= h($mcvalues['incorporate_install']); ?></span>
-            </td>
-        </tr>
-    </table>
 </div>
