@@ -16,7 +16,20 @@
 
             <div class="csv-upload-wrapper">
                 <?= $this->Form->create(null, ['type' => 'file', 'url' => ['action' => 'uploadcsv']]); ?>
-
+                <?php if($userIds) { ?>
+                
+                <div class="checkbox-primary m-l-15">
+                    <h4> Select Manufacturers </h4>
+                    <?php foreach($userIds as $mf){ ?>
+                    <?= $this->Form->input("manufacturer[$mf->id]", ['type' => 'checkbox', 'label' => $mf->firstname .' '. $mf->lastname,'value' => $mf->id,
+                                                'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']])
+                                        ?>
+                    <?php } ?>
+                </div>
+                <?= $this->Form->input("all-manufacturers", ['type' => 'checkbox', 'label' => 'Select all Manufacturers',
+                                                'templates' => ['nestingLabel' => '{{hidden}}{{input}}<label{{attrs}}>{{text}}</label>']])
+                                        ?>
+            <?php } ?>
                 <input type="file" name="file">
 
 
