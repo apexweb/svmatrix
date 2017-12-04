@@ -387,6 +387,8 @@ function calculateIncorporateInstallation(productRow) {
             }
         }
     }
+    console.log(installation+'installation');
+    productRow.find('.product_incorporate_install').val(installation);
     return installation;
 }
 
@@ -473,7 +475,7 @@ $(document).ready(function () {
 		$('input[name="freight_cost"]').parents('tr').hide();
 		$('.installation-label').text('Incorporate Install:');
 	}
-        
+        $('.product_incorporate_install').val('');
 	$('.product-options-row').each(function(){
             $(this).find('.product-qty').trigger('change');
 	});

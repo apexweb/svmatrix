@@ -125,7 +125,6 @@ class Calculator
         foreach ($this->quote['products'] as $product) {
             $this->calculateProduct($product);
         }
-
 //        foreach ($this->quote['midrails'] as $midrail) {
 //            $this->calculateMidrail($midrail);
 //        }
@@ -150,8 +149,12 @@ class Calculator
             $this->totalInstallation = round($this->installation + $this->quote['freight_cost'], 2);
             $this->quote['installation_preset_amount'] = $this->installation;
             $this->quote['installation_custom_amount'] = 0;
-        } else {
+        } else if ($this->quote['installation_type'] == 'custom amount') {
             $this->totalInstallation = round($this->quote['installation_custom_amount'] + $this->quote['freight_cost']);
+            $this->quote['installation_preset_amount'] = 0;
+        }
+        else if ($this->quote['installation_type'] == 'incorporate install') {
+           echo $this->totalInstallation = 0;
             $this->quote['installation_preset_amount'] = 0;
         }
 
@@ -376,9 +379,13 @@ class Calculator
         if ($incMidrail && is_numeric($this->incMidrail)) {
             $totalPrice = $totalPrice + $this->incMidrail;
         }
-
+        if ($this->quote['installation_type'] == 'incorporate install') {
+            echo $product->product_incorporate_install;
+            $totalPrice = $totalPrice + $product->product_incorporate_install;
+        }
+        echo $totalPrice ;
         $totalPrice *= $newQty;
-
+        
         /*** Increase cost when LOCK Type is Changed ***/
         if ($winDoor == 'Door') {
             if ($secDigFibr == 'Insect') {
@@ -405,7 +412,7 @@ class Calculator
             }
         }
 
-        $profit = round($sellPrice - $totalPrice, 2);
+        echo $profit = round($sellPrice - $totalPrice, 2);
         $this->setMarkedupAmount($secDigFibr, $profit);
 
         $discount = $this->quote['discount'];
@@ -415,10 +422,11 @@ class Calculator
             $this->discountedAmount += $discounted;
         }
 
-        $this->profit += $profit;
+        echo $this->profit += $profit;
         $this->totalSellPrice += round($sellPrice, 2);
 
         $product->product_cost = round($sellPrice, 2);
+        echo 'next';
     }
 
 

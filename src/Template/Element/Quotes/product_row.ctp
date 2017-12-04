@@ -134,6 +134,9 @@
                 class="delete-btn product-delete"><i class="typcn typcn-delete"></i>
         </button>
     </td>
+    <?= $this->Form->input('products.' . $i . '.product_incorporate_install',
+        ['type' => 'hidden','class' => 'product_incorporate_install',])
+    ?>
 </tr>
 
 <tr id="product-prices-row-<?php echo $i; ?>" class="product-prices-row">
