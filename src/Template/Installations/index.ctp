@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-sm-6">
             <?= $this->Form->create($installation, ['class' => 'form-horizontal', 'type' => 'POST']); ?>
-            <h4>Preset Installation</h4>
+            
             <table class="table table-bordered">
 
                 <tr>
@@ -20,24 +20,7 @@
                     <td><?= $this->Form->input('insect_door_amount', ['class' => 'form-control', 'label' => false]) ?></td>
                 </tr>
             </table>
-            <h4>Incorporate Installation</h4>
-            <table class="table table-bordered">
-
-                <tr>
-                    <th rowspan="2" class="vertical-middle">S/S, Perf, DG</th>
-                    <th class="text-center">Window</th>
-                    <th class="text-center">Door</th>
-                </tr>
-                <tr>
-                    <td><?= $this->Form->input('incorporate_window_amount', ['class' => 'form-control', 'label' => false]) ?></td>
-                    <td><?= $this->Form->input('incorporate_door_amount', ['class' => 'form-control', 'label' => false]) ?></td>
-                </tr>
-                <tr>
-                    <th class="vertical-middle">Insect</th>
-                    <td><?= $this->Form->input('incorporate_insect_window_amount', ['class' => 'form-control', 'label' => false]) ?></td>
-                    <td><?= $this->Form->input('incorporate_insect_door_amount', ['class' => 'form-control', 'label' => false]) ?></td>
-                </tr>
-            </table>
+            
 
             <?= $this->Form->Button('Save', ['class' => 'btn btn-primary waves-effect', 'type' => 'submit']) ?>
 
