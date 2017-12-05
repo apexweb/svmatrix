@@ -1,4 +1,17 @@
 /**
+05/12/2017 Added installation_incorporate_amount field in quotes table %  (Ramandeep)
+
+*/
+ALTER TABLE `quotes` ADD `installation_incorporate_amount` INT(11) NOT NULL AFTER `installation_custom_amount`;
+
+/**
+05/12/2017 Added incorporate installment field inProduct table %  (Ramandeep)
+
+*/
+ALTER TABLE `products` ADD `product_incorporate_install` INT(11) NOT NULL AFTER `product_order`;
+
+
+/**
 14/11/2017 User meta table %  (Ramandeep)
 
 */
