@@ -64,8 +64,17 @@ class DropdownsController extends AppController
                 $this->Flash->error(__('The new option could not be saved. Please, try again.'));
             }
         }
+        $role = $this->Auth->user('role');
+        $userIds = [];
+        if ($role == 'supplier') {
+            $users = TableRegistry::get('Users');
+            $userIds = $users->find('all')
+                ->where(['Users.role' => 'manufacturer', 'Users.parent_id' => $this->Auth->user('id')]);//                
 
-        $this->set(compact('dropdowns'));
+            $userIds = $userIds->toArray();
+        }
+            
+        $this->set(compact('dropdowns','userIds'));
 //        $this->set('_serialize', ['dropdowns']);
     }
 
@@ -84,8 +93,9 @@ class DropdownsController extends AppController
             $userIds = $users->find('list', ['keyField' => 'id', 'valueField' => 'id'])
                 ->where(['Users.role' => 'manufacturer', 'Users.parent_id' => $this->Auth->user('id')]);//                
             
-            $userIds = $userIds->toArray();
-            array_push($userIds, $this->Auth->user('id'));
+           // $userIds = $userIds->toArray();
+           // array_push($userIds, $this->Auth->user('id'));
+          //  print_r($userIds);die;
         }
      
         $saved = false;
@@ -101,8 +111,26 @@ class DropdownsController extends AppController
                 } catch (Exception $e) {
                     $dropdowns = null;
                 }
+                $userIds = [];
+                if ($role == 'manufacturer') {
+                    $userIds = array($this->Auth->user('id'));
+                }else if ($role == 'supplier') { 
+                    if(isset($this->request->data['all-manufacturers']) && $this->request->data['all-manufacturers'] == 1){
+                    $users = TableRegistry::get('Users');
+                    $userIds = $users->find('list', ['keyField' => 'id', 'valueField' => 'id'])
+                            ->where(['Users.role' => 'manufacturer', 'Users.parent_id' => $this->Auth->user('id')]);//                
+            
+                    $userIds = $userIds->toArray();
+                    }elseif(isset($this->request->data['manufacturer']) && !empty($this->request->data['manufacturer'])){
+                        foreach($this->request->data['manufacturer'] as $key => $val){
+                            if($val > 0){
+                                array_push($userIds, $key);
+                            }
+                        }
+                    }
+                    array_push($userIds, $this->Auth->user('id'));
+                }          
                 
-
                 if (is_array($dropdowns)) {
                     
                     if ($userIds) {
