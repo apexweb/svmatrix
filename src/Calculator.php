@@ -154,12 +154,16 @@ class Calculator
             $this->quote['installation_preset_amount'] = 0;
         }
         else if ($this->quote['installation_type'] == 'incorporate install') {
-           echo $this->totalInstallation = 0;
+            $this->totalInstallation = round($this->quote['installation_incorporate_amount']);
             $this->quote['installation_preset_amount'] = 0;
+            $this->quote['installation_custom_amount'] = 0;
         }
 
         $this->quote['discount_amount'] = $this->discountedAmount;
         $this->quote['installation_total_cost'] = $this->totalInstallation;
+        if ($this->quote['installation_type'] == 'incorporate install') {
+            $this->totalInstallation = 0;
+        }
         $this->quote['total_sell_price'] = round($this->totalSellPrice + $this->totalInstallation - $this->discountedAmount, 2);
         $this->quote['profit'] = round($this->profit - $this->discountedAmount, 2);
 

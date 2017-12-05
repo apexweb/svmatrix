@@ -46,7 +46,15 @@
 
         <tr>
 
-            <td><label class="installation-label">Preset Amount:</label></td>
+            <td>
+                <?php if ($installationType == 'preset amount' || $installationType == ''): ?>
+                    <label class="installation-label">Preset Amount:</label>
+                <?php elseif ($installationType == 'custom amount'): ?>
+                    <label class="installation-label">Custom Amount:</label>
+                <?php else: ?>
+                    <label class="installation-label">Incorporate Install:</label>
+                <?php endif; ?>
+            </td>
             <td>
                 <?php if ($installationType == 'preset amount' || $installationType == ''): ?>
                     <?= $this->Form->input('installation_preset_amount',
@@ -77,7 +85,7 @@
                         ['class' => 'form-control input-sm', 'label' => false, 'style' => 'display:none;']) ?>
                 
                     <?= $this->Form->input('installation_incorporate_amount',
-                        ['class' => 'form-control input-sm', 'label' => false]) ?> 
+                        ['class' => 'form-control input-sm', 'readonly' => 'true', 'label' => false]) ?> 
                 <?php endif; ?>
 
             </td>
@@ -93,7 +101,7 @@
         </tr>
 
 
-        <tr style="<?php echo ($installationType == 'incorporate install') ? 'display:none' : ''; ?>">
+        <tr>
             <td><?= $this->Form->label('installation_total_cost') ?></td>
             <td>
 

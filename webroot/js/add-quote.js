@@ -356,6 +356,7 @@ function calculateInstallation(productRow, index, isAdd) {
     $('input[name="installation_preset_amount"]').val(PRESET_INSTALLATION);
     
     INCORPORATE_INSTALLATION = Number(installations.reduce(sum, 0)).toFixed(2);
+    console.log(INCORPORATE_INSTALLATION + 'INCORPORATE_INSTALLATION');
     $('input[name="installation_incorporate_amount"]').val(INCORPORATE_INSTALLATION);
     calculateTotalInstallation();
     // }
@@ -387,7 +388,6 @@ function calculateIncorporateInstallation(productRow) {
             }
         }
     }
-    console.log(installation+'installation');
     productRow.find('.product_incorporate_install').val(installation);
     return installation;
 }
@@ -456,26 +456,23 @@ $(document).ready(function () {
 	if (value == 'preset amount') {
 		$('input[name="installation_preset_amount"]').show();
 		$('input[name="installation_custom_amount"]').hide();
+                $('input[name="installation_incorporate_amount"]').hide();
 		$('.installation-label').text('Preset Amount:');
-		$('input[name="installation_preset_amount"]').parents('tr').show();
-		$('input[name="freight_cost"]').parents('tr').show();
-		$('input[name="installation_total_cost"]').parents('tr').show();
+                $('input[name="freight_cost"]').parents('tr').show();
 	} else if (value == 'custom amount') {
 		$('input[name="installation_preset_amount"]').hide();
 		$('input[name="installation_custom_amount"]').show();
+                $('input[name="installation_incorporate_amount"]').hide();
 		$('.installation-label').text('Custom Amount:');
-		$('input[name="installation_preset_amount"]').parents('tr').show();
 		$('input[name="freight_cost"]').parents('tr').show();
-		$('input[name="installation_total_cost"]').parents('tr').show();
 	}else if (value == 'incorporate install') {
 		$('input[name="installation_preset_amount"]').hide();
 		$('input[name="installation_custom_amount"]').hide();
-		$('input[name="installation_preset_amount"]').parents('tr').hide();
-		$('input[name="installation_total_cost"]').parents('tr').hide();
+                $('input[name="installation_incorporate_amount"]').show();
 		$('input[name="freight_cost"]').parents('tr').hide();
 		$('.installation-label').text('Incorporate Install:');
 	}
-        $('.product_incorporate_install').val('');
+        $('.product_incorporate_install').val(0);
 	$('.product-options-row').each(function(){
             $(this).find('.product-qty').trigger('change');
 	});
