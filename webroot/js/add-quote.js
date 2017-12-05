@@ -1391,8 +1391,12 @@ $(document).ready(function () {
         }
         var profit = (Number(sellPrice) - Number(resultTotal)).toFixed(2);
 
-        
-        productOptions.find('input.product-price-incl-gst').val(resultTotal);
+        var inclGst = resultTotal;
+        if (includeIncorporateInstallCheckbox) {
+            inclGst = (Number(inclGst) - (Number(calculateIncorporateInstallation(product)) * Number(newQty))).toFixed(2);
+        }
+        noMarkupCost = (Number(noMarkupCost) * Number(newQty)).toFixed(2);
+        productOptions.find('input.product-price-incl-gst').val(inclGst);
         productOptions.find('input.product-sell-price').val(sellPrice);
         productOptions.find('input.product-profit').val(profit);
 
@@ -1696,6 +1700,10 @@ $(document).ready(function () {
                 var productOptions = product.next();
                 var productIndex = findIndexById(product);
                 var priceInclGst = Number(productOptions.find('input.product-price-incl-gst').val()).toFixed(2);
+                var newQty = Number(product.find('.product-qty').val());
+                if ($('#installation-type-incorporate-install').is(':checked')) {
+                    priceInclGst = (Number(priceInclGst) + (Number(calculateIncorporateInstallation(product)) * Number(newQty))).toFixed(2);
+                }
                 var profit = Number(priceInclGst * Number(markupAmount) / 100).toFixed(2);
                 var sellPrice = Number(Number(priceInclGst) + Number(profit)).toFixed(2);
                 
@@ -1762,6 +1770,10 @@ $(document).ready(function () {
                 var productIndex = findIndexById(product);
                 var priceInclGst = Number(productOptions.find('input.product-price-incl-gst').val()).toFixed(2);
                 //console.log(priceInclGst);
+                var newQty = Number(product.find('.product-qty').val());
+                if ($('#installation-type-incorporate-install').is(':checked')) {
+                    priceInclGst = (Number(priceInclGst) + (Number(calculateIncorporateInstallation(product)) * Number(newQty))).toFixed(2);
+                }
                 var profit =  0;
                 var sellPrice = 0;
                 var profitAfterDiscount = 0;
