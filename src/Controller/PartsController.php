@@ -89,10 +89,10 @@ class PartsController extends AppController
 
         $parts = null;
         if ($role == 'supplier') {
-            $parts = $userparts->find('all')->where(['user_id' => $mf])->contain(['Parts']);
+            $parts = $userparts->find('all')->where(['user_id' => $mf])->contain(['Parts'])->orderAsc('display_order');
         } elseif ($role == 'manufacturer') {
             $id = $this->Auth->user('id');
-            $parts = $userparts->find('all')->where(['user_id' => $id])->contain(['Parts']);
+            $parts = $userparts->find('all')->where(['user_id' => $id])->contain(['Parts'])->orderAsc('display_order');
         }
         $parts->orderAsc('title');
 
