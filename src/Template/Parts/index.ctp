@@ -93,7 +93,6 @@
             <th>Acc</th>
             <th>MC</th>
             <th>Created Date</th>
-            <th>Display Order</th>
             <th colspan="2">Edit / Delete</th>
         </tr>
         </thead>
@@ -144,8 +143,7 @@
                 </td>
 
                 <td><?= $part->part->created->format('d/m/Y'); ?></td>
-                <td><?= $part->part->display_order; ?></td>
-                
+
                 <td>
                     <?= $this->Html->link('Edit', ['action' => 'edit', $part->id]) ?>
                     <span> / </span>

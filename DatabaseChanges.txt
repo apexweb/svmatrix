@@ -65,3 +65,9 @@ CREATE TABLE `contents` (
   `created` datetime NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+/**
+06/12/2017 Added display_order field in users_parts table %  (Ramandeep)
+
+*/
+ALTER TABLE `users_parts` ADD `display_order` INT(11) NULL DEFAULT NULL AFTER `description`;

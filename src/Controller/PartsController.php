@@ -89,10 +89,10 @@ class PartsController extends AppController
 
         $parts = null;
         if ($role == 'supplier') {
-            $parts = $userparts->find('all')->where(['user_id' => $mf])->contain(['Parts'])->orderAsc('display_order');
+            $parts = $userparts->find('all')->where(['user_id' => $mf])->contain(['Parts'])->orderAsc('Parts.display_order');
         } elseif ($role == 'manufacturer') {
             $id = $this->Auth->user('id');
-            $parts = $userparts->find('all')->where(['user_id' => $id])->contain(['Parts'])->orderAsc('display_order');
+            $parts = $userparts->find('all')->where(['user_id' => $id])->contain(['Parts'])->orderAsc('Parts.display_order');
         }
         $parts->orderAsc('title');
 
@@ -385,6 +385,7 @@ class PartsController extends AppController
                 $entity->show_in_additional_section_by_length_dropdown = $part->show_in_additional_section_by_length_dropdown;
                 $entity->show_in_accessories_dropdown = $part->show_in_accessories_dropdown;
                 $entity->master_calculator_value = $part->master_calculator_value;
+                $entity->display_order = $part->display_order;
                 $entities[] = $entity;
             }
         }
