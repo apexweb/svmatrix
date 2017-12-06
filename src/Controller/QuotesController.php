@@ -602,7 +602,7 @@ class QuotesController extends AppController
 
 
 
-        $parts = $parts->find('all')->contain(['users_parts' => function ($q) {
+        $parts = $parts->find('all',['order' => 'display_order ASC',])->contain(['users_parts' => function ($q) {
             $role = $this->Auth->user('role');
             if ($role == 'manufacturer') {
                 $userId = $this->Auth->user('id');

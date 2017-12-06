@@ -312,6 +312,7 @@ class PartsController extends AppController
                             $entity->marked_up = isset($part[8]) ? $part[8] : 0;
                             $entity->price_per_unit = isset($part[9]) ? $part[9] : 0;
                             $entity->description = isset($part[11]) ? $part[11] : '';
+                            $entity->display_order = isset($part[12]) ? $part[12] : '';
 
                             if (isset($part[10])) {
                                 if ($part[10] == 'adm') {
