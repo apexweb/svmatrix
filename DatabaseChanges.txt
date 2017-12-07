@@ -71,3 +71,12 @@ CREATE TABLE `contents` (
 
 */
 ALTER TABLE `users_parts` ADD `display_order` INT(11) NULL DEFAULT NULL AFTER `description`;
+
+/**
+07/12/2017 Added primary key and auto increment to id field in users_parts table %  (Ramandeep)
+
+*/
+
+ALTER TABLE `users_parts` ADD PRIMARY KEY (`id`)
+
+ALTER TABLE `users_parts` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;

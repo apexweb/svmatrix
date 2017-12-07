@@ -81,8 +81,8 @@ $role = $authUser['role'];
                                     <li><?= $this->Html->link('<span> Orders Scheduler </span>', ['controller' => 'quotes', 'action' => 'scheduler'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> My Quotes </span>', ['controller' => 'quotes', 'action' => 'myquotes'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> Add Quote </span>', ['controller' => 'quotes', 'action' => 'roleselect'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                                    <li><?= $this->Html->link('<span> Master Calculator Values </span>', ['controller' => 'mcvalues', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                                    <li><?= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <!--<li><?//= $this->Html->link('<span> Master Calculator Values </span>', ['controller' => 'mcvalues', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?//= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>-->
                                     
                                 </ul>
                             </li>
@@ -167,7 +167,17 @@ $role = $authUser['role'];
 				</ul>
 			</li>
 			
-			<li><?= $this->Html->link('<i class="ti-power-off m-r-5 logout-icon"></i> <span> Log out </span>', ['controller' => 'users', 'action' => 'logout'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                        <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Settings</a>
+                            <ul class="dropdown-menu">
+                                <?php if ($role == 'manufacturer'): ?>
+                                <li><?= $this->Html->link('<span> Personlize </span>', ['controller' => 'settings', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                <li><?= $this->Html->link('<span> Master Calculator Values </span>', ['controller' => 'mcvalues', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                <li><?= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                <?php endif; ?>
+                                <li><?= $this->Html->link('<i class="ti-power-off m-r-5 logout-icon"></i> <span> Log out </span>', ['controller' => 'users', 'action' => 'logout'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                            </ul>
+                        </li>
+			
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -212,8 +222,8 @@ $role = $authUser['role'];
                                     <li><?= $this->Html->link('<span> Orders Scheduler </span>', ['controller' => 'quotes', 'action' => 'scheduler'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> Add Quote </span>', ['controller' => 'quotes', 'action' => 'roleselect'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                     <li><?= $this->Html->link('<span> All Orders </span>', ['controller' => 'quotes', 'action' => 'orders'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                                    <li><?= $this->Html->link('<span> Master Calculator Values </span>', ['controller' => 'mcvalues', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
-                                    <li><?= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <!--<li><?//= $this->Html->link('<span> Master Calculator Values </span>', ['controller' => 'mcvalues', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
+                                    <li><?//= $this->Html->link('<span> Drop Down Values </span>', ['controller' => 'dropdowns', 'action' => 'index'], ['class' => 'waves-effect', 'escape' => false]) ?></li>-->
                                     <li><?= $this->Html->link('<span> My Quotes </span>', ['controller' => 'quotes', 'action' => 'myquotes'], ['class' => 'waves-effect', 'escape' => false]) ?></li>
                                 </ul>
                             </li>
