@@ -81,6 +81,7 @@
                 <th class="text-center width-150">LOCATION</th>
                 <th colspan="2" class="text-center width-120">CONFIGURATION</th>
                 <th class="text-center width-40">WIN OR DR</th>
+                <th class="text-center width-80">COLOUR</th>
                 <th class="text-center width-30">FRAME</th>
                 <th class="text-center height">HEIGHT</th>
                 <th class="width-30"></th>
@@ -104,11 +105,12 @@
                         </td>
 
                         <td class="text-center"><?= h($product->product_window_or_door) ?></td>
+                        <td class="text-center" class="width-30"><?= h($product->colour) ?></td>
                         <td class="text-center"><?= h($product->product_window_frame_type) ?></td>
                         <td class="text-center"><?= h($product->product_height) ?></td>
-                        <td class="width-30">&nbsp;</td>
+                        <td class="width-10">&nbsp;</td>
                         <td class="text-center"><?= h($product->product_width) ?></td>
-                        <td class="width-30">&nbsp;</td>
+                        <td class="width-10">&nbsp;</td>
                         <td class="text-center"><?= h($product->product_lock_handle_height) ?></td>
                         <!--                <td></td>-->
                     </tr>

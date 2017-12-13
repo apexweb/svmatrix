@@ -41,6 +41,14 @@ class Product extends Entity
         '*' => true,
         'id' => false
     ];
+    
+    protected function _getColour() {
+        $product_colour = '';
+        if ($this->_properties['product_colour']) {
+            list($colourGroup, $product_colour) = explode('|', $this->_properties['product_colour']);
+        }        
+        return $product_colour;
+    }
 
 
     /**
