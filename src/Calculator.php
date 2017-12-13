@@ -384,10 +384,10 @@ class Calculator
             $totalPrice = $totalPrice + $this->incMidrail;
         }
         if ($this->quote['installation_type'] == 'incorporate install') {
-            echo $product->product_incorporate_install;
+            $product->product_incorporate_install;
             $totalPrice = $totalPrice + $product->product_incorporate_install;
         }
-        echo $totalPrice ;
+        $totalPrice ;
         $totalPrice *= $newQty;
         
         /*** Increase cost when LOCK Type is Changed ***/
@@ -416,7 +416,7 @@ class Calculator
             }
         }
 
-        echo $profit = round($sellPrice - $totalPrice, 2);
+        $profit = round($sellPrice - $totalPrice, 2);
         $this->setMarkedupAmount($secDigFibr, $profit);
 
         $discount = $this->quote['discount'];
@@ -426,11 +426,11 @@ class Calculator
             $this->discountedAmount += $discounted;
         }
 
-        echo $this->profit += $profit;
+        $this->profit += $profit;
         $this->totalSellPrice += round($sellPrice, 2);
 
         $product->product_cost = round($sellPrice, 2);
-        echo 'next';
+       
     }
 
 
