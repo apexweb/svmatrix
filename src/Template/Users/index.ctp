@@ -17,7 +17,7 @@
                 <th scope="col"><?= $this->Paginator->sort('business_abrev', 'Abrev') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('monthly_fee_report', 'MF Monthly Fee Report') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('parentusername', 'Parent') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -32,7 +32,12 @@
                 <td><?= h($user->business_abrev) ?></td>
                 <td><?= h($user->role) ?></td>
                 <td><?= h($user->created) ?></td>
-                <td><?= h($user->modified) ?></td>
+                <td>
+                    <?php
+                        if($user->monthly_fee_report) { ?>
+                        <?= $this->Html->link(__('PDF'), ['controller' => 'quotes', 'action' => 'monthly-report', $user->id]) ?>
+                    <?php } ?>
+                    </td>
                 <td><?= h($user->email) ?></td>
                 <td><?= h($user->parentusername) ?></td>
                 <td class="actions">

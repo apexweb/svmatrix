@@ -126,7 +126,12 @@
             </div>
         </div>
     </div>
-
+    
+    <div class="form-group">
+        <div class="col-lg-3 col-md-4 col-xs-12">
+            <?= $this->Form->input('monthly_fee_report', ['class' => 'form-control']) ?>
+        </div>
+    </div>
     <hr>
     <div class="form-group">
         <div class="col-lg-3 col-md-4 col-xs-12">

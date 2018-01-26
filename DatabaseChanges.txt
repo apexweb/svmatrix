@@ -80,3 +80,9 @@ ALTER TABLE `users_parts` ADD `display_order` INT(11) NULL DEFAULT NULL AFTER `d
 ALTER TABLE `users_parts` ADD PRIMARY KEY (`id`)
 
 ALTER TABLE `users_parts` CHANGE `id` `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `products` CHANGE `product_incorporate_install` `product_incorporate_install` INT(11) NULL; 
+
+
+/*  New fields to handle Montly Fee Report By Raman 25-01-2018  */
+ALTER TABLE `users` ADD `monthly_fee_report` CHAR(1) NOT NULL DEFAULT '0' AFTER `printout_header`;

@@ -57,9 +57,11 @@ class QuotesController extends AppController
                 'printoutpdf',
                 'invoicepdf',
                 'funnelwebpdf',
+                'monthlyreportpdf',
                 'pdf',
                 'sendattachment',
-                'autosavequote'
+                'autosavequote',
+                'monthlyReport'
                 //'test'
             ]);
         }
@@ -202,6 +204,17 @@ class QuotesController extends AppController
     function funnelwebpdf($id = null)
     {
         $this->pdf($id, 'FW', 'portrait');
+    }
+    
+    function monthlyreportpdf($id = null){
+        //$this->pdf($id, 'FWMUR', 'portrait');
+        $filename = 'XY';
+        $this->viewBuilder()->options([
+            'pdfConfig' => [
+                'filename' =>  $filename . '.pdf',
+                'orientation' => 'portrait',
+            ]
+        ]);
     }
 
     /********************END PDF *************************/
@@ -1199,5 +1212,35 @@ class QuotesController extends AppController
         }
         echo json_encode($result);
         exit;
+    }
+    
+    public function monthlyReport($user_id = null)
+    {
+        $month = date('m');
+        $year = date('Y');
+        
+        $quotes = $this->Quotes->find('all', ['contain' => [
+            'Users' => function ($q) {
+                return $q->select(['username']);
+            }
+        ]])
+            ->order(['Quotes.created' => 'DESC', 'FIELD(Quotes.role, "wholesaler", "manufacturer") DESC']);//, 
+         
+        $quotes->where(['Quotes.user_id' => $user_id]);
+        $quotes->where(['Quotes.status' => 'complete']);
+               
+        if (isset($this->request->query['month'])) {
+            $month = $this->request->query['month'];
+        }
+        if (isset($this->request->query['year'])) {
+            $year = $this->request->query['year'];
+        }
+        
+        $quotes->where(['MONTH(Quotes.created)' => $month]);
+        $quotes->where(['YEAR(Quotes.created)' => $year]);
+      
+        
+        $this->set(compact('quotes', 'search', 'status', 'user_id', 'month', 'year'));
+        $this->set('_serialize', ['quotes', 'search', 'status']);
     }
 }

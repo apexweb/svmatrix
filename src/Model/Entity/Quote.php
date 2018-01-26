@@ -117,8 +117,10 @@ class Quote extends Entity
         /* With Mark Up */
         $totalCharged = 0;
 
-        foreach ($this['customitems'] as $customitem) {
-            $totalCharged += $customitem->custom_charged;
+        if ($this['customitems']) {
+            foreach ($this['customitems'] as $customitem) {
+                $totalCharged += $customitem->custom_charged;
+            }
         }
 
         return $totalCharged;
@@ -127,9 +129,10 @@ class Quote extends Entity
     private function getCustomItemsMarkups() {
         /* Just Marked Up Amounts */
         $markedups = 0;
-
-        foreach ($this['customitems'] as $customitem) {
-            $markedups += ($customitem->custom_qty * $customitem->custom_price * $customitem->custom_markup / 100);
+        if ($this['customitems']) {
+            foreach ($this['customitems'] as $customitem) {
+                $markedups += ($customitem->custom_qty * $customitem->custom_price * $customitem->custom_markup / 100);
+            }
         }
 
         return $markedups;
@@ -139,10 +142,12 @@ class Quote extends Entity
     {
         /* Without Mark Up */
         $totalCost = 0;
-
-        foreach ($this['customitems'] as $customitem) {
-            if ($customitem->custom_tick) {
-                $totalCost += ($customitem->custom_qty * $customitem->custom_price);
+        
+        if ($this['customitems']) {
+            foreach ($this['customitems'] as $customitem) {
+                if ($customitem->custom_tick) {
+                    $totalCost += ($customitem->custom_qty * $customitem->custom_price);
+                }
             }
         }
 

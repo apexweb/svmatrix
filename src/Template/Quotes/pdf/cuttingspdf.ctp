@@ -40,9 +40,9 @@
                 <!--          15  -->
                 <tr>
                     <th class="vertical-middle"></th>
-                    <th colspan="9" class="text-center"><span class="font-18"><b><?= h($quote->customer_name) ?></b></span>
+                    <th colspan="12" class="text-center"><span class="font-18"><b><?= h($quote->customer_name) ?></b></span>
                     </th>
-                    <th colspan="6"></th>
+                    <th colspan="5"></th>
                 </tr>
 
                 <tr>
@@ -72,7 +72,7 @@
                         }
                         ?>
                     </td>
-                    <td colspan="3" class="text-center vertical-middle">SECOND POWDERCOAT REQUIRED:
+                    <td colspan="5" class="text-center vertical-middle">SECOND POWDERCOAT REQUIRED:
                         <span style="color: #161616;">
                         <?php if ($quote->second_color_required) {
                             echo '<b>YES</b>';
@@ -89,6 +89,8 @@
                     <th class="width-10" style="width:10px;">PNL QTY</th>
                     <th colspan="2" class="width-290">CONFIGURATION</th>
                     <th class="width-90">WIN OR DOOR</th>
+                    <th class="width-60">MIDRAIL</th>
+                    <th class="width-90">COLOUR</th>
                     <th class="width-60">FRAME</th>
                     <th class="qty">QTY</th>
                     <th class="x"></th>
@@ -120,6 +122,8 @@
                             <td class="max-space"><?= h($product->product_configuration) ?></td>
                             <td><?= h($product->product_sec_dig_perf_fibr) ?></td>
                             <td><?= h($product->product_window_or_door) ?></td>
+                            <td class="text-center"><?= ($product->product_inc_midrail)?'Y':'N' ?></td>
+                            <td><?= h($product->colour) ?></td>
                             <td><?= h($product->product_window_frame_type) ?></td>
                             <td class="text-right"><?= $qty_2 ?></td>
                             <td class="at"><small>@</small></td>
@@ -145,7 +149,7 @@
                 <?php endforeach; ?>
 
                 <tr>
-                    <td colspan="16"></td>
+                    <td colspan="18"></td>
                 </tr>
 
                 <?php foreach ($quote['midrails'] as $midrail): ?>

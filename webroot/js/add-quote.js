@@ -1593,6 +1593,32 @@ $(document).ready(function () {
         }
     });
     
+    $('body').on('change', '.cutsheets-additional-colour', function () {
+        //var selected = $('option:selected', this).attr('class');
+        //var optionText = $('.editable').text();    
+        var additionalRow = $(this).parents('tr');
+        var name = additionalRow.find('.additional-select-colour').val();
+        var select_name = additionalRow.find('.additional-select-colour').attr('name');
+        var input_name = additionalRow.find('.additional-input-colour').attr('name');
+        if (name) {
+            if(name == 'Other'){
+                additionalRow.find('.additional-input-colour').show();
+                additionalRow.find('.additional-input-colour').focus();
+                additionalRow.find('.additional-select-colour').attr('name', select_name.replace('colour', 'col_our'));
+                additionalRow.find('.additional-input-colour').attr('name', input_name.replace('col_our', 'colour'));
+                
+            }else{
+                additionalRow.find('.additional-input-colour').hide();
+                additionalRow.find('.additional-select-colour').attr('name', select_name.replace('col_our', 'colour')); 
+                additionalRow.find('.additional-input-colour').attr('name', input_name.replace('colour', 'col_our'));
+            }
+        }else{
+            additionalRow.find('.additional-input-colour').hide(); 
+            additionalRow.find('.additional-select-colour').attr('name', select_name.replace('col_our', 'colour'));
+            additionalRow.find('.additional-input-colour').attr('name', input_name.replace('colour', 'col_our'));            
+        }
+    });
+    
     $('body').on('change', '.additional-per-length', function () {
         var additionalRow = $(this).parents('tr');
         var name = additionalRow.find('.additional-name').val();
@@ -1717,12 +1743,14 @@ $(document).ready(function () {
                 }
                 productOptions.find('input.product-sell-price').val(sellPriceAfterDiscount);
                 productOptions.find('input.product-profit').val(profitAfterDiscount);
+                markups.addToMarkups(profit, productIndex, secdgfibr, true);
                 
                
-                //productOptions.find('input.product-sell-price').val(sellPrice);
-                //productOptions.find('input.product-profit').val(profit);
+                /*productOptions.find('input.product-sell-price').val(sellPrice);
+                productOptions.find('input.product-profit').val(profit);
+                markups.addToMarkups(profit, productIndex, secdgfibr, true);*/
 
-                markups.addToMarkups(profitAfterDiscount, productIndex, secdgfibr, true);
+                
             }
             markups._updateMarkups();
 
@@ -1730,7 +1758,7 @@ $(document).ready(function () {
     });
 
 
-    $('#discount').on('change', function () {
+    $('#discount').on('change', function (event, param) {
         var percent = Number($(this).val());
         var discountedAmount = (percent * (Number(markups.getTotalMarkups()) + Number(SCREENS_TOTAL)) / 100).toFixed(2);
         $('#discount-amount').val(discountedAmount);
@@ -1738,7 +1766,10 @@ $(document).ready(function () {
         DISCOUNT_AMOUNT = discountedAmount;
         calculateProfit();
         calculateTotalSell();        
-        updateOrderTablePrice();
+        
+        if(!param){
+            updateOrderTablePrice();
+        }
     });
 
     /************************************/
@@ -1796,6 +1827,7 @@ $(document).ready(function () {
                 productOptions.find('input.product-profit').val(profitAfterDiscount);
             }
         });
+        markups._updateMarkups();
     }
 
     $('.save-quote-btn').on('click', function () {
@@ -1810,11 +1842,12 @@ $(document).ready(function () {
         var self = $(this);
         if (validate('order')) {
             $('#is-ordered').val(true);
-            if (confirm('Send installsheet to installer?')) {
+            $('#sendtoinstaller').val(false);
+            /*if (confirm('Send installsheet to installer?')) {
                 $('#sendtoinstaller').val(true);
             } else {
                 $('#sendtoinstaller').val(false);
-            }
+            }*/
             self.parents('form').submit();
         }
     });
@@ -1944,7 +1977,7 @@ var markups = {
         $('#perf-markup-amount').val(perfTotal);
 
         //console.log('_updateMarkups default');
-        $('#discount').trigger('change');
+        $('#discount').trigger('change',[true]);
 
     },
 

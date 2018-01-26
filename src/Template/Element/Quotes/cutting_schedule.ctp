@@ -74,7 +74,7 @@
                     ?>
                 <?php }?>
             </td>
-            <td colspan="3" class="text-center vertical-middle">SECOND POWDERCOAT REQUIRED:
+            <td colspan="4" class="text-center vertical-middle">SECOND POWDERCOAT REQUIRED:
                 <span style="color: #161616;">
                     <?php if ($quote->second_color_required) {
                         echo 'YES';
@@ -91,6 +91,7 @@
             <th class="width-50">PANEL QTY</th>
             <th colspan="2" class="width-250">CONFIGURATION</th>
             <th>WIN OR DOOR</th>
+            <th>MIDRAIL</th>
             <th>COLOUR</th>
             <th>FRAME</th>
             <th>QTY</th>
@@ -113,11 +114,7 @@
 
         <?php foreach ($quote['products'] as $product): ?>
             <?php if ($product->product_qty > 0): 
-                    $pColour = "";
-                    if ($product->product_colour) {
-                        list($cGroup, $pColour) = explode("|", $product->product_colour);
-                    }   
-                ?>
+        ?>
                 <tr>
                     <?php
                     $qty_2 = 0;
@@ -128,7 +125,8 @@
                     <td><?= h($product->product_configuration) ?></td>
                     <td><?= h($product->product_sec_dig_perf_fibr) ?></td>
                     <td><?= h($product->product_window_or_door) ?></td>
-                    <td><?= h($pColour) ?></td>
+                    <td class="text-center"><?= ($product->product_inc_midrail)?'Y':'N' ?></td>
+                    <td><?= h($product->colour) ?></td>
                     <td><?= h($product->product_window_frame_type) ?></td>
                     <td class="text-right"><?= $qty_2 ?></td>
                     <td>x</td>
