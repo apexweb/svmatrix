@@ -1058,6 +1058,8 @@ $(document).ready(function () {
         var includeIncorporateInstallCheckbox = $('#installation-type-incorporate-install').is(':checked');
         var productConf = product.find('.product-conf').find('option:selected').attr('data-code');
         var productColour = product.find('.product-colour').val();
+
+        var discountPercentage = Number($('input[name=discount]').val());
                 
 
         //------ Change Dropdown Color on Window/Door change ------)
@@ -1391,6 +1393,12 @@ $(document).ready(function () {
         }
         var profit = (Number(sellPrice) - Number(resultTotal)).toFixed(2);
 
+        if(discountPercentage > 0){
+                var discountPrice = Number(sellPrice * Number(discountPercentage) / 100).toFixed(2);
+                profit =  Number(profit - discountPrice).toFixed(2);
+                sellPrice = Number(sellPrice - discountPrice).toFixed(2);
+         }
+
         var inclGst = resultTotal;
         if (includeIncorporateInstallCheckbox) {
             inclGst = (Number(inclGst) - (Number(calculateIncorporateInstallation(product)) * Number(newQty))).toFixed(2);
@@ -1398,6 +1406,8 @@ $(document).ready(function () {
         noMarkupCost = (Number(noMarkupCost) * Number(newQty)).toFixed(2);
         productOptions.find('input.product-price-incl-gst').val(inclGst);
         productOptions.find('input.product-sell-price').val(sellPrice);
+
+
         productOptions.find('input.product-profit').val(profit);
 
         markups.addToMarkups(profit, productIndex, secDigFibr);
@@ -1668,6 +1678,8 @@ $(document).ready(function () {
             accessories[index] = totalPrice;
         } else {
             additionalRow.find('.accessory-total-price').val('');
+            additionalRow.find('.accessory-charged').val('');
+            
             accessories[index] = 0;
         }
         calculateAddtionalsTotal();

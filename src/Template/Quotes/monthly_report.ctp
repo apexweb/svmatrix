@@ -1,4 +1,16 @@
+<?php
+    $invoice_no = 'A';
 
+    for ($i=1; $i<=5; $i++) {
+        if (rand(0,1)) {
+            // letter
+            $invoice_no .= chr(rand(65, 90));
+        } else {
+            // number;
+            $invoice_no .= rand(0, 9);
+        }
+    }    
+?>
 <div class="row">
 
     <div class="col-sm-11">
@@ -10,13 +22,16 @@
 
         <?=
         $this->Html->link($this->Html->image('/assets/images/pdficon.png', ['alt' => 'PDF']),
-            ['controller' => 'Quotes', 'action' => 'monthlyreportpdf', $user_id],
+            ['controller' => 'Quotes', 'action' => 'monthlyreportpdf', $user_id.'.pdf', 
+            '?' => array('month' => $month, 'year' => $year)],
             ['class' => 'pdflink', 'escape' => false]);
         ?>
     </div>
     <?= $this->element('Quotes/calendar_form', ['year' => $year, 'month' => $month]); ?>
     
 </div>
+
+
 
 <div class="row">
 
@@ -119,7 +134,7 @@
             echo 'No report data available for this period.';
         }?>
         
-
     </div>
-
 </div>
+
+

@@ -207,14 +207,51 @@ class QuotesController extends AppController
     }
     
     function monthlyreportpdf($id = null){
-        //$this->pdf($id, 'FWMUR', 'portrait');
-        $filename = 'XY';
+        
+        $users = TableRegistry::get('Users');
+        $user = $users->get($id);
+        
+        $filename = 'MF-Monthly-Fee-Report';
+        
+        $month = date('m');
+        $year = date('Y');
+        
+        $quotes = $this->Quotes->find('all', ['contain' => [
+            'Users' => function ($q) {
+                return $q->select(['username']);
+            }
+        ]])
+            ->order(['Quotes.created' => 'DESC', 'FIELD(Quotes.role, "wholesaler", "manufacturer") DESC']);//, 
+         
+        $quotes->where(['Quotes.user_id' => $id]);
+        
+        $quotes->andWhere(function ($exp) {
+                return $exp->or_([
+                    'Quotes.status' => 'complete',
+                    ]);
+                });
+         
+        $quotes->orWhere(['Quotes.status' => 'in progress']);
+               
+        if (isset($this->request->query['month'])) {
+            $month = $this->request->query['month'];
+        }
+        if (isset($this->request->query['year'])) {
+            $year = $this->request->query['year'];
+        }
+        
+        $quotes->where(['MONTH(Quotes.created)' => $month]);
+        $quotes->where(['YEAR(Quotes.created)' => $year]);
+        
         $this->viewBuilder()->options([
             'pdfConfig' => [
                 'filename' =>  $filename . '.pdf',
                 'orientation' => 'portrait',
             ]
         ]);
+        
+        $this->set(compact('quotes', 'user'));
+        
     }
 
     /********************END PDF *************************/
@@ -1227,7 +1264,15 @@ class QuotesController extends AppController
             ->order(['Quotes.created' => 'DESC', 'FIELD(Quotes.role, "wholesaler", "manufacturer") DESC']);//, 
          
         $quotes->where(['Quotes.user_id' => $user_id]);
-        $quotes->where(['Quotes.status' => 'complete']);
+        
+        $quotes->andWhere(function ($exp) {
+                return $exp->or_([
+                    'Quotes.status' => 'complete',
+                    ]);
+                });
+         
+        $quotes->orWhere(['Quotes.status' => 'in progress']);
+        
                
         if (isset($this->request->query['month'])) {
             $month = $this->request->query['month'];
@@ -1241,6 +1286,6 @@ class QuotesController extends AppController
       
         
         $this->set(compact('quotes', 'search', 'status', 'user_id', 'month', 'year'));
-        $this->set('_serialize', ['quotes', 'search', 'status']);
+        $this->set('_serialize', ['quotes', 'search', 'status', 'user_id', 'month', 'year']);
     }
 }
